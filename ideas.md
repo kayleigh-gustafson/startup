@@ -1,0 +1,15 @@
+**Idea Brainstorming**
+- Reminders
+- Planner
+- Collaborative note-taking
+- D&D character sheet creator (use D&D API)
+- Bird identifier
+- Better alarm clock
+- Color palette generator
+- Scripture verse saver
+- Cheap textbook finder
+- Google Docs writing tracker
+- Font finder
+- Drawing to vector
+- Weather app (temperature, air quality, allergies)
+- Barcode price checker
