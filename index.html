@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<head>
+    <title>SketchTracer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" />
+</head>
+<body>
+    <header>
+        <h1>SketchTracer</h1>
+        <a href="#login-target">Log In / Sign Up</a>
+        <a href="#images-target">My Images</a>
+    </header>
+    <main>
+        <div>
+            <p>Upload an image to convert:</p>
+            <input type="file" id="imageInput" name="imageInput" accept="image/png, image/jpeg" />
+            <br>
+            <img src="image-placeholder.jpg">
+        </div>
+        <div>
+            <input type="range" id="brightness" name="brightness" min="0" max="1" step="0.01" />
+            <label for="brightness">Brightness</label>
+            <input type="range" id="contrast" name="contrast" min="0" max="1" step="0.01" />
+            <label for="contrast">Contrast</label>
+            <input type="range" id="shadows" name="shadows" min="0" max="1" step="0.01" />
+            <label for="shadows">Shadows</label>
+            <input type="range" id="highlights" name="highlights" min="0" max="1" step="0.01" />
+            <label for="highlights">Highlights</label>
+            <hr>
+            <input type="range" id="detail" name="detail" min="0" max="1" step="0.01" />
+            <label for="detail">Vector Detail</label>
+            <hr>
+            <button>Convert and Download</button>
+        </div>
+    </main>
+    <aside id="images-target">
+        <h2>My Images</h2>
+        <ul>
+            <li><a href="">image1.jpg</a></li>
+            <li><a href="">image2.jpg</a></li>
+            <li><a href="">image3.jpg</a></li>
+        </ul>
+    </aside>
+    <div id="login-target">
+        <div>
+        <h2>Log In</h2>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <div>
+            <h2>Sign Up</h2>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+            <label for="password">Confirm Password</label>
+            <input type="password" id="password" name="password">
+        </div>
+    </div>
+    <footer>
+        &copy; 2024 Kayleigh Gustafson
+        <a href="https://github.com/kayleigh-gustafson/startup">GitHub Repository</a>
+    </footer>
+</body>
