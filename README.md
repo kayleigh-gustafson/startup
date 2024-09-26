@@ -11,10 +11,20 @@ There are a lot of ways to create art, and it's not uncommon to combine them. I 
 - Convert filtered bitmap image into a clean vector file with a transparent background
 - Download converted files
 ## Technologies
-- HTML: File input, image filter sliders, structure of the page (1 main page, with a login screen and a list of the user's previously converted images, that could be popup dialogs or their own pages)
-- CSS: Style website to look nice and use whitespace well, and use an attractive color palette and font scheme
-- React: Add interactivity, make dialogs appear and disappear
-- Web Service: Image filtering and vector conversion APIs
-- Authentication: User can log in to save the images they convert
-- Database: Save the images created by the user so they can access them again later
-- WebSocket: Update a preview of the final result in real time
+- **HTML**: File input, image filter sliders, structure of the page (1 main page, with a login screen and a list of the user's previously converted images, that could be popup dialogs or their own pages)
+- **CSS**: Style website to look nice and use whitespace well, and use an attractive color palette and font scheme
+- **React**: Add interactivity, make dialogs appear and disappear
+- **Web Service**: Image filtering and vector conversion APIs
+- **Authentication**: User can log in to save the images they convert
+- **Database**: Save the images created by the user so they can access them again later
+- **WebSocket**: Update a preview of the final result in real time
+## HTML Deliverable
+- [x] **HTML pages for each component of your application:** just one home page (I'm planning to have a login and a list of the user's images as popup dialogs)
+- [x] **Proper use of HTML tags including BODY, NAV, MAIN, HEADER, FOOTER:** Only one HTML page means no nav is necessary, but all other tags are there
+- [x] **Links between pages as necessary:** no other pages, but links that will trigger popup dialogs later on
+- [x] **Application textual content:** done
+- [x] **Placeholder for 3rd party service calls:** placeholder image, which will later display a preview of the output from the vector converter API
+- [x] **Application images:** placeholder image and favicon, done
+- [x] **Login placeholder, including user name display:** done
+- [x] **Database data placeholder showing content stored in the database:** placeholder list of user's previously converted images, done
+- [x] **WebSocket data placeholder showing where realtime communication will go:** placeholder image will update in real time with a preview of the converted image
