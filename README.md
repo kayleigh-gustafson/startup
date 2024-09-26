@@ -1,5 +1,4 @@
 # CS 260 Startup Project
-[Notes](https://github.com/kayleigh-gustafson/startup/blob/main/notes.md)
 ## Elevator Pitch
 There are a lot of ways to create art, and it's not uncommon to combine them. I prefer to do sketches and line art on paper, but I love coloring things digitally. This application will help me and those like me! Users will upload a scan or a photo of their pen-and-paper line art, and the web app will use a vector API to convert the bitmap image into a smooth, clean vector line art file that's ready to use in a digital art program. Other use cases could include vectorizing logos or hand-drawn fonts.
 ![Main page mockup](./images/mainpage.jpg)
@@ -24,7 +23,7 @@ There are a lot of ways to create art, and it's not uncommon to combine them. I 
 - [x] **Links between pages as necessary:** no other pages, but links that will trigger popup dialogs later on
 - [x] **Application textual content:** done
 - [x] **Placeholder for 3rd party service calls:** placeholder image, which will later display a preview of the output from the vector converter API
-- [x] **Application images:** placeholder image and favicon, done
+- [x] **Application images:** Icons for various settings, buttons, and links
 - [x] **Login placeholder, including user name display:** done
 - [x] **Database data placeholder showing content stored in the database:** placeholder list of user's previously converted images, done
 - [x] **WebSocket data placeholder showing where realtime communication will go:** placeholder image will update in real time with a preview of the converted image
