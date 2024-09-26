@@ -5,3 +5,6 @@
 - **SSH into the server:** ssh -i [key pair file] ubuntu@[ip address], use cd to change directories, ls -l to list files, exit to stop
 - **Elastic IP:** Allocate an elastic IP to keep the same IP after server restart
 - **My server:** Elastic IP: 34.232.209.210, web address: http://34.232.209.210
+
+## Deployment
+- ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup
