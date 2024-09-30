@@ -1,22 +1,25 @@
 # CS 260 Startup Project
 ## Elevator Pitch
-There are a lot of ways to create art, and it's not uncommon to combine them. I prefer to do sketches and line art on paper, but I love coloring things digitally. This application will help me and those like me! Users will upload a scan or a photo of their pen-and-paper line art, and the web app will use a vector API to convert the bitmap image into a smooth, clean vector line art file that's ready to use in a digital art program. Other use cases could include vectorizing logos or hand-drawn fonts.
-![Main page mockup](./images/mainpage.jpg)
-![Popup dialog mockups](./images/dialogs.jpg)
+As a freshman starting her first semester of college, the number of assignments can be overwhelming. At the moment, I have a spreadsheet with all of my assignments for the semester, and I know some of my friends and roommates have similar solutions. My web app, an assignment planner, will aim to make organizing and remembering assignments easier.
+![Main page mockup](./images/spec1.jpg)
+![Log in mockup](./images/spec2.jpg)
+![Sign up mockup](./images/spec3.jpg)
+![New assignment mockup](./images/spec4.jpg)
 ## Key Features
-- Log in to save art and preferences
-- Upload an image from your device
-- User can adjust filters (brightness, contrast, etc) to make the line art as clear as possible
-- Convert filtered bitmap image into a clean vector file with a transparent background
-- Download converted files
+- Create new assignments and specify a name, a class, the due date, and the date you want to finish the assignment
+- Log in to save assignments
+- Check off completed assignments
+- View completed assignments in a separate tab
+- Sort assignments by date
+- Tap on part of an assignment (such as the due date) to edit it
 ## Technologies
-- **HTML**: File input, image filter sliders, structure of the page (1 main page, with a login screen and a list of the user's previously converted images, that could be popup dialogs or their own pages)
+- **HTML**: Website structure, including a header and footer, buttons, text and date input for assignments
 - **CSS**: Style website to look nice and use whitespace well, and use an attractive color palette and font scheme
-- **React**: Add interactivity, make dialogs appear and disappear
-- **Web Service**: Image filtering and vector conversion APIs
-- **Authentication**: User can log in to save the images they convert
-- **Database**: Save the images created by the user so they can access them again later
-- **WebSocket**: Update a preview of the final result in real time
+- **React**: Add interactivity such as switching between tabs, initiating login and logout, and adding and completing assignments
+- **Web Service**: Email API to notify users if they have an assignment due
+- **Authentication**: User logs in with an email (or username) and password to access their personal list of assignments
+- **Database**: Save user's assignments so they can access them again later
+- **WebSocket**: Real-time counter (in the footer) of how many assignments have been completed using the app
 ## HTML Deliverable
 - [x] **HTML pages for each component of your application:** just one home page (I'm planning to have a login and a list of the user's images as popup dialogs)
 - [x] **Proper use of HTML tags including BODY, NAV, MAIN, HEADER, FOOTER:** Only one HTML page means no nav is necessary, but all other tags are there
