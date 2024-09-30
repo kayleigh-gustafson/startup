@@ -7,4 +7,4 @@
 - **My server:** Elastic IP: 34.232.209.210, web address: http://34.232.209.210
 
 ## Deployment
-- ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup
+- ./deployFiles.sh -k yourpemkey -h yourdomain -s startup
