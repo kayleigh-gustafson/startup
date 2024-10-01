@@ -43,125 +43,153 @@
         </nav>
     </header>
     <main>
-        <div>
-            <h2>Upcoming Assignments</h2>
-            <table>
-                <tr>
-                    <th>Completed</th>
-                    <th>Assignment</th>
-                    <th>Due Date</th>
-                    <th>Finish By</th>
-                    <th>Class</th>
-                    <th>Due Date Notification</th>
-                    <th>Delete</th>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td><input type="text" value="Take reading quiz"></td>
-                    <td><input type="date" value="2024-10-03"></td>
-                    <td><input type="date" value="2024-10-02"></td>
-                    <td><input type="text" value="A HTG 100"></td>
-                    <td><input type="checkbox"></td>
-                    <td><img src="icons/delete.svg" width="15px"></td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td><input type="text" value="Another assignment"></td>
-                    <td><input type="date" value="2024-10-08"></td>
-                    <td><input type="date" value="2024-10-04"></td>
-                    <td><input type="text" value="CS 260"></td>
-                    <td><input type="checkbox"></td>
-                    <td><img src="icons/delete.svg" width="15px"></td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td><input type="text" value="Some other assignment"></td>
-                    <td><input type="date" value="2024-10-10"></td>
-                    <td><input type="date" value="2024-10-08"></td>
-                    <td><input type="text" value="WRTG 150"></td>
-                    <td><input type="checkbox"></td>
-                    <td><img src="icons/delete.svg" width="15px"></td>
-                </tr>
-            </table>
-        </div>
-        <div>
-            <h2>Completed Assignments</h2>
-            <table>
-                <tr>
-                    <th>Completed</th>
-                    <th>Assignment</th>
-                    <th>Due Date</th>
-                    <th>Finish By</th>
-                    <th>Class</th>
-                    <th>Due Date Notification</th>
-                    <th>Delete</th>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" checked></td>
-                    <td><input type="text" value="Take reading quiz"></td>
-                    <td><input type="date" value="2024-10-03"></td>
-                    <td><input type="date" value="2024-10-02"></td>
-                    <td><input type="text" value="A HTG 100"></td>
-                    <td><input type="checkbox"></td>
-                    <td><img src="icons/delete.svg" width="15px"></td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" checked></td>
-                    <td><input type="text" value="Another assignment"></td>
-                    <td><input type="date" value="2024-10-08"></td>
-                    <td><input type="date" value="2024-10-04"></td>
-                    <td><input type="text" value="CS 260"></td>
-                    <td><input type="checkbox"></td>
-                    <td><img src="icons/delete.svg" width="15px"></td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" checked></td>
-                    <td><input type="text" value="Some other assignment"></td>
-                    <td><input type="date" value="2024-10-10"></td>
-                    <td><input type="date" value="2024-10-08"></td>
-                    <td><input type="text" value="WRTG 150"></td>
-                    <td><input type="checkbox"></td>
-                    <td><img src="icons/delete.svg" width="15px"></td>
-                </tr>
-            </table>
-        </div>
-        <div>
-            <h2>Exams</h2>
-            <table>
-                <tr>
-                    <th>Completed</th>
-                    <th>Exam</th>
-                    <th>Open Date</th>
-                    <th>Close Date</th>
-                    <th>Finish By</th>
-                    <th>Class</th>
-                    <th>Close Date Notification</th>
-                    <th>Delete</th>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" checked></td>
-                    <td><input type="text" value="Midterm #1"></td>
-                    <td><input type="date" value="2024-10-08"></td>
-                    <td><input type="date" value="2024-10-011"></td>
-                    <td><input type="date" value="2024-10-09"></td>
-                    <td><input type="text" value="A HTG 100"></td>
-                    <td><input type="checkbox"></td>
-                    <td><img src="icons/delete.svg" width="15px"></td>
-                </tr>
-            </table>
-        </div>
-        <div>
-            <h2>New Assignment</h2>
-            <label for="assignment">Assignment</label>
-            <input type="text" id="assignment" name="assignment">
-            <label for="duedate">Due Date</label>
-            <input type="date" id="duedate" name="duedate">
-            <label for="finishdate">Finish By</label>
-            <input type="date" id="finishdate" name="finishdate">
-            <label for="class">Class</label>
-            <input type="text" id="class" name="class">
-            <a href="main.html">Create</a>
-        </div>
+        <ul class="nav nav-tabs" id="taskTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="tasks-tab" data-bs-toggle="tab" data-bs-target="#tasks-tab-pane" type="button" role="tab" aria-controls="tasks-tab-pane" aria-selected="true">Tasks</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="completed-tab" data-bs-toggle="tab" data-bs-target="#completed-tab-pane" type="button" role="tab" aria-controls="completed-tab-pane" aria-selected="false">Completed</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="exams-tab" data-bs-toggle="tab" data-bs-target="#exams-tab-pane" type="button" role="tab" aria-controls="exams-tab-pane" aria-selected="false">Exams</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="taskTabsContent">
+            <div class="tab-pane fade show active" id="tasks-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>Task</th>
+                        <th>Due Date</th>
+                        <th>Finish By</th>
+                        <th>Class</th>
+                        <th>Notify</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><input type="text" value="Take reading quiz"></td>
+                        <td><input type="date" value="2024-10-03"></td>
+                        <td><input type="date" value="2024-10-02"></td>
+                        <td><input type="text" value="A HTG 100"></td>
+                        <td><input type="checkbox"></td>
+                        <td><img src="icons/delete.svg" width="15px"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><input type="text" value="Another assignment"></td>
+                        <td><input type="date" value="2024-10-08"></td>
+                        <td><input type="date" value="2024-10-04"></td>
+                        <td><input type="text" value="CS 260"></td>
+                        <td><input type="checkbox"></td>
+                        <td><img src="icons/delete.svg" width="15px"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><input type="text" value="Some other assignment"></td>
+                        <td><input type="date" value="2024-10-10"></td>
+                        <td><input type="date" value="2024-10-08"></td>
+                        <td><input type="text" value="WRTG 150"></td>
+                        <td><input type="checkbox"></td>
+                        <td><img src="icons/delete.svg" width="15px"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="completed-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>Task</th>
+                        <th>Due Date</th>
+                        <th>Finish By</th>
+                        <th>Class</th>
+                        <th>Notify</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" checked></td>
+                        <td><input type="text" value="Take reading quiz"></td>
+                        <td><input type="date" value="2024-10-03"></td>
+                        <td><input type="date" value="2024-10-02"></td>
+                        <td><input type="text" value="A HTG 100"></td>
+                        <td><input type="checkbox"></td>
+                        <td><img src="icons/delete.svg" width="15px"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" checked></td>
+                        <td><input type="text" value="Another assignment"></td>
+                        <td><input type="date" value="2024-10-08"></td>
+                        <td><input type="date" value="2024-10-04"></td>
+                        <td><input type="text" value="CS 260"></td>
+                        <td><input type="checkbox"></td>
+                        <td><img src="icons/delete.svg" width="15px"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" checked></td>
+                        <td><input type="text" value="Some other assignment"></td>
+                        <td><input type="date" value="2024-10-10"></td>
+                        <td><input type="date" value="2024-10-08"></td>
+                        <td><input type="text" value="WRTG 150"></td>
+                        <td><input type="checkbox"></td>
+                        <td><img src="icons/delete.svg" width="15px"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="exams-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>Exam</th>
+                        <th>Open Date</th>
+                        <th>Close Date</th>
+                        <th>Finish By</th>
+                        <th>Class</th>
+                        <th>Notify</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" checked></td>
+                        <td><input type="text" value="Midterm #1"></td>
+                        <td><input type="date" value="2024-10-08"></td>
+                        <td><input type="date" value="2024-10-011"></td>
+                        <td><input type="date" value="2024-10-09"></td>
+                        <td><input type="text" value="A HTG 100"></td>
+                        <td><input type="checkbox"></td>
+                        <td><img src="icons/delete.svg" width="15px"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>          
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newAssignmentModal">
+            New Task
+        </button>
+          
+        <div class="modal fade" id="newAssignmentModal" tabindex="-1" aria-labelledby="newAssignmentModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="newAssignmentModalLabel">New Task</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="assignment">Assignment</label>
+                    <input type="text" id="assignment" name="assignment">
+                    <label for="duedate">Due Date</label>
+                    <input type="date" id="duedate" name="duedate">
+                    <label for="finishdate">Finish By</label>
+                    <input type="date" id="finishdate" name="finishdate">
+                    <label for="class">Class</label>
+                    <input type="text" id="class" name="class">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Create</button>
+                </div>
+              </div>
+            </div>
+          </div>          
+ 
     </main>
     <footer>
         <p>123,456 total assignments completed... and counting</p>
