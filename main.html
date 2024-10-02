@@ -11,32 +11,32 @@
 </head>
 <body class="d-flex min-vh-100 flex-column">
     <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-sm bg-body-tertiary">
             <div class="container-fluid" style="flex: 1 1 0;">
-                
+                <a class="navbar-brand me-auto d-sm-none" href="main.html">HomeworkHub</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-between align-items-center" id="navbarSupportedContent">   
-                    <ul class="navbar-nav justify-content-start" style="flex: 1 1 0; width: 0">
+                    <ul class="navbar-nav justify-content-start d-none d-sm-inline" style="flex: 1 1 0">
                         <li class="nav-item my-auto"><a class="navbar-brand me-auto" href="main.html">HomeworkHub</a></li>
                     </ul>
-                    <ul class="navbar-nav justify-content-center" style="flex: 1 1 0; width: 0">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link fs-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-solid fa-plus"></i>
+                    <ul class="navbar-nav justify-content-center" style="flex: 1 1 0">
+                        <li class="nav-item dropdown-center dropdown w-100">
+                            <a class="nav-link fs-3 text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-plus text-sm-end"></i>
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newAssignmentModal">
-                                    Task
+                            <ul class="dropdown-menu w-100">
+                                <li><button type="button" class="btn btn-tertiary d-inline w-100" data-bs-toggle="modal" data-bs-target="#newAssignmentModal">
+                                    Create Task
                                 </button></li>
-                                <li><button type="button" class="btn btn-primary mb-5 mt-1" data-bs-toggle="modal" data-bs-target="#newExamModal">
-                                    Exam
+                                <li><button type="button" class="btn btn-tertiary d-inline w-100" data-bs-toggle="modal" data-bs-target="#newExamModal">
+                                    Create Exam
                                 </button></li>
                             </ul>
                         </li>
                     </ul>
-                    <ul class="navbar-nav justify-content-end" style="flex: 1 1 0; width: 0">
+                    <ul class="navbar-nav justify-content-end text-center" style="flex: 1 1 0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Fall 2024
@@ -83,7 +83,7 @@
                 <input type="text" id="class" name="class">
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-tertiary" data-bs-dismiss="modal">Close</button>
               <button type="button" class="btn btn-primary">Create</button>
             </div>
           </div>
@@ -112,7 +112,7 @@
                 <input type="text" id="class" name="class">
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-tertiary" data-bs-dismiss="modal">Close</button>
               <button type="button" class="btn btn-primary">Create</button>
             </div>
           </div>
@@ -164,7 +164,7 @@
                         </td>
                         <td>
                             <div class="dropdown">
-                                <button class="btn btn-tertiary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-tertiary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu">
@@ -197,7 +197,7 @@
                         </td>
                         <td>
                             <div class="dropdown">
-                                <button class="btn btn-tertiary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-tertiary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu">
@@ -230,7 +230,7 @@
                         </td>
                         <td>
                             <div class="dropdown">
-                                <button class="btn btn-tertiary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-tertiary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu">
@@ -275,7 +275,7 @@
                         </td>
                         <td>
                             <div class="dropdown">
-                                <button class="btn btn-tertiary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-tertiary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu">
@@ -308,7 +308,7 @@
                         </td>
                         <td>
                             <div class="dropdown">
-                                <button class="btn btn-tertiary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-tertiary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu">
@@ -341,7 +341,7 @@
                         </td>
                         <td>
                             <div class="dropdown">
-                                <button class="btn btn-tertiary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-tertiary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu">
@@ -388,7 +388,7 @@
                         </td>
                         <td>
                             <div class="dropdown">
-                                <button class="btn btn-tertiary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-tertiary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu">
