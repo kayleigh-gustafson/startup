@@ -21,12 +21,12 @@ As a freshman starting her first semester of college, the number of assignments 
 - **Database**: Save user's assignments so they can access them again later
 - **WebSocket**: Real-time counter (in the footer) of how many assignments have been completed using the app
 ## HTML Deliverable
-- [x] **HTML pages for each component of your application:** just one home page (I'm planning to have a login and a list of the user's images as popup dialogs)
-- [x] **Proper use of HTML tags including BODY, NAV, MAIN, HEADER, FOOTER:** Only one HTML page means no nav is necessary, but all other tags are there
-- [x] **Links between pages as necessary:** no other pages, but links that will trigger popup dialogs later on
-- [x] **Application textual content:** done
-- [x] **Placeholder for 3rd party service calls:** placeholder image, which will later display a preview of the output from the vector converter API
-- [x] **Application images:** Icons for various settings, buttons, and links
-- [x] **Login placeholder, including user name display:** done
-- [x] **Database data placeholder showing content stored in the database:** placeholder list of user's previously converted images, done
-- [x] **WebSocket data placeholder showing where realtime communication will go:** placeholder image will update in real time with a preview of the converted image
+- [x] **HTML pages for each component of your application:** Log in/sign up page, main page, and new assignment page: Done
+- [x] **Proper use of HTML tags including BODY, NAV, MAIN, HEADER, FOOTER:** Done
+- [x] **Links between pages as necessary:** Done
+- [x] **Application textual content:** Done
+- [x] **Placeholder for 3rd party service calls:** User can check boxes to indicate whether they would like an email notification: Done (A third party service will be used to send the emails)
+- [x] **Application images:** Icons for various inputs (email, password, etc)
+- [x] **Login placeholder, including user name display:** Done
+- [x] **Database data placeholder showing content stored in the database:** Placeholder list of user's assignments: Done
+- [x] **WebSocket data placeholder showing where realtime communication will go:** Placeholder for real-time counter of the total number of assignments that everyone has completed: Done
