@@ -62,46 +62,48 @@
             </div>
         </nav>
     </header>
-    <main class="flex-grow-1 mt-5">
-        <div>
-            <h2>Academic Terms</h2>
-            <table>
-                <tr>
-                    <th>Term</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Delete</th>
+    <main class="flex-grow-1 d-flex align-items-center mt-5 flex-column">
+        <div id="manage-term-content" class="text-center">
+            <h3 class="pb-4">Academic Terms</h3>
+            <table class="mx-auto">
+                <tr class="text-start">
+                    <th class="px-2">Term</th>
+                    <th class="px-2">Start Date</th>
+                    <th class="px-2">End Date</th>
+                    <th class="px-2"></th>
                 </tr>
                 <tr>
-                    <td><input type="text" value="Fall 2024"></td>
-                    <td><input type="date" value="2024-09-03"></td>
-                    <td><input type="date" value="2024-4-26"></td>
-                    <td><td><img src="icons/delete.svg" width="15px"></td></td>
+                    <td class="p-2"><input class="form-control" type="text" value="Fall 2024"></td>
+                    <td class="p-2"><input class="form-control" type="date" value="2024-09-03"></td>
+                    <td class="p-2"><input class="form-control" type="date" value="2024-04-26"></td>
+                    <td class="text-start"><a class="btn btn-tertiary" href="">Delete</a></td>
                 </tr>
                 <tr>
-                    <td><input type="text" value="Fall 2024"></td>
-                    <td><input type="date" value="2024-09-03"></td>
-                    <td><input type="date" value="2024-4-26"></td>
-                    <td><td><img src="icons/delete.svg" width="15px"></td></td>
+                    <td class="p-2"><input class="form-control" type="text" value="Winter 2025"></td>
+                    <td class="p-2"><input class="form-control" type="date" value="2024-09-03"></td>
+                    <td class="p-2"><input class="form-control" type="date" value="2024-04-26"></td>
+                    <td class="text-start"><a class="btn btn-tertiary" href="">Delete</a></td>
                 </tr>
                 <tr>
-                    <td><input type="text" value="Fall 2024"></td>
-                    <td><input type="date" value="2024-09-03"></td>
-                    <td><input type="date" value="2024-4-26"></td>
-                    <td><td><img src="icons/delete.svg" width="15px"></td></td>
+                    <td class="p-2"><input class="form-control" type="text" value="Fall 2025"></td>
+                    <td class="p-2"><input class="form-control" type="date" value="2024-09-03"></td>
+                    <td class="p-2"><input class="form-control" type="date" value="2024-04-26"></td>
+                    <td class="text-start"><a class="btn btn-tertiary" href="">Delete</a></td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="p-2"><input class="form-control" type="text" placeholder="New term..."></td>
+                    <td class="p-2"><input class="form-control" type="date"></td>
+                    <td class="p-2"><input class="form-control" type="date"></td>
+                    <td class="text-start"><a class="btn btn-tertiary" href="">Add</a></td>
                 </tr>
             </table>
-            <hr>
-            <table>
-                <tr>
-                    <td><input type="text"></td>
-                    <td><input type="date"></td>
-                    <td><input type="date"></td>
-                    <td><a href="">Add Term</a></td>
-                </tr>
-            </table>
+            <a class="btn btn-primary mt-4" href="main.html">Done</a>
         </div>
-        <a class="btn btn-primary" href="main.html">Done</a>
     </main>
     <footer class="py-3 px-5 bg-body-tertiary d-flex flex-row justify-content-between align-items-center">
         <p class="mb-0">123,456 total assignments completed... and counting</p>

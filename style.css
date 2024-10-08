@@ -2,12 +2,12 @@
     padding: 5px;
 }
 
-#login-tab-pane, #signup-tab-pane, #manage-class-content {
-    width: 50%;
+#login-tab-pane, #signup-tab-pane, #manage-class-content, #manage-term-content {
+    width: 60%;
 }
 
 @media screen and (max-width: 768px) {
-    #login-tab-pane, #signup-tab-pane, #manage-class-content {
+    #login-tab-pane, #signup-tab-pane, #manage-class-content, #manage-term-content {
         width: 90%;
     }
 }
