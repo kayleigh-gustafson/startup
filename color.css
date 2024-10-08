@@ -1,0 +1,154 @@
+/* https://lingtalfi.com/bootstrap4-color-generator */
+
+/*------------------------------------
+- COLOR primary
+------------------------------------*/
+.alert-primary {
+    color: #293a19;
+    background-color: #cce0b9;
+    border-color: #c2daaa;
+}
+
+.alert-primary hr {
+    border-top-color: #b5d399;
+}
+
+.alert-primary .alert-link {
+    color: #101609;
+}
+
+.badge-primary {
+    color: #fff;
+    background-color: #66903e;
+}
+
+.badge-primary[href]:hover, .badge-primary[href]:focus {
+    color: #fff;
+    background-color: #4c6c2e;
+}
+
+.bg-primary {
+    background-color: #66903e !important;
+}
+
+a.bg-primary:hover, a.bg-primary:focus,
+button.bg-primary:hover,
+button.bg-primary:focus {
+    background-color: #4c6c2e !important;
+}
+
+.border-primary {
+    border-color: #66903e !important;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #66903e;
+    border-color: #66903e;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #547733;
+    border-color: #4c6c2e;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(102, 144, 62, 0.5);
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: #66903e;
+    border-color: #66903e;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #4c6c2e;
+    border-color: #45612a;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(102, 144, 62, 0.5);
+}
+
+.btn-outline-primary {
+    color: #66903e;
+    background-color: transparent;
+    border-color: #66903e;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #66903e;
+    border-color: #66903e;
+}
+
+.btn-outline-primary:focus, .btn-outline-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(102, 144, 62, 0.5);
+}
+
+.btn-outline-primary.disabled, .btn-outline-primary:disabled {
+    color: #66903e;
+    background-color: transparent;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active, .show > .btn-outline-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #66903e;
+    border-color: #66903e;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(102, 144, 62, 0.5);
+}
+
+.list-group-item-primary {
+    color: #293a19;
+    background-color: #c2daaa;
+}
+
+.list-group-item-primary.list-group-item-action:hover, .list-group-item-primary.list-group-item-action:focus {
+    color: #293a19;
+    background-color: #b5d399;
+}
+
+.list-group-item-primary.list-group-item-action.active {
+    color: #fff;
+    background-color: #293a19;
+    border-color: #293a19;
+}
+
+.table-primary,
+.table-primary > th,
+.table-primary > td {
+    background-color: #c2daaa;
+}
+
+.table-hover .table-primary:hover {
+    background-color: #b5d399;
+}
+
+.table-hover .table-primary:hover > td,
+.table-hover .table-primary:hover > th {
+    background-color: #b5d399;
+}
+
+.text-primary {
+    color: #66903e !important;
+}
+
+a.text-primary:hover, a.text-primary:focus {
+    color: #4c6c2e !important;
+}
+
+/* Adding on inactive tabs */
+
+.nav-tabs button:not(.active) {
+    color: #66903e !important;
+}
+
+.nav-tabs button:not(.active):hover, .nav-tabs button:not(.active):focus {
+    color: #4c6c2e !important;
+}
