@@ -143,7 +143,7 @@ a.text-primary:hover, a.text-primary:focus {
     color: #4c6c2e !important;
 }
 
-/* Adding on inactive tabs */
+/* Addition: inactive tabs */
 
 .nav-tabs button:not(.active) {
     color: #66903e !important;
@@ -152,3 +152,10 @@ a.text-primary:hover, a.text-primary:focus {
 .nav-tabs button:not(.active):hover, .nav-tabs button:not(.active):focus {
     color: #4c6c2e !important;
 }
+
+/* Addition: checkboxes */
+
+.form-check-input:checked {
+    background-color: #66903e;
+    border-color: #66903e;
+  }

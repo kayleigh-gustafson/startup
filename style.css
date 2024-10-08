@@ -40,3 +40,10 @@ select option:disabled {
     border-radius: 25px;
     border: none;
   }
+
+.nav-tabs-sticky {
+    position: sticky;
+    padding-top: 20px;
+    top: 55px;
+    z-index: 1;
+}
