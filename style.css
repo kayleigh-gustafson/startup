@@ -1,7 +1,38 @@
-.tab-content table {
-    
-}
-
 .tab-content td {
     padding: 5px;
 }
+
+#login-tab-pane, #signup-tab-pane, #manage-class-content {
+    width: 50%;
+}
+
+@media screen and (max-width: 768px) {
+    #login-tab-pane, #signup-tab-pane, #manage-class-content {
+        width: 90%;
+    }
+}
+
+select option:disabled {
+    color: #cccccc;
+}
+
+.custom-color-picker {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 0px;
+    margin: 0px;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+.custom-color-picker::-webkit-color-swatch {
+    border-radius: 25px;
+    border: none;
+  }
+.custom-color-picker::-moz-color-swatch {
+    border-radius: 25px;
+    border: none;
+  }

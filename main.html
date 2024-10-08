@@ -23,7 +23,7 @@
                     </ul>
                     <ul class="navbar-nav justify-content-center" style="flex: 1 1 0">
                         <li class="nav-item dropdown-center dropdown w-100">
-                            <a class="nav-link fs-3 text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link fs-4 text-center m-0 p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-plus text-sm-end"></i>
                             </a>
                             <ul class="dropdown-menu w-100">
@@ -73,14 +73,20 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <label for="assignment">Assignment</label>
-                <input type="text" id="assignment" name="assignment">
-                <label for="duedate">Due Date</label>
-                <input type="date" id="duedate" name="duedate">
-                <label for="finishdate">Finish By</label>
-                <input type="date" id="finishdate" name="finishdate">
-                <label for="class">Class</label>
-                <input type="text" id="class" name="class">
+                <label class="mt-2 mb-1" for="assignment">Assignment</label>
+                <input type="text" class="form-control" id="assignment" name="assignment">
+                <label class="mt-2 mb-1" for="duedate">Due Date</label>
+                <input type="date" class="form-control" id="duedate" name="duedate">
+                <label class="mt-2 mb-1" for="finishdate">Finish By</label>
+                <input type="date" class="form-control" id="finishdate" name="finishdate">
+                <label class="mt-2 mb-1" for="class">Class</label>
+                <select id="class" class="form-control">
+                    <option selected>A HTG 100</option>
+                    <option>CS 260</option>
+                    <option>WRTG 150</option>
+                    <option disabled>—————————————</option>
+                    <option onclick="location.href = 'classes.html';">Manage...</option>
+                </select>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-tertiary" data-bs-dismiss="modal">Close</button>
@@ -100,16 +106,22 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <label for="assignment">Exam</label>
-                <input type="text" id="assignment" name="assignment">
-                <label for="opendate">Open Date</label>
-                <input type="date" id="opendate" name="opendate">
-                <label for="closedate">Close Date</label>
-                <input type="date" id="closedate" name="closedate">
-                <label for="finishdate">Finish By</label>
-                <input type="date" id="finishdate" name="finishdate">
-                <label for="class">Class</label>
-                <input type="text" id="class" name="class">
+                <label class="mt-2 mb-1" for="assignment">Exam</label>
+                <input type="text" class="form-control" id="assignment" name="assignment">
+                <label class="mt-2 mb-1" for="opendate">Open Date</label>
+                <input type="date" class="form-control" id="opendate" name="opendate">
+                <label class="mt-2 mb-1" for="closedate">Close Date</label>
+                <input type="date" class="form-control" id="closedate" name="closedate">
+                <label class="mt-2 mb-1" for="finishdate">Finish By</label>
+                <input type="date" class="form-control" id="finishdate" name="finishdate">
+                <label class="mt-2 mb-1" for="class">Class</label>
+                <select id="class" class="form-control">
+                    <option selected>A HTG 100</option>
+                    <option>CS 260</option>
+                    <option>WRTG 150</option>
+                    <option disabled>—————————————</option>
+                    <option onclick="location.href = 'classes.html';">Manage...</option>
+                </select>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-tertiary" data-bs-dismiss="modal">Close</button>
@@ -144,23 +156,18 @@
                         <th></th>
                     </tr>
                     <tr>
-                        <td><input type="checkbox"></td>
-                        <td><input type="text" value="Take reading quiz"></td>
-                        <td><input type="date" value="2024-10-03"></td>
-                        <td><input type="date" value="2024-10-02"></td>
+                        <td><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="CompletedCheckbox"></td>
+                        <td><input type="text" class="form-control" value="Take reading quiz"></td>
+                        <td><input type="date" class="form-control" value="2024-10-03"></td>
+                        <td><input type="date" class="form-control" value="2024-10-02"></td>
                         <td>
-                            <div class="dropdown">
-                                <button class="btn btn-tertiary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    A HTG 100
-                                </button>
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">A HTG 100</a></li>
-                                  <li><a class="dropdown-item" href="#">CS 260</a></li>
-                                  <li><a class="dropdown-item" href="#">WRTG 150</a></li>
-                                  <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="classes.html">Manage...</a></li>
-                                </ul>
-                            </div>
+                            <select id="class" class="form-control">
+                                <option selected>A HTG 100</option>
+                                <option>CS 260</option>
+                                <option>WRTG 150</option>
+                                <option disabled>—————————————</option>
+                                <option onclick="location.href = 'classes.html';">Manage...</option>
+                            </select>
                         </td>
                         <td>
                             <div class="dropdown">
@@ -168,32 +175,27 @@
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify on finish date</a></li>
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify on due date</a></li>
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify if late</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify on finish date</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify on due date</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify if late</a></li>
                                   <li><a class="dropdown-item" href="#">Delete <img src="icons/delete.svg" width="15px"></a></li>
                                 </ul>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox"></td>
-                        <td><input type="text" value="Another assignment"></td>
-                        <td><input type="date" value="2024-10-08"></td>
-                        <td><input type="date" value="2024-10-04"></td>
+                        <td><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="CompletedCheckbox"></td>
+                        <td><input type="text" class="form-control" value="Another assignment"></td>
+                        <td><input type="date" class="form-control" value="2024-10-08"></td>
+                        <td><input type="date" class="form-control" value="2024-10-04"></td>
                         <td>
-                            <div class="dropdown">
-                                <button class="btn btn-tertiary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    CS 260
-                                </button>
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">A HTG 100</a></li>
-                                  <li><a class="dropdown-item" href="#">CS 260</a></li>
-                                  <li><a class="dropdown-item" href="#">WRTG 150</a></li>
-                                  <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="classes.html">Manage...</a></li>
-                                </ul>
-                            </div>
+                            <select id="class" class="form-control">
+                                <option selected>A HTG 100</option>
+                                <option>CS 260</option>
+                                <option>WRTG 150</option>
+                                <option disabled>—————————————</option>
+                                <option onclick="location.href = 'classes.html';">Manage...</option>
+                            </select>
                         </td>
                         <td>
                             <div class="dropdown">
@@ -201,32 +203,27 @@
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify on finish date</a></li>
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify on due date</a></li>
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify if late</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify on finish date</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify on due date</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify if late</a></li>
                                   <li><a class="dropdown-item" href="#">Delete <img src="icons/delete.svg" width="15px"></a></li>
                                 </ul>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox"></td>
-                        <td><input type="text" value="Some other assignment"></td>
-                        <td><input type="date" value="2024-10-10"></td>
-                        <td><input type="date" value="2024-10-08"></td>
+                        <td><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="CompletedCheckbox"></td>
+                        <td><input type="text" class="form-control" value="Some other assignment"></td>
+                        <td><input type="date" class="form-control" value="2024-10-10"></td>
+                        <td><input type="date" class="form-control" value="2024-10-08"></td>
                         <td>
-                            <div class="dropdown">
-                                <button class="btn btn-tertiary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    WRTG 150
-                                </button>
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">A HTG 100</a></li>
-                                  <li><a class="dropdown-item" href="#">CS 260</a></li>
-                                  <li><a class="dropdown-item" href="#">WRTG 150</a></li>
-                                  <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="classes.html">Manage...</a></li>
-                                </ul>
-                            </div>
+                            <select id="class" class="form-control">
+                                <option selected>A HTG 100</option>
+                                <option>CS 260</option>
+                                <option>WRTG 150</option>
+                                <option disabled>—————————————</option>
+                                <option onclick="location.href = 'classes.html';">Manage...</option>
+                            </select>
                         </td>
                         <td>
                             <div class="dropdown">
@@ -234,9 +231,9 @@
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify on finish date</a></li>
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify on due date</a></li>
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify if late</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify on finish date</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify on due date</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify if late</a></li>
                                   <li><a class="dropdown-item" href="#">Delete <img src="icons/delete.svg" width="15px"></a></li>
                                 </ul>
                             </div>
@@ -255,23 +252,18 @@
                         <th></th>
                     </tr>
                     <tr>
-                        <td><input type="checkbox" checked></td>
-                        <td><input type="text" value="Take reading quiz"></td>
-                        <td><input type="date" value="2024-10-03"></td>
-                        <td><input type="date" value="2024-10-02"></td>
+                        <td><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="CompletedCheckbox" checked></td>
+                        <td><input type="text" class="form-control" value="Take reading quiz"></td>
+                        <td><input type="date" class="form-control" value="2024-10-03"></td>
+                        <td><input type="date" class="form-control" value="2024-10-02"></td>
                         <td>
-                            <div class="dropdown">
-                                <button class="btn btn-tertiary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    A HTG 100
-                                </button>
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">A HTG 100</a></li>
-                                  <li><a class="dropdown-item" href="#">CS 260</a></li>
-                                  <li><a class="dropdown-item" href="#">WRTG 150</a></li>
-                                  <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="classes.html">Manage...</a></li>
-                                </ul>
-                            </div>
+                            <select id="class" class="form-control">
+                                <option selected>A HTG 100</option>
+                                <option>CS 260</option>
+                                <option>WRTG 150</option>
+                                <option disabled>—————————————</option>
+                                <option onclick="location.href = 'classes.html';">Manage...</option>
+                            </select>
                         </td>
                         <td>
                             <div class="dropdown">
@@ -279,32 +271,27 @@
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify on finish date</a></li>
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify on due date</a></li>
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify if late</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify on finish date</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify on due date</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify if late</a></li>
                                   <li><a class="dropdown-item" href="#">Delete <img src="icons/delete.svg" width="15px"></a></li>
                                 </ul>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox" checked></td>
-                        <td><input type="text" value="Another assignment"></td>
-                        <td><input type="date" value="2024-10-08"></td>
-                        <td><input type="date" value="2024-10-04"></td>
+                        <td><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="CompletedCheckbox" checked></td>
+                        <td><input type="text" class="form-control" value="Another assignment"></td>
+                        <td><input type="date" class="form-control" value="2024-10-08"></td>
+                        <td><input type="date" class="form-control" value="2024-10-04"></td>
                         <td>
-                            <div class="dropdown">
-                                <button class="btn btn-tertiary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    CS 260
-                                </button>
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">A HTG 100</a></li>
-                                  <li><a class="dropdown-item" href="#">CS 260</a></li>
-                                  <li><a class="dropdown-item" href="#">WRTG 150</a></li>
-                                  <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="classes.html">Manage...</a></li>
-                                </ul>
-                            </div>
+                            <select id="class" class="form-control">
+                                <option selected>A HTG 100</option>
+                                <option>CS 260</option>
+                                <option>WRTG 150</option>
+                                <option disabled>—————————————</option>
+                                <option onclick="location.href = 'classes.html';">Manage...</option>
+                            </select>
                         </td>
                         <td>
                             <div class="dropdown">
@@ -312,32 +299,27 @@
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify on finish date</a></li>
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify on due date</a></li>
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify if late</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify on finish date</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify on due date</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify if late</a></li>
                                   <li><a class="dropdown-item" href="#">Delete <img src="icons/delete.svg" width="15px"></a></li>
                                 </ul>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox" checked></td>
-                        <td><input type="text" value="Some other assignment"></td>
-                        <td><input type="date" value="2024-10-10"></td>
-                        <td><input type="date" value="2024-10-08"></td>
+                        <td><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="CompletedCheckbox" checked></td>
+                        <td><input type="text" class="form-control" value="Some other assignment"></td>
+                        <td><input type="date" class="form-control" value="2024-10-10"></td>
+                        <td><input type="date" class="form-control" value="2024-10-08"></td>
                         <td>
-                            <div class="dropdown">
-                                <button class="btn btn-tertiary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    WRTG 150
-                                </button>
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">A HTG 100</a></li>
-                                  <li><a class="dropdown-item" href="#">CS 260</a></li>
-                                  <li><a class="dropdown-item" href="#">WRTG 150</a></li>
-                                  <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="classes.html">Manage...</a></li>
-                                </ul>
-                            </div>
+                            <select id="class" class="form-control">
+                                <option selected>A HTG 100</option>
+                                <option>CS 260</option>
+                                <option>WRTG 150</option>
+                                <option disabled>—————————————</option>
+                                <option onclick="location.href = 'classes.html';">Manage...</option>
+                            </select>
                         </td>
                         <td>
                             <div class="dropdown">
@@ -345,9 +327,9 @@
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify on finish date</a></li>
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify on due date</a></li>
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify if late</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify on finish date</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify on due date</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify if late</a></li>
                                   <li><a class="dropdown-item" href="#">Delete <img src="icons/delete.svg" width="15px"></a></li>
                                 </ul>
                             </div>
@@ -367,24 +349,19 @@
                         <th></th>
                     </tr>
                     <tr>
-                        <td><input type="checkbox" checked></td>
-                        <td><input type="text" value="Midterm #1"></td>
-                        <td><input type="date" value="2024-10-08"></td>
-                        <td><input type="date" value="2024-10-011"></td>
-                        <td><input type="date" value="2024-10-09"></td>
+                        <td><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="CompletedCheckbox" checked></td>
+                        <td><input type="text" class="form-control" value="Midterm #1"></td>
+                        <td><input type="date" class="form-control" value="2024-10-08"></td>
+                        <td><input type="date" class="form-control" value="2024-10-011"></td>
+                        <td><input type="date" class="form-control" value="2024-10-09"></td>
                         <td>
-                            <div class="dropdown">
-                                <button class="btn btn-tertiary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    A HTG 100
-                                </button>
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">A HTG 100</a></li>
-                                  <li><a class="dropdown-item" href="#">CS 260</a></li>
-                                  <li><a class="dropdown-item" href="#">WRTG 150</a></li>
-                                  <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="classes.html">Manage...</a></li>
-                                </ul>
-                            </div>
+                            <select id="class" class="form-control">
+                                <option selected>A HTG 100</option>
+                                <option>CS 260</option>
+                                <option>WRTG 150</option>
+                                <option disabled>—————————————</option>
+                                <option onclick="location.href = 'classes.html';">Manage...</option>
+                            </select>
                         </td>
                         <td>
                             <div class="dropdown">
@@ -392,9 +369,9 @@
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify on finish date</a></li>
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify on due date</a></li>
-                                  <li><a class="dropdown-item" href="#"><input type="checkbox"> Notify if late</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify on finish date</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify on due date</a></li>
+                                  <li><a class="dropdown-item" href="#"><input class="form-check-input" type="checkbox" id="checkbox" value="" aria-label="Checkbox"> Notify if late</a></li>
                                   <li><a class="dropdown-item" href="#">Delete <img src="icons/delete.svg" width="15px"></a></li>
                                 </ul>
                             </div>
