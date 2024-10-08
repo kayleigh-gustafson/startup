@@ -47,3 +47,8 @@ select option:disabled {
     top: 55px;
     z-index: 1;
 }
+
+.btn.hover-red:hover {
+    background-color: #f0515c;
+    color: white;
+}
