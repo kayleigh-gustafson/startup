@@ -52,3 +52,95 @@ select option:disabled {
     background-color: #f0515c;
     color: white;
 }
+
+input[type="checkbox"]:not(:checked) {
+    background-color: #f5f5f5;
+}
+
+@media screen and (max-width: 768px) {
+    tr {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px 0px;
+        border-bottom: 1px solid #cccccc;
+        align-items: center;
+
+    }
+    .task-check .form-check-input {
+        width: 20px;
+        height: 20px;
+        padding: 0px;
+        margin: 0px;
+    }
+    #tasks-tab-pane table, #completed-tab-pane table {
+        width: 95%;
+        margin: auto;
+    }
+    #tasks-tab-pane td, #completed-tab-pane td {
+        padding: 1%;
+        margin: 0px;
+    }
+    .task-check, .exam-check {
+        width: 6%;
+        order: 1;
+    }
+    .task-name, .exam-name {
+        width: 87%;
+        order: 2;
+    }
+    .task-menu, .exam-menu {
+        order: 3;
+        width: 6%;
+        margin-left: -1.5%;
+    }
+    .task-due {
+        width: 33%;
+        order: 4;
+    }
+    .task-finish {
+        width: 33%;
+        order: 5;
+    }
+    .task-class {
+        width: 33%;
+        order: 6;
+    }
+    .exam-open {
+        width: 25%;
+        order: 4;
+    }
+    .exam-close {
+        width: 25%;
+        order: 5;
+    }
+    .exam-finish {
+        width: 25%;
+        order: 6;
+    }
+    .exam-class {
+        width: 24%;
+        order: 7;
+    }
+    .task-due input, .task-finish input, .task-class select, .exam-open input, .exam-close input, .exam-finish input, .exam-class select  {
+        font-size: 0.8em;
+        background-color: #f5f5f5;
+    }
+    label {
+        position: relative;
+        bottom: 3px;
+        left: 10px;
+        font-size: 0.8em;
+        color: gray;
+    }
+    .task-table-header, .exam-table-header {
+        display: none;
+    }
+    /* table {
+        display: block;
+    }
+    
+    table td {
+        display: inline-block;
+    } */
+
+}
