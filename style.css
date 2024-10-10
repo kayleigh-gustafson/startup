@@ -57,8 +57,14 @@ input[type="checkbox"]:not(:checked) {
     background-color: #f5f5f5;
 }
 
+.form-style-dropdown {
+    border: 1px solid #dee2e6;
+    padding: 6px 15px 7px 15px;
+    border-radius: 6px;
+}
+
 @media screen and (max-width: 768px) {
-    tr {
+    .tab-content tr {
         display: flex;
         flex-wrap: wrap;
         padding: 20px 0px;
@@ -66,73 +72,80 @@ input[type="checkbox"]:not(:checked) {
         align-items: center;
 
     }
-    .task-check .form-check-input {
+    .tab-content .task-check .form-check-input, .exam-check .form-check-input {
         width: 20px;
         height: 20px;
         padding: 0px;
         margin: 0px;
     }
-    #tasks-tab-pane table, #completed-tab-pane table {
+    .tab-content #tasks-tab-pane table, #completed-tab-pane table {
         width: 95%;
         margin: auto;
     }
-    #tasks-tab-pane td, #completed-tab-pane td {
+    .tab-content #tasks-tab-pane td, #completed-tab-pane td {
         padding: 1%;
         margin: 0px;
     }
-    .task-check, .exam-check {
+    .tab-content .task-check, .exam-check {
         width: 6%;
         order: 1;
     }
-    .task-name, .exam-name {
+    .tab-content .task-name, .exam-name {
         width: 87%;
         order: 2;
     }
-    .task-menu, .exam-menu {
+    .tab-content .task-name input, .exam-name input {
+        background-color: #f5f5f5;
+    }
+    .tab-content .task-menu, .exam-menu {
         order: 3;
         width: 6%;
         margin-left: -1.5%;
     }
-    .task-due {
+    .tab-content .task-due {
         width: 33%;
         order: 4;
     }
-    .task-finish {
+    .tab-content .task-finish {
         width: 33%;
         order: 5;
     }
-    .task-class {
+    .tab-content .task-class {
         width: 33%;
         order: 6;
     }
-    .exam-open {
+    .tab-content .exam-open {
         width: 25%;
         order: 4;
     }
-    .exam-close {
+    .tab-content .exam-close {
         width: 25%;
         order: 5;
     }
-    .exam-finish {
+    .tab-content .exam-finish {
         width: 25%;
         order: 6;
     }
-    .exam-class {
+    .tab-content .exam-class {
         width: 24%;
         order: 7;
     }
-    .task-due input, .task-finish input, .task-class select, .exam-open input, .exam-close input, .exam-finish input, .exam-class select  {
+    .tab-content .task-due input, .tab-content .task-finish input, .tab-content .task-class a.dropdown-toggle, .tab-content .exam-open input, .tab-content .exam-close input, .tab-content .exam-finish input, .tab-content .exam-class a.dropdown-toggle  {
         font-size: 0.8em;
-        background-color: #f5f5f5;
+        padding-bottom: 7px;
+        /* background-color: #f5f5f5; */
     }
-    label {
+
+    .tab-content #tasks-tab-pane label, .tab-content #completed-tab-pane label, .tab-content #exams-tab-pane label {
         position: relative;
-        bottom: 3px;
+        bottom: 13px;
         left: 10px;
-        font-size: 0.8em;
+        font-size: 0.7em;
         color: gray;
+        background-color: white;
+        padding: 0px 5px;
     }
-    .task-table-header, .exam-table-header {
+    .tab-content .task-table-header, .tab-content .exam-table-header {
         display: none;
     }
     /* table {
