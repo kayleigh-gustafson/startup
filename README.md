@@ -39,5 +39,5 @@ This deliverable involved adding a lot of Bootstrap elements, adjusting padding,
 - [x] Responsive to window resizing: done
 - [x] Application elements: done
 - [x] Application text content: done
-- [x] Application images: "Add" icon, favicon: done
+- [x] Application images: "add" icons, "delete" icons, menu icon, favicon: done
 
