@@ -34,6 +34,10 @@ select option:disabled {
     color: #cccccc;
 }
 
+.navbar-toggler {
+    border: none;
+}
+
 .custom-color-picker {
     -webkit-appearance: none;
     -moz-appearance: none;
