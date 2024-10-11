@@ -43,40 +43,35 @@
         <div id="manage-term-content" class="text-center">
             <h3 class="pb-5">Academic Terms</h3>
             <table class="mx-auto">
-                <tr class="text-start">
+                <tr class="text-start term-table-header">
                     <th class="px-2">Term</th>
                     <th class="px-2">Start Date</th>
                     <th class="px-2">End Date</th>
                     <th class="px-2"></th>
                 </tr>
                 <tr>
-                    <td class="p-2"><input class="form-control" type="text" value="Fall 2024"></td>
-                    <td class="p-2"><input class="form-control" type="date" value="2024-09-03"></td>
-                    <td class="p-2"><input class="form-control" type="date" value="2024-04-26"></td>
-                    <td class="p-2 text-start"><a class="btn btn-tertiary hover-red" href="">Delete</a></td>
+                    <td class="p-2 term-name"><input class="form-control" type="text" value="Fall 2024"></td>
+                    <td class="p-2 term-start"><input class="form-control" type="date" value="2024-09-03"><label class="d-md-none">Start Date</label></td>
+                    <td class="p-2 term-end"><input class="form-control" type="date" value="2024-04-26"><label class="d-md-none">End Date</label></td>
+                    <td class="p-2 term-delete text-start"><a class="btn btn-tertiary hover-red" href=""><i class="fa-solid fa-trash"></i></a></td>
                 </tr>
                 <tr>
-                    <td class="p-2"><input class="form-control" type="text" value="Winter 2025"></td>
-                    <td class="p-2"><input class="form-control" type="date" value="2024-09-03"></td>
-                    <td class="p-2"><input class="form-control" type="date" value="2024-04-26"></td>
-                    <td class="p-2 text-start"><a class="btn btn-tertiary hover-red" href="">Delete</a></td>
+                    <td class="p-2 term-name"><input class="form-control" type="text" value="Fall 2024"></td>
+                    <td class="p-2 term-start"><input class="form-control" type="date" value="2024-09-03"><label class="d-md-none">Start Date</label></td>
+                    <td class="p-2 term-end"><input class="form-control" type="date" value="2024-04-26"><label class="d-md-none">End Date</label></td>
+                    <td class="p-2 term-delete text-start"><a class="btn btn-tertiary hover-red" href=""><i class="fa-solid fa-trash"></i></a></td>
                 </tr>
                 <tr>
-                    <td class="p-2"><input class="form-control" type="text" value="Fall 2025"></td>
-                    <td class="p-2"><input class="form-control" type="date" value="2024-09-03"></td>
-                    <td class="p-2"><input class="form-control" type="date" value="2024-04-26"></td>
-                    <td class="p-2 text-start"><a class="btn btn-tertiary hover-red" href="">Delete</a></td>
+                    <td class="p-2 term-name"><input class="form-control" type="text" value="Fall 2024"></td>
+                    <td class="p-2 term-start"><input class="form-control" type="date" value="2024-09-03"><label class="d-md-none">Start Date</label></td>
+                    <td class="p-2 term-end"><input class="form-control" type="date" value="2024-04-26"><label class="d-md-none">End Date</label></td>
+                    <td class="p-2 term-delete text-start"><a class="btn btn-tertiary hover-red" href=""><i class="fa-solid fa-trash"></i></a></td>
                 </tr>
                 <tr>
-                    <td colspan="4">
-                        <hr>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p-2"><input class="form-control" type="text" placeholder="New term..."></td>
-                    <td class="p-2"><input class="form-control" type="date"></td>
-                    <td class="p-2"><input class="form-control" type="date"></td>
-                    <td class="p-2 text-start"><a class="btn btn-primary" href="">Add</a></td>
+                    <td class="p-2 term-name"><input class="form-control" type="text" placeholder="New term..."></td>
+                    <td class="p-2 term-start"><input class="form-control" type="date"><label class="d-md-none">Start Date</label></td>
+                    <td class="p-2 term-end"><input class="form-control" type="date"><label class="d-md-none">End Date</label></td>
+                    <td class="p-2 term-delete text-start"><a class="btn btn-primary" href=""><i class="fa-solid fa-plus"></i></a></td>
                 </tr>
             </table>
             <a class="btn btn-primary mt-4" href="main.html">Done</a>

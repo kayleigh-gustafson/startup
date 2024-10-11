@@ -2,6 +2,10 @@
     font-family: Inter, sans-serif;
 }
 
+th {
+    font-weight: normal;
+}
+
 .tab-content td {
     padding: 5px;
 }
@@ -13,6 +17,16 @@
 @media screen and (max-width: 768px) {
     #login-tab-pane, #signup-tab-pane, #manage-class-content, #manage-term-content {
         width: 90%;
+    }
+}
+
+#tasks-tab-pane, #completed-tab-pane, #exams-tab-pane {
+    width: 80%;
+}
+
+@media screen and (max-width: 768px) {
+    #tasks-tab-pane, #completed-tab-pane, #exams-tab-pane {
+        width: 95%;
     }
 }
 
@@ -53,8 +67,13 @@ select option:disabled {
     color: white;
 }
 
+.task-check input[type="checkbox"], .exam-check input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
 input[type="checkbox"]:not(:checked) {
-    background-color: #f5f5f5;
+    background-color: #dee2e6;
 }
 
 .form-style-dropdown {
@@ -63,6 +82,12 @@ input[type="checkbox"]:not(:checked) {
     border-radius: 6px;
 }
 
+.tab-content .task-name, .exam-name {
+    width: 100%;
+}
+
+/* Mobile-friendly assignment tables */
+
 @media screen and (max-width: 768px) {
     .tab-content tr {
         display: flex;
@@ -70,7 +95,7 @@ input[type="checkbox"]:not(:checked) {
         padding: 20px 0px;
         border-bottom: 1px solid #cccccc;
         align-items: center;
-
+        text-align: start;
     }
     .tab-content .task-check .form-check-input, .exam-check .form-check-input {
         width: 20px;
@@ -93,10 +118,9 @@ input[type="checkbox"]:not(:checked) {
     .tab-content .task-name, .exam-name {
         width: 87%;
         order: 2;
+        
     }
-    .tab-content .task-name input, .exam-name input {
-        background-color: #f5f5f5;
-    }
+    
     .tab-content .task-menu, .exam-menu {
         order: 3;
         width: 6%;
@@ -155,5 +179,120 @@ input[type="checkbox"]:not(:checked) {
     table td {
         display: inline-block;
     } */
+
+}
+
+@media screen and (max-width: 576px) {
+    .tab-content .exam-open {
+        width: 49.5%;
+        order: 4;
+        padding-bottom: 0px;
+    }
+    .tab-content .exam-close {
+        width: 49.5%;
+        order: 5;
+        padding-bottom: 0px;
+    }
+    .tab-content .exam-finish {
+        width: 49.5%;
+        order: 6;
+        padding-top: 0px;
+    }
+    .tab-content .exam-class {
+        width: 49.5%;
+        order: 7;
+        padding-top: 0px;
+    }
+}
+
+/* Mobile-friendly term tables */
+
+@media screen and (max-width: 768px) {
+    #manage-term-content tr {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px 0px 5px 0px;
+        border-bottom: 1px solid #cccccc;
+        align-items: center;
+        text-align: start;
+    }
+    #manage-term-content table {
+        width: 95%;
+        margin: auto;
+    }
+    #manage-term-content td {
+        padding: 1%;
+        margin: 0px;
+    }
+    #manage-term-content .term-name {
+        width: 85%;
+        order: 1;
+    }
+    #manage-term-content .term-delete {
+        width: 14%;
+        order: 2;
+    }
+    #manage-term-content .term-start {
+        width: 49.5%;
+        order: 3;
+    }
+    #manage-term-content .term-end {
+        width: 49.5%;
+        order: 4;
+    }
+    
+    
+    #manage-term-content .term-start input, #manage-term-content .term-end input {
+        font-size: 0.8em;
+        padding-bottom: 7px;
+        /* background-color: #f5f5f5; */
+    }
+
+    #manage-term-content label {
+        position: relative;
+        bottom: 13px;
+        left: 10px;
+        font-size: 0.7em;
+        color: gray;
+        background-color: white;
+        padding: 0px 5px;
+    }
+    #manage-term-content .term-table-header {
+        display: none;
+    }
+
+}
+
+/* Mobile-friendly class tables */
+
+@media screen and (max-width: 768px) {
+    #manage-class-content tr {
+        padding: 20px 0px 5px 0px;
+        align-items: center;
+        text-align: start;
+    }
+    #manage-class-content table {
+        width: 95%;
+        margin: auto;
+    }
+    #manage-class-content td {
+        padding: 1%;
+        margin: 0px;
+    }
+    #manage-class-content .class-name {
+        width: 100%;
+        order: 1;
+    }
+    #manage-class-content .class-delete {
+        order: 2;
+    }
+    #manage-class-content .class-color {
+        order: 3;
+        padding: 0px 10px;
+    }
+
+    #manage-class-content .class-table-header {
+        display: none;
+    }
 
 }
