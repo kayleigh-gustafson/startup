@@ -10,12 +10,19 @@ th {
     padding: 5px;
 }
 
-#login-tab-pane, #signup-tab-pane, #manage-class-content, #manage-term-content {
-    width: 60%;
+.tab-table {
+    width: 80%;
+    margin: 20px auto;
+}
+
+@media screen and (max-width: 992px) {
+    .tab-table {
+        width: 95%;
+    }
 }
 
 @media screen and (max-width: 768px) {
-    #login-tab-pane, #signup-tab-pane, #manage-class-content, #manage-term-content {
+    .tab-table {
         width: 90%;
     }
 }
@@ -82,8 +89,9 @@ input[type="checkbox"]:not(:checked) {
 
 .form-style-dropdown {
     border: 1px solid #dee2e6;
-    padding: 6px 15px 7px 15px;
+    padding: 0px 15px 0px 15px;
     border-radius: 6px;
+    text-align: center;
 }
 
 .tab-content .task-name, .exam-name {
@@ -158,13 +166,13 @@ input[type="checkbox"]:not(:checked) {
         width: 24%;
         order: 7;
     }
-    .tab-content .task-due input, .tab-content .task-finish input, .tab-content .task-class a.dropdown-toggle, .tab-content .exam-open input, .tab-content .exam-close input, .tab-content .exam-finish input, .tab-content .exam-class a.dropdown-toggle  {
+    .tab-content .task-due input, .tab-content .task-finish input, .tab-content .task-class a.dropdown-toggle, .tab-content .exam-open input, .tab-content .exam-close input, .tab-content .exam-finish input, .tab-content .exam-class a.dropdown-toggle, .form-style-dropdown .dropdown-toggle  {
         font-size: 0.8em;
         padding-bottom: 7px;
         /* background-color: #f5f5f5; */
     }
 
-    .tab-content #tasks-tab-pane label, .tab-content #completed-tab-pane label, .tab-content #exams-tab-pane label {
+    .tab-table label {
         position: relative;
         bottom: 13px;
         left: 10px;
@@ -303,4 +311,16 @@ input[type="checkbox"]:not(:checked) {
 
 .dropdown-item:active {
     background-color: transparent!important;
+}
+
+.no-caret .dropdown-toggle:after {
+    display: none !important;
+}
+
+.dropdown-center .dropdown-menu {
+    width: 100%;
+}
+
+.form-style-dropdown .dropdown-toggle {
+    border: none;
 }
