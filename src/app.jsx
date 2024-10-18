@@ -4,11 +4,20 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
 import './app.css';
 import './color.css';
 
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { Login } from './login/login';
+import { Home } from './home/home';
+import { Classes } from './classes/classes';
+import { Terms } from './terms/terms';
+
 export default function App() {
   return (
+    <BrowserRouter>
     <div className="d-flex min-vh-100 flex-column">
         <header className="sticky-top">
             <Navbar expand="md" className="bg-body-tertiary px-3">
@@ -74,22 +83,22 @@ export default function App() {
                     >
                         <NavDropdown title="Fall 2024">
                             <NavDropdown.Item>
-                                <a className="dropdown-item" href="#">Fall 2024</a>
+                                <Button variant="tertiary" className="dropdown-item">Fall 2024</Button>
                             </NavDropdown.Item>
                             <NavDropdown.Item>
-                                <a className="dropdown-item" href="#">Winter 2025</a>
+                            <Button variant="tertiary" className="dropdown-item">Winter 2025</Button>
                             </NavDropdown.Item>
                             <NavDropdown.Item>
-                                <a className="dropdown-item" href="#">Fall 2025</a>
+                            <Button variant="tertiary" className="dropdown-item">Fall 2025</Button>
                             </NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item>
-                                <a className="dropdown-item" href="terms.html">Manage...</a>
+                                <Link className="dropdown-item" to="terms">Manage...</Link>
                             </NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="userName123">
                             <NavDropdown.Item>
-                                <a className="dropdown-item" href="index.html">Log Out</a>
+                                <Link className="dropdown-item" to="/">Log out</Link>
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
@@ -97,7 +106,19 @@ export default function App() {
             </Container>
             </Navbar>
         </header>
-        <main className="flex-grow-1 mt-5">Page goes here</main>
+
+        <main className="flex-grow-1 mt-5">
+
+        <Routes>
+            <Route path='/' element={<Login />} exact />
+            <Route path='/home' element={<Home />} />
+            <Route path='/classes' element={<Classes />} />
+            <Route path='/terms' element={<Terms />} />
+            <Route path='*' element={<NotFound />} />
+        </Routes>
+
+        </main>
+
         <footer className="mt-5 py-3 px-5 bg-body-tertiary d-flex flex-row justify-content-between align-items-center">
             <p className="mb-0">123,456 total assignments completed</p>
             <p className="mb-0">
@@ -111,5 +132,10 @@ export default function App() {
             </p>
         </footer>
     </div>
+    </BrowserRouter>
   );
+}
+
+function NotFound() {
+    return <main className='container-fluid bg-secondary text-center'>404: Return to sender. Address unknown.</main>;
 }

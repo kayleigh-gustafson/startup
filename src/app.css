@@ -300,3 +300,7 @@ input[type="checkbox"]:not(:checked) {
     }
 
 }
+
+.dropdown-item:active {
+    background-color: transparent!important;
+}
