@@ -19,7 +19,10 @@ import { Home } from './home/home';
 import { Classes } from './classes/classes';
 import { Terms } from './terms/terms';
 
+import getUserData from './getUserData';
+
 export default function App() {
+    userData = getUserData();
     const [showTaskModal, setShowTaskModal] = useState(false);
     const [showExamModal, setShowExamModal] = useState(false);  
     return (
