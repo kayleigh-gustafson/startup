@@ -1,10 +1,14 @@
 import React from 'react';
+import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import { Link } from "react-router-dom";
 import './app.css';
 import './color.css';
@@ -16,7 +20,9 @@ import { Classes } from './classes/classes';
 import { Terms } from './terms/terms';
 
 export default function App() {
-  return (
+    const [showTaskModal, setShowTaskModal] = useState(false);
+    const [showExamModal, setShowExamModal] = useState(false);  
+    return (
     <BrowserRouter>
     <div className="d-flex min-vh-100 flex-column">
         <header className="sticky-top">
@@ -55,24 +61,14 @@ export default function App() {
                     >
                         <NavDropdown className="w-100 dropdown-center justify-content-center text-center m-auto p-0 no-caret" title={<i className="fa-solid fa-plus text-md-end fs-3"></i>}>
                             <NavDropdown.Item>
-                            <button
-                                type="button"
-                                className="btn btn-tertiary d-inline w-100"
-                                data-bs-toggle="modal"
-                                data-bs-target="#newAssignmentModal"
-                            >
+                            <Button onClick={() => setShowTaskModal(true)} variant="tertiary" className="d-inline w-100">
                                 Create Task
-                            </button>
+                            </Button>
                             </NavDropdown.Item>
                             <NavDropdown.Item>
-                            <button
-                                type="button"
-                                className="btn btn-tertiary d-inline w-100"
-                                data-bs-toggle="modal"
-                                data-bs-target="#newExamModal"
-                            >
+                            <Button onClick={() => setShowExamModal(true)} variant="tertiary" className="d-inline w-100">
                                 Create Exam
-                            </button>
+                            </Button>
                             </NavDropdown.Item>
 
                         </NavDropdown>
@@ -106,6 +102,74 @@ export default function App() {
             </Container>
             </Navbar>
         </header>
+
+        <Modal
+        show={showTaskModal}
+        onHide={() => setShowTaskModal(false)}
+        >
+       <Modal.Header closeButton>
+          <Modal.Title>New Task</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+                <label className="mt-2 mb-1" htmlFor="assignment">Assignment</label>
+                <input type="text" className="form-control" id="assignment" name="assignment"/>
+                
+                <label className="mt-2 mb-1" htmlFor="duedate">Due Date</label>
+                <input type="date" className="form-control" id="duedate" name="duedate"/>
+                
+                <label className="mt-2 mb-1" htmlFor="finishdate">Finish By</label>
+                <input type="date" className="form-control" id="finishdate" name="finishdate"/>
+                
+                <label className="mt-2 mb-1" htmlFor="class">Class</label>
+                <DropdownButton variant="tertiary" title="A HTG 100" className="form-style-dropdown text-start">
+                    <Dropdown.Item eventKey="1">A HTG 100</Dropdown.Item>
+                    <Dropdown.Item eventKey="2">CS 260</Dropdown.Item>
+                    <Dropdown.Item eventKey="3">WRTG 150</Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item eventKey="4" href="classes">Manage...</Dropdown.Item>
+                </DropdownButton>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant='tertiary' onClick={() => setShowTaskModal(false)}>Close</Button>
+                <Button variant='primary' onClick={() => setShowTaskModal(false)}>Create</Button>
+            </Modal.Footer>
+        </Modal>
+
+        <Modal
+        show={showExamModal}
+        onHide={() => setShowExamModal(false)}
+        >
+       <Modal.Header closeButton>
+          <Modal.Title>New Exam</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+                <label className="mt-2 mb-1" htmlFor="assignment">Exam</label>
+                <input type="text" className="form-control" id="assignment" name="assignment"/>
+                
+                <label className="mt-2 mb-1" htmlFor="opendate">Open Date</label>
+                <input type="date" className="form-control" id="opendate" name="opendate"/>
+
+                <label className="mt-2 mb-1" htmlFor="closedate">Close Date</label>
+                <input type="date" className="form-control" id="closedate" name="closedate"/>
+                
+                <label className="mt-2 mb-1" htmlFor="finishdate">Finish By</label>
+                <input type="date" className="form-control" id="finishdate" name="finishdate"/>
+                
+                <label className="mt-2 mb-1" htmlFor="class">Class</label>
+                <DropdownButton variant="tertiary" title="A HTG 100" className="form-style-dropdown text-start">
+                    <Dropdown.Item eventKey="1">A HTG 100</Dropdown.Item>
+                    <Dropdown.Item eventKey="2">CS 260</Dropdown.Item>
+                    <Dropdown.Item eventKey="3">WRTG 150</Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item eventKey="4" href="classes">Manage...</Dropdown.Item>
+                </DropdownButton>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant='tertiary' onClick={() => setShowExamModal(false)}>Close</Button>
+                <Button variant='primary' onClick={() => setShowExamModal(false)}>Create</Button>
+            </Modal.Footer>
+        </Modal>
+
 
         <main className="flex-grow-1 mt-5">
 
