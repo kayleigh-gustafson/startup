@@ -4,6 +4,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { DropdownToggle } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 export default function TaskRow({ id, completed, name, due, finish, taskClass, notifyDue = false, notifyFinish = false, notifyLate = false }) {
     return (
@@ -45,6 +46,8 @@ export default function TaskRow({ id, completed, name, due, finish, taskClass, n
                 <Dropdown.Item eventKey="1">A HTG 100</Dropdown.Item>
                 <Dropdown.Item eventKey="2">CS 260</Dropdown.Item>
                 <Dropdown.Item eventKey="3">WRTG 150</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item eventKey="4" href="classes">Manage...</Dropdown.Item>
             </DropdownButton>
             <label className="d-md-none">Class</label>
         </td>

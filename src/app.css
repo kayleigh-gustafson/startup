@@ -27,6 +27,17 @@ th {
     }
 }
 
+.login-tab-content {
+    width: 50%;
+    margin: 20px auto;
+}
+
+@media screen and (max-width: 768px) {
+    .login-tab-content {
+        width: 80%;
+    }
+}
+
 #tasks-tab-pane, #completed-tab-pane, #exams-tab-pane {
     width: 80%;
 }
