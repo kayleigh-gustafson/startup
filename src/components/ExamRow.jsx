@@ -55,6 +55,8 @@ export default function ExamRow({ id, completed, name, open, close, finish, exam
                 <Dropdown.Item eventKey="1">A HTG 100</Dropdown.Item>
                 <Dropdown.Item eventKey="2">CS 260</Dropdown.Item>
                 <Dropdown.Item eventKey="3">WRTG 150</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item to={"../classes"} as={Link} eventKey="4" href="classes">Manage...</Dropdown.Item>
             </DropdownButton>
             <label className="d-md-none">Class</label>
         </td>
