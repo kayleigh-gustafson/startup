@@ -20,11 +20,25 @@ import { Classes } from './classes/classes';
 import { Terms } from './terms/terms';
 
 import getUserData from './getUserData';
+import databasePlaceholder from './databasePlaceholder';
+import getDataById from './getDataById';
+let userData;
 
 export default function App() {
-    userData = getUserData();
+    const [userData, setUserData] = useState(databasePlaceholder());
     const [showTaskModal, setShowTaskModal] = useState(false);
-    const [showExamModal, setShowExamModal] = useState(false);  
+    const [showExamModal, setShowExamModal] = useState(false);
+    const [currentTerm, setCurrentTerm] = useState(userData.terms[0].id)
+
+    // Generate term dropdown
+    const termDropdownContent = userData.terms.map((term, index) => {
+        return (
+            <NavDropdown.Item key={term.id}>
+                <Button variant="tertiary" onClick={() => setCurrentTerm(term.id)} className="dropdown-item">{term.name}</Button>
+            </NavDropdown.Item>
+        );
+      });
+
     return (
     <BrowserRouter>
     <div className="d-flex min-vh-100 flex-column">
@@ -80,20 +94,8 @@ export default function App() {
                         className="justify-content-end text-center"
                         style={{ flex: "1 1 0" }}
                     >
-                        <NavDropdown title="Fall 2024">
-                            <NavDropdown.Item>
-                                <Button variant="tertiary" className="dropdown-item">Fall 2024</Button>
-                            </NavDropdown.Item>
-                            <NavDropdown.Item>
-                            <Button variant="tertiary" className="dropdown-item">Winter 2025</Button>
-                            </NavDropdown.Item>
-                            <NavDropdown.Item>
-                            <Button variant="tertiary" className="dropdown-item">Fall 2025</Button>
-                            </NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item>
-                                <Link className="dropdown-item" to="terms">Manage...</Link>
-                            </NavDropdown.Item>
+                        <NavDropdown title={getDataById(userData.terms, currentTerm).name}>
+                            {termDropdownContent}
                         </NavDropdown>
                         <NavDropdown title="userName123">
                             <NavDropdown.Item>
@@ -177,10 +179,10 @@ export default function App() {
         <main className="flex-grow-1 mt-5">
 
         <Routes>
-            <Route path='/' element={<Login />} exact />
-            <Route path='/home' element={<Home />} />
-            <Route path='/classes' element={<Classes />} />
-            <Route path='/terms' element={<Terms />} />
+            <Route path='/' element={<Login userData={userData}/>} exact />
+            <Route path='/home' element={<Home userData={userData} setUserData={setUserData} currentTerm={currentTerm}/>} />
+            <Route path='/classes' element={<Classes userData={userData}/>} />
+            <Route path='/terms' element={<Terms userData={userData}/>} />
             <Route path='*' element={<NotFound />} />
         </Routes>
 

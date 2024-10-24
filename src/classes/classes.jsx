@@ -2,7 +2,7 @@ import React from 'react';
 import ClassRow from '../components/ClassRow';
 import { Link } from "react-router-dom";
 
-export function Classes() {
+export function Classes(userData) {
   return (
     <div id="manage-class-content" className="text-center">
       <h3 className="pb-5">Fall 2024 Classes</h3>

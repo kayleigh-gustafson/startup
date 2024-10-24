@@ -2,7 +2,7 @@ import React from 'react';
 import TermRow from '../components/TermRow';
 import { Link } from "react-router-dom";
 
-export function Terms() {
+export function Terms(userData) {
   return (
     <div id="manage-term-content" className="text-center">
       <h3 className="pb-5">Academic Terms</h3>

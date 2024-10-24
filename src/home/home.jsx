@@ -3,8 +3,64 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import TaskRow from '../components/TaskRow';
 import ExamRow from '../components/ExamRow';
+import databasePlaceholder from '../databasePlaceholder';
+import getDataById from '../getDataById';
 
-export function Home() {
+export function Home({userData, setUserData, currentTerm}) {
+
+  // Generating lists for each tab
+  console.log(userData.terms, userData.classes)
+  console.log(getDataById(userData.classes, "32913").term)
+  const completeTasksList = userData.assignments.filter(assignment => {
+    return assignment.completed && getDataById(userData.classes, assignment.classId).term === currentTerm
+  });
+  const incompleteTasksList = userData.assignments.filter(assignment => {
+    return !assignment.completed && getDataById(userData.classes, assignment.classId).term === currentTerm
+  });
+  const examList = userData.exams.filter(exam => {
+    return getDataById(userData.classes, exam.classId).term === currentTerm
+  });
+  const completeTasks = completeTasksList.map((task, index) => {
+    return (
+      <TaskRow
+        key={task.id}
+        id={task.id}
+        completed={task.completed}
+        name={task.name}
+        due={task.due}
+        finish={task.finish}
+        taskClass={getDataById(userData.classes, task.classId).name}
+      ></TaskRow>
+    );
+  });
+  const incompleteTasks = incompleteTasksList.map((task, index) => {
+    return (
+      <TaskRow
+        key={task.id}
+        id={task.id}
+        completed={task.completed}
+        name={task.name}
+        due={task.due}
+        finish={task.finish}
+        taskClass={getDataById(userData.classes, task.classId).name}
+      ></TaskRow>
+    );
+  });
+  const exams = examList.map((task, index) => {
+    return (
+      <ExamRow
+        key={task.id}
+        id={task.id}
+        completed={task.completed}
+        name={task.name}
+        open={task.open}
+        due={task.close}
+        finish={task.finish}
+        examClass={getDataById(userData.classes, task.classId).name}
+      ></ExamRow>
+    );
+  });
+
   return (
     <>
       <Tabs
@@ -23,30 +79,7 @@ export function Home() {
                 <th>Class</th>
                 <th />
               </tr>
-              <TaskRow
-                id="12269"
-                completed={false}
-                name="Reading quiz"
-                due="2024-10-01"
-                finish="2024-09-29"
-                taskClass="A HTG 100"
-              ></TaskRow>
-              <TaskRow
-                id="39462"
-                completed={false}
-                name="Another assignment"
-                due="2024-10-02"
-                finish="2024-10-01"
-                taskClass="CS 260"
-              ></TaskRow>
-              <TaskRow
-                id="20183"
-                completed={false}
-                name="Some other assignment"
-                due="2024-10-06"
-                finish="2024-10-05"
-                taskClass="WRTG 150"
-              ></TaskRow>
+              {incompleteTasks}
             </tbody>
           </table>
         </Tab>
@@ -61,22 +94,7 @@ export function Home() {
                 <th>Class</th>
                 <th />
               </tr>
-              <TaskRow
-                id="20378"
-                completed={true}
-                name="A random assignment"
-                due="2024-10-06"
-                finish="2024-10-05"
-                taskClass="WRTG 150"
-              ></TaskRow>
-              <TaskRow
-                id="20183"
-                completed={true}
-                name="Some other assignment"
-                due="2024-10-06"
-                finish="2024-10-05"
-                taskClass="A HTG 100"
-              ></TaskRow>
+              {completeTasks}
             </tbody>
           </table>
         </Tab>
@@ -92,15 +110,7 @@ export function Home() {
                 <th>Class</th>
                 <th />
               </tr>
-              <ExamRow
-                id="20183"
-                completed={true}
-                name="Midterm #1"
-                open="2024-10-01"
-                due="2024-10-06"
-                finish="2024-10-03"
-                examClass="A HTG 100"
-              ></ExamRow>
+              {exams}
             </tbody>
           </table>
         </Tab>

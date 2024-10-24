@@ -84,7 +84,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #1",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "32913",
+        classId: "32913",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -95,7 +95,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #2",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "32913",
+        classId: "32913",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -106,7 +106,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #3",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "32913",
+        classId: "32913",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -117,7 +117,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #4",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "10394",
+        classId: "10394",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -128,7 +128,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #5",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "10394",
+        classId: "10394",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -139,7 +139,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #6",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "10394",
+        classId: "10394",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -150,7 +150,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #7",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "91263",
+        classId: "91263",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -161,7 +161,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #8",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "91263",
+        classId: "91263",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -172,7 +172,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #9",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "91263",
+        classId: "91263",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -183,7 +183,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #10",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "11234",
+        classId: "11234",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -194,7 +194,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #11",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "11234",
+        classId: "11234",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -205,7 +205,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #12",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "11234",
+        classId: "11234",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -216,7 +216,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #13",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "63234",
+        classId: "63234",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -227,7 +227,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #14",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "63234",
+        classId: "63234",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -238,7 +238,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #15",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "63234",
+        classId: "63234",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -249,7 +249,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #16",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "94323",
+        classId: "94323",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -260,7 +260,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #17",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "94323",
+        classId: "94323",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -271,7 +271,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #18",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "94323",
+        classId: "94323",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -282,7 +282,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #19",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "75343",
+        classId: "75343",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -293,7 +293,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #20",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "75343",
+        classId: "75343",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -304,7 +304,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #21",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "75343",
+        classId: "75343",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -315,7 +315,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #22",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "98746",
+        classId: "98746",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -326,7 +326,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #23",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "98746",
+        classId: "98746",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -337,7 +337,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #24",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "98746",
+        classId: "98746",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -348,7 +348,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #25",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "23451",
+        classId: "23451",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -359,7 +359,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #26",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "23451",
+        classId: "23451",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -370,7 +370,7 @@ export default function databasePlaceholder() {
         name: "Placeholder assignment #27",
         due: "2024-10-02",
         finish: "2024-10-01",
-        class: "23451",
+        classId: "23451",
         notifyDue: false,
         notifyFinish: false,
         notifyLate: false
@@ -384,107 +384,107 @@ export default function databasePlaceholder() {
         open: "2024-10-01",
         due: "2024-10-03",
         finish: "2024-10-02",
-        class: "32913",
+        classId: "32913",
         notifyOpen: false,
         notifyFinish: false,
         notifyClose: false
         },
         {
-        id: "17235",
+        id: "01823",
         completed: false,
         name: "Placeholder exam #2",
         open: "2024-10-01",
         due: "2024-10-03",
         finish: "2024-10-02",
-        class: "10394",
+        classId: "10394",
         notifyOpen: false,
         notifyFinish: false,
         notifyClose: false
         },
         {
-        id: "17235",
+        id: "62135",
         completed: false,
         name: "Placeholder exam #3",
         open: "2024-10-01",
         due: "2024-10-03",
         finish: "2024-10-02",
-        class: "91263",
+        classId: "91263",
         notifyOpen: false,
         notifyFinish: false,
         notifyClose: false
         },
         {
-        id: "17235",
+        id: "91241",
         completed: false,
         name: "Placeholder exam #4",
         open: "2024-10-01",
         due: "2024-10-03",
         finish: "2024-10-02",
-        class: "11234",
+        classId: "11234",
         notifyOpen: false,
         notifyFinish: false,
         notifyClose: false
         },
         {
-        id: "17235",
+        id: "86242",
         completed: false,
         name: "Placeholder exam #5",
         open: "2024-10-01",
         due: "2024-10-03",
         finish: "2024-10-02",
-        class: "63234",
+        classId: "63234",
         notifyOpen: false,
         notifyFinish: false,
         notifyClose: false
         },
         {
-        id: "17235",
+        id: "92341",
         completed: false,
         name: "Placeholder exam #6",
         open: "2024-10-01",
         due: "2024-10-03",
         finish: "2024-10-02",
-        class: "94323",
+        classId: "94323",
         notifyOpen: false,
         notifyFinish: false,
         notifyClose: false
         },
         {
-        id: "17235",
+        id: "63245",
         completed: false,
         name: "Placeholder exam #7",
         open: "2024-10-01",
         due: "2024-10-03",
         finish: "2024-10-02",
-        class: "75343",
+        classId: "75343",
         notifyOpen: false,
         notifyFinish: false,
         notifyClose: false
         },
         {
-        id: "17235",
+        id: "09326",
         completed: false,
         name: "Placeholder exam #8",
         open: "2024-10-01",
         due: "2024-10-03",
         finish: "2024-10-02",
-        class: "98746",
+        classId: "98746",
         notifyOpen: false,
         notifyFinish: false,
         notifyClose: false
         },
         {
-        id: "17235",
+        id: "02351",
         completed: false,
         name: "Placeholder exam #9",
         open: "2024-10-01",
         due: "2024-10-03",
         finish: "2024-10-02",
-        class: "23451",
+        classId: "23451",
         notifyOpen: false,
         notifyFinish: false,
         notifyClose: false
         },
     ]
-};
+}
 }
