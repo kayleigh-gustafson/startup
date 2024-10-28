@@ -2,10 +2,24 @@ import React from 'react';
 import ClassRow from '../components/ClassRow';
 import { Link } from "react-router-dom";
 
-export function Classes(userData) {
+export function Classes({userData, setUserData, currentTerm}) {
+  let classRows = [];
+  for (const [key, value] of Object.entries(userData.classes)) {
+    if (value.term == currentTerm) {
+        classRows.push(
+          <ClassRow
+          userData={userData}
+          setUserData={setUserData}
+          key={key}
+          id={key}
+          name={value.name}
+          color={value.color}
+        ></ClassRow>);
+    }
+}
   return (
     <div id="manage-class-content" className="text-center">
-      <h3 className="pb-5">Fall 2024 Classes</h3>
+      <h4 className="pb-5">{userData.terms[currentTerm].name} Classes</h4>
       <table className="mx-auto">
         <tbody>
           <tr className="text-start class-table-header">
@@ -13,21 +27,7 @@ export function Classes(userData) {
             <th className="px-2">Color</th>
             <th className="px-2" />
           </tr>
-          <ClassRow
-            id="19252"
-            name="A HTG 100"
-            color="#d0f069"
-          ></ClassRow>
-          <ClassRow
-            id="10363"
-            name="CS 260"
-            color="#14ba99"
-          ></ClassRow>
-          <ClassRow
-            id="39163"
-            name="WRTG 150"
-            color="#8dba63"
-          ></ClassRow>
+          {classRows}
           <tr>
             <td className="p-2">
               <input

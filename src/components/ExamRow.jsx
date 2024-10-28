@@ -6,6 +6,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import { DropdownToggle } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import writeUserData from '../writeUserData';
+import deleteUserData from '../deleteUserData';
 
 export default function ExamRow({ userData, setUserData, currentTerm, id, completed, name, open, close, finish, examClass, notifyOpen = false, notifyDue = false, notifyFinish = false }) {
     let classDropdownContent = [];
@@ -97,7 +98,7 @@ export default function ExamRow({ userData, setUserData, currentTerm, id, comple
                         Due Date
                     </Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item>
+                    <Dropdown.Item onClick={() => deleteUserData(userData, setUserData, "exams", id)}>
                         Delete
                     </Dropdown.Item>
                 </Dropdown.Menu>

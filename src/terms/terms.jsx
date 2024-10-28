@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export function Terms(userData) {
   return (
     <div id="manage-term-content" className="text-center">
-      <h3 className="pb-5">Academic Terms</h3>
+      <h4 className="pb-5">Academic Terms</h4>
       <table className="mx-auto">
         <tbody>
           <tr className="text-start term-table-header">

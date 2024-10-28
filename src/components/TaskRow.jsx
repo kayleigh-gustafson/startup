@@ -6,6 +6,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import { DropdownToggle } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import writeUserData from '../writeUserData';
+import deleteUserData from '../deleteUserData';
 
 export default function TaskRow({ userData, setUserData, currentTerm, id, completed, name, due, finish, taskClass, notifyDue = false, notifyFinish = false, notifyLate = false }) {
     let classDropdownContent = [];
@@ -87,7 +88,7 @@ export default function TaskRow({ userData, setUserData, currentTerm, id, comple
                         Late
                     </Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item>
+                    <Dropdown.Item onClick={() => deleteUserData(userData, setUserData, "assignments", id)}>
                         Delete
                     </Dropdown.Item>
                 </Dropdown.Menu>

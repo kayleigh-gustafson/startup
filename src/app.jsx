@@ -179,7 +179,7 @@ export default function App() {
         <Routes>
             <Route path='/' element={<Login userData={userData}/>} exact />
             <Route path='/home' element={<Home userData={userData} setUserData={setUserData} currentTerm={currentTerm}/>} />
-            <Route path='/classes' element={<Classes userData={userData}/>} />
+            <Route path='/classes' element={<Classes userData={userData} setUserData={setUserData} currentTerm={currentTerm}/>} />
             <Route path='/terms' element={<Terms userData={userData}/>} />
             <Route path='*' element={<NotFound />} />
         </Routes>
