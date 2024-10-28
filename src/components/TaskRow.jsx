@@ -5,14 +5,28 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { DropdownToggle } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import writeUserData from '../writeUserData';
 
-export default function TaskRow({ id, completed, name, due, finish, taskClass, notifyDue = false, notifyFinish = false, notifyLate = false }) {
+export default function TaskRow({ userData, setUserData, currentTerm, id, completed, name, due, finish, taskClass, notifyDue = false, notifyFinish = false, notifyLate = false }) {
+    let classDropdownContent = [];
+    for (const [key, value] of Object.entries(userData.classes)) {
+        if (value.term == currentTerm) {
+            classDropdownContent.push(
+            <Dropdown.Item
+            onClick={() => writeUserData(userData, setUserData, "assignments", id, "classId", key)}
+            eventKey={key}
+            key={key}>
+            {value.name}
+            </Dropdown.Item>);
+        }
+    }
     return (
     <tr>
         <td className="task-check">
             <Form.Check
             id={id+"-row-checkbox"}
             defaultChecked={completed}
+            onChange={() => writeUserData(userData, setUserData, "assignments", id, "completed", !completed)}
             />
         </td>
         <td className="task-name">
@@ -21,6 +35,7 @@ export default function TaskRow({ id, completed, name, due, finish, taskClass, n
             className="form-control"
             defaultValue={name}
             id={id+"-row-name"}
+            onChange={(event) => writeUserData(userData, setUserData, "assignments", id, "name", event.target.value)}
             />
         </td>
         <td className="task-due">
@@ -29,6 +44,7 @@ export default function TaskRow({ id, completed, name, due, finish, taskClass, n
             className="form-control"
             defaultValue={due}
             id={id+"-row-due"}
+            onChange={(event) => writeUserData(userData, setUserData, "assignments", id, "due", event.target.value)}
             />
             <label className="d-md-none">Due Date</label>
         </td>
@@ -38,16 +54,15 @@ export default function TaskRow({ id, completed, name, due, finish, taskClass, n
             className="form-control"
             defaultValue={finish}
             id={id+"-row-finish"}
+            onChange={(event) => writeUserData(userData, setUserData, "assignments", id, "finish", event.target.value)}
             />
             <label className="d-md-none">Finish By</label>
         </td>
         <td className="task-class">
             <DropdownButton variant="tertiary" id={id+"-row-class"} title={taskClass} className="form-style-dropdown">
-                <Dropdown.Item eventKey="1">A HTG 100</Dropdown.Item>
-                <Dropdown.Item eventKey="2">CS 260</Dropdown.Item>
-                <Dropdown.Item eventKey="3">WRTG 150</Dropdown.Item>
+                {classDropdownContent}
                 <Dropdown.Divider />
-                <Dropdown.Item to={"../classes"} as={Link} eventKey="4" href="classes">Manage...</Dropdown.Item>
+                <Dropdown.Item to={"../classes"} as={Link} eventKey="0" href="classes">Manage...</Dropdown.Item>
             </DropdownButton>
             <label className="d-md-none">Class</label>
         </td>

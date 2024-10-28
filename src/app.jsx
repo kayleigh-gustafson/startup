@@ -20,24 +20,22 @@ import { Classes } from './classes/classes';
 import { Terms } from './terms/terms';
 
 import getUserData from './getUserData';
-import databasePlaceholder from './databasePlaceholder';
-import getDataById from './getDataById';
-let userData;
 
 export default function App() {
-    const [userData, setUserData] = useState(databasePlaceholder());
+    const [userData, setUserData] = useState(getUserData());
     const [showTaskModal, setShowTaskModal] = useState(false);
     const [showExamModal, setShowExamModal] = useState(false);
-    const [currentTerm, setCurrentTerm] = useState(userData.terms[0].id)
+    const [currentTerm, setCurrentTerm] = useState(Object.keys(userData.terms)[0])
 
     // Generate term dropdown
-    const termDropdownContent = userData.terms.map((term, index) => {
-        return (
-            <NavDropdown.Item key={term.id}>
-                <Button variant="tertiary" onClick={() => setCurrentTerm(term.id)} className="dropdown-item">{term.name}</Button>
+    let termDropdownContent = [];
+    for (const [key, value] of Object.entries(userData.terms)) {
+        termDropdownContent.push(
+            <NavDropdown.Item key={key}>
+                <Button variant="tertiary" onClick={() => setCurrentTerm(key)} className="dropdown-item">{value.name}</Button>
             </NavDropdown.Item>
         );
-      });
+      };
 
     return (
     <BrowserRouter>
@@ -94,7 +92,7 @@ export default function App() {
                         className="justify-content-end text-center"
                         style={{ flex: "1 1 0" }}
                     >
-                        <NavDropdown title={getDataById(userData.terms, currentTerm).name}>
+                        <NavDropdown title={userData.terms[currentTerm].name}>
                             {termDropdownContent}
                         </NavDropdown>
                         <NavDropdown title="userName123">

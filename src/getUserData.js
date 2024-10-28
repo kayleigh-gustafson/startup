@@ -1,5 +1,6 @@
-import databasePlaceholder from "./databasePlaceholder";
+import fetchedData from "./databasePlaceholder.json" assert {type: 'json'};
 
 export default function getUserData() {
-    return databasePlaceholder();
+    // const fetchedData = require('./databasePlaceholder.json');
+    return fetchedData;
 }

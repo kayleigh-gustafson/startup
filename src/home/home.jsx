@@ -3,63 +3,69 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import TaskRow from '../components/TaskRow';
 import ExamRow from '../components/ExamRow';
-import databasePlaceholder from '../databasePlaceholder';
 import getDataById from '../getDataById';
 
 export function Home({userData, setUserData, currentTerm}) {
 
-  // Generating lists for each tab
-  console.log(userData.terms, userData.classes)
-  console.log(getDataById(userData.classes, "32913").term)
-  const completeTasksList = userData.assignments.filter(assignment => {
-    return assignment.completed && getDataById(userData.classes, assignment.classId).term === currentTerm
-  });
-  const incompleteTasksList = userData.assignments.filter(assignment => {
-    return !assignment.completed && getDataById(userData.classes, assignment.classId).term === currentTerm
-  });
-  const examList = userData.exams.filter(exam => {
-    return getDataById(userData.classes, exam.classId).term === currentTerm
-  });
-  const completeTasks = completeTasksList.map((task, index) => {
-    return (
+
+  let completeTasks = [];
+  for (const [key, value] of Object.entries(userData.assignments)) {
+    if (value.completed && userData.classes[value.classId].term === currentTerm) {
+      completeTasks.push(
       <TaskRow
-        key={task.id}
-        id={task.id}
-        completed={task.completed}
-        name={task.name}
-        due={task.due}
-        finish={task.finish}
-        taskClass={getDataById(userData.classes, task.classId).name}
+        userData={userData}
+        setUserData={setUserData}
+        currentTerm={currentTerm}
+        key={key}
+        id={key}
+        completed={value.completed}
+        name={value.name}
+        due={value.due}
+        finish={value.finish}
+        taskClass={userData.classes[value.classId].name}
       ></TaskRow>
-    );
-  });
-  const incompleteTasks = incompleteTasksList.map((task, index) => {
-    return (
+      )
+    }
+  };
+  let incompleteTasks = [];
+  for (const [key, value] of Object.entries(userData.assignments)) {
+    if (!value.completed && userData.classes[value.classId].term === currentTerm) {
+      incompleteTasks.push(
       <TaskRow
-        key={task.id}
-        id={task.id}
-        completed={task.completed}
-        name={task.name}
-        due={task.due}
-        finish={task.finish}
-        taskClass={getDataById(userData.classes, task.classId).name}
+        userData={userData}
+        setUserData={setUserData}
+        currentTerm={currentTerm}
+        key={key}
+        id={key}
+        completed={value.completed}
+        name={value.name}
+        due={value.due}
+        finish={value.finish}
+        taskClass={userData.classes[value.classId].name}
       ></TaskRow>
-    );
-  });
-  const exams = examList.map((task, index) => {
-    return (
-      <ExamRow
-        key={task.id}
-        id={task.id}
-        completed={task.completed}
-        name={task.name}
-        open={task.open}
-        due={task.close}
-        finish={task.finish}
-        examClass={getDataById(userData.classes, task.classId).name}
+      )
+    }
+  };
+  let exams = [];
+  for (const [key, value] of Object.entries(userData.exams)) {
+    if (userData.classes[value.classId].term === currentTerm) {
+      exams.push(
+        <ExamRow
+        userData={userData}
+        setUserData={setUserData}
+        currentTerm={currentTerm}
+        key={key}
+        id={key}
+        completed={value.completed}
+        name={value.name}
+        open={value.open}
+        close={value.close}
+        finish={value.finish}
+        examClass={userData.classes[value.classId].name}
       ></ExamRow>
-    );
-  });
+      )
+    }
+  };
 
   return (
     <>
