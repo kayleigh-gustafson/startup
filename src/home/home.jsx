@@ -3,7 +3,6 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import TaskRow from '../components/TaskRow';
 import ExamRow from '../components/ExamRow';
-import getDataById from '../getDataById';
 
 export function Home({userData, setUserData, currentTerm}) {
 

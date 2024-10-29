@@ -1,6 +1,6 @@
 import React from 'react';
-import writeUserData from '../writeUserData';
-import deleteUserData from '../deleteUserData';
+import editUserData from '../functions/editUserData';
+import deleteUserData from '../functions/deleteUserData';
 import Button from 'react-bootstrap/Button';
 
 export default function ClassRow({ userData, setUserData, id, name, color }) {
@@ -12,7 +12,7 @@ export default function ClassRow({ userData, setUserData, id, name, color }) {
             type="text"
             id={id+"-class-name"}
             defaultValue={name}
-            onChange={(event) => writeUserData(userData, setUserData, "classes", id, "name", event.target.value)}
+            onChange={(event) => editUserData(userData, setUserData, "classes", id, "name", event.target.value)}
           />
         </td>
         <td className="class-color">
@@ -22,7 +22,7 @@ export default function ClassRow({ userData, setUserData, id, name, color }) {
             id={id+"-class-color"}
             name="color"
             defaultValue={color}
-            onChange={(event) => writeUserData(userData, setUserData, "classes", id, "color", event.target.value)}
+            onChange={(event) => editUserData(userData, setUserData, "classes", id, "color", event.target.value)}
           />
         </td>
         <td className="class-delete p-2 text-start">

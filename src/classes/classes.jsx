@@ -15,8 +15,8 @@ export function Classes({userData, setUserData, currentTerm}) {
           name={value.name}
           color={value.color}
         ></ClassRow>);
-    }
-}
+      }
+  }
   return (
     <div id="manage-class-content" className="text-center">
       <h4 className="pb-5">{userData.terms[currentTerm].name} Classes</h4>

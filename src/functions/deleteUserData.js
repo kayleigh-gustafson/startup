@@ -1,6 +1,6 @@
-export default function deleteUserData(userData, setUserData, section, id) {
+export default function deleteUserData(userData, setUserData, section, id, currentTerm="", setCurrentTerm="") {
     let data = structuredClone(userData);
-
+    console.log("currentTerm", currentTerm, "setCurrentTerm", setCurrentTerm);
     // if we are deleting a term, delete associated classes
     if (section === "terms") {
         deleteTerm(id);
@@ -14,6 +14,13 @@ export default function deleteUserData(userData, setUserData, section, id) {
     }
 
     function deleteTerm(termId) {
+        if (currentTerm === termId) {
+            let remainingTerms = data.terms;
+            Object.keys(remainingTerms).forEach(key => {
+                if (key === currentTerm) delete remainingTerms[key];
+              });
+            setCurrentTerm(Object.keys(remainingTerms)[0]);
+        }
         for (const [key, value] of Object.entries(userData.classes)) {
             if (value.term === termId) {
                 deleteClass(key)
@@ -33,7 +40,6 @@ export default function deleteUserData(userData, setUserData, section, id) {
             }
         }
         delete data["classes"][classId];
-        console.log("Deleted class", classId);
     }
 
     function deleteTask(section, taskId) {

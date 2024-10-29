@@ -19,7 +19,7 @@ import { Home } from './home/home';
 import { Classes } from './classes/classes';
 import { Terms } from './terms/terms';
 
-import getUserData from './getUserData';
+import getUserData from './functions/getUserData';
 
 export default function App() {
     const [userData, setUserData] = useState(getUserData());
@@ -94,6 +94,8 @@ export default function App() {
                     >
                         <NavDropdown title={userData.terms[currentTerm].name}>
                             {termDropdownContent}
+                            <Dropdown.Divider />
+                            <Dropdown.Item to={"../terms"} as={Link} eventKey="0">Manage...</Dropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="userName123">
                             <NavDropdown.Item>
@@ -180,7 +182,7 @@ export default function App() {
             <Route path='/' element={<Login userData={userData}/>} exact />
             <Route path='/home' element={<Home userData={userData} setUserData={setUserData} currentTerm={currentTerm}/>} />
             <Route path='/classes' element={<Classes userData={userData} setUserData={setUserData} currentTerm={currentTerm}/>} />
-            <Route path='/terms' element={<Terms userData={userData}/>} />
+            <Route path='/terms' element={<Terms userData={userData} setUserData={setUserData} currentTerm={currentTerm} setCurrentTerm={setCurrentTerm}/>} />
             <Route path='*' element={<NotFound />} />
         </Routes>
 

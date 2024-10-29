@@ -2,7 +2,22 @@ import React from 'react';
 import TermRow from '../components/TermRow';
 import { Link } from "react-router-dom";
 
-export function Terms(userData) {
+export function Terms({userData, setUserData, currentTerm, setCurrentTerm}) {
+  let termRows = [];
+  for (const [key, value] of Object.entries(userData.terms)) {
+    termRows.push(
+      <TermRow
+      userData={userData}
+      setUserData={setUserData}
+      currentTerm={currentTerm}
+      setCurrentTerm={setCurrentTerm}
+      key={key}
+      id={key}
+      name={value.name}
+      start={value.start}
+      end={value.end}
+    ></TermRow>); 
+  }
   return (
     <div id="manage-term-content" className="text-center">
       <h4 className="pb-5">Academic Terms</h4>
@@ -14,24 +29,7 @@ export function Terms(userData) {
             <th className="px-2">End Date</th>
             <th className="px-2" />
           </tr>
-          <TermRow
-            id="12104"
-            name="Fall 2024"
-            start="2024-09-03"
-            end="2024-12-11"
-          ></TermRow>
-          <TermRow
-            id="12104"
-            name="Winter 2025"
-            start="2024-09-03"
-            end="2024-12-11"
-          ></TermRow>
-          <TermRow
-            id="12104"
-            name="Fall 2025"
-            start="2024-09-03"
-            end="2024-12-11"
-          ></TermRow>
+          {termRows}
           <tr>
             <td className="p-2 term-name">
               <input
