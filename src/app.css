@@ -89,6 +89,7 @@ select option:disabled {
     color: white;
 }
 
+
 .task-check input[type="checkbox"], .exam-check input[type="checkbox"] {
     width: 20px;
     height: 20px;
