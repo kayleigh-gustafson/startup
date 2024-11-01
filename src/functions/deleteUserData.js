@@ -1,5 +1,5 @@
 export default function deleteUserData(userData, setUserData, section, id, currentTerm="", setCurrentTerm="") {
-    let data = structuredClone(userData);
+    let data = {...userData};
     console.log("currentTerm", currentTerm, "setCurrentTerm", setCurrentTerm);
     // if we are deleting a term, delete associated classes
     if (section === "terms") {

@@ -1,5 +1,8 @@
+// to-do: deleting current term causes newTaskData to malfunction (no default class)
+
 import React from 'react';
 import { useState } from 'react';
+import { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -35,26 +38,46 @@ export default function App() {
         }
     }
 
-    const [newTaskData, setNewTaskData] = useState({classId: defaultClass});
-    console.log(defaultClass, newTaskData.classId);
+
+    function resetNewTask() {
+        console.log("Reset new task");
+        let data = {...userData};
+        data.newTask = {classId: defaultClass};
+        console.log(data);
+        setUserData(data);
+    }
+
+    if (!userData.newTask.hasOwnProperty("classId")) resetNewTask();
+    console.log(userData);
+
 
     function handleModal(action, modal) {
         modal === "task" ? setShowTaskModal(!showTaskModal) : setShowExamModal(!showExamModal);
         if (action === "open") {
 
-            setNewTaskData({classId: defaultClass});
+            resetNewTask();
         }
-        console.log(newTaskData);
+        console.log(userData.newTask);
     }
 
-    function updateNewTaskData(key, value) {
-        console.log("updateNewTaskData", key, value)
-        setNewTaskData({
-            ...newTaskData,
-            [key]: value
-        });
-        console.log(newTaskData);
+    function updateNewTask(key, value) {
+        console.log("updateNewTask", key, value)
+        let data = {...userData};
+        data.newTask[key] = value;
+        setUserData(data);
     }
+
+    function getNewTaskClass() {
+        if (!userData.newTask.hasOwnProperty("classId") || !userData.classes.hasOwnProperty(userData.newTask.classId)) {
+            return {name: "No classes found"}
+        } else {
+            return userData.classes[userData.newTask.classId]
+        }
+    }
+
+    // useEffect(() => {
+    //     updateNewTask("classId", defaultClass)
+    //  },[userData])
 
     function createTask(type, data) {
         let id = "";
@@ -91,7 +114,7 @@ export default function App() {
                 <Dropdown.Item
                 eventKey={key}
                 key={key}
-                onClick={() => updateNewTaskData("classId", key)}>
+                onClick={() => updateNewTask("classId", key)}>
                 {value.name}
                 </Dropdown.Item>
             );
@@ -189,16 +212,16 @@ export default function App() {
         </Modal.Header>
         <Modal.Body>
                 <label className="mt-2 mb-1" htmlFor="assignment">Assignment</label>
-                <input onChange={(event) => updateNewTaskData("name", event.target.value)} type="text" className="form-control" id="assignment" name="assignment"/>
+                <input onChange={(event) => updateNewTask("name", event.target.value)} type="text" className="form-control" id="assignment" name="assignment"/>
                 
                 <label className="mt-2 mb-1" htmlFor="duedate">Due Date</label>
-                <input onChange={(event) => updateNewTaskData("due", event.target.value)} type="date" className="form-control" id="duedate" name="duedate"/>
+                <input onChange={(event) => updateNewTask("due", event.target.value)} type="date" className="form-control" id="duedate" name="duedate"/>
                 
                 <label className="mt-2 mb-1" htmlFor="finishdate">Finish By</label>
-                <input onChange={(event) => updateNewTaskData("finish", event.target.value)} type="date" className="form-control" id="finishdate" name="finishdate"/>
+                <input onChange={(event) => updateNewTask("finish", event.target.value)} type="date" className="form-control" id="finishdate" name="finishdate"/>
                 
                 <label className="mt-2 mb-1" htmlFor="class">Class</label>
-                <DropdownButton variant="tertiary" title={userData.classes[newTaskData.classId].name} className="form-style-dropdown text-start">
+                <DropdownButton variant="tertiary" title={getNewTaskClass().name} className="form-style-dropdown text-start">
                     {newTaskClassDropdownContent}
                     <Dropdown.Divider />
                     <Dropdown.Item eventKey="4" href="classes">Manage...</Dropdown.Item>
@@ -206,7 +229,7 @@ export default function App() {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant='tertiary' onClick={() => handleModal("close", "task")}>Close</Button>
-                <Button variant='primary' onClick={() => createTask("assignment", newTaskData)}>Create</Button>
+                <Button variant='primary' onClick={() => createTask("assignment", userData.newTask)}>Create</Button>
             </Modal.Footer>
         </Modal>
 
@@ -219,19 +242,19 @@ export default function App() {
         </Modal.Header>
         <Modal.Body>
                 <label className="mt-2 mb-1" htmlFor="assignment">Exam</label>
-                <input onChange={(event) => updateNewTaskData("name", event.target.value)} type="text" className="form-control" id="assignment" name="assignment"/>
+                <input onChange={(event) => updateNewTask("name", event.target.value)} type="text" className="form-control" id="assignment" name="assignment"/>
                 
                 <label className="mt-2 mb-1" htmlFor="opendate">Open Date</label>
-                <input onChange={(event) => updateNewTaskData("open", event.target.value)} type="date" className="form-control" id="opendate" name="opendate"/>
+                <input onChange={(event) => updateNewTask("open", event.target.value)} type="date" className="form-control" id="opendate" name="opendate"/>
 
                 <label className="mt-2 mb-1" htmlFor="closedate">Close Date</label>
-                <input onChange={(event) => updateNewTaskData("close", event.target.value)} type="date" className="form-control" id="closedate" name="closedate"/>
+                <input onChange={(event) => updateNewTask("close", event.target.value)} type="date" className="form-control" id="closedate" name="closedate"/>
                 
                 <label className="mt-2 mb-1" htmlFor="finishdate">Finish By</label>
-                <input onChange={(event) => updateNewTaskData("finish", event.target.value)} type="date" className="form-control" id="finishdate" name="finishdate"/>
+                <input onChange={(event) => updateNewTask("finish", event.target.value)} type="date" className="form-control" id="finishdate" name="finishdate"/>
                 
                 <label className="mt-2 mb-1" htmlFor="class">Class</label>
-                <DropdownButton variant="tertiary" title={userData.classes[newTaskData.classId].name} className="form-style-dropdown text-start">
+                <DropdownButton variant="tertiary" title={getNewTaskClass().name} className="form-style-dropdown text-start">
                     {newTaskClassDropdownContent}
                     <Dropdown.Divider />
                     <Dropdown.Item eventKey="4" href="classes">Manage...</Dropdown.Item>
@@ -239,7 +262,7 @@ export default function App() {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant='tertiary' onClick={() => handleModal("close", "exam")}>Close</Button>
-                <Button variant='primary' onClick={() => createTask("exam", newTaskData)}>Create</Button>
+                <Button variant='primary' onClick={() => createTask("exam", userData.newTask)}>Create</Button>
             </Modal.Footer>
         </Modal>
 
