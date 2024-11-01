@@ -1,8 +1,14 @@
 import React from 'react';
 import TermRow from '../components/TermRow';
 import { Link } from "react-router-dom";
+import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import addUserData from '../functions/addUserData';
 
 export function Terms({userData, setUserData, currentTerm, setCurrentTerm}) {
+
+  const [newTerm, setNewTerm] = useState({name: "", start: "", end: ""});
+
   let termRows = [];
   for (const [key, value] of Object.entries(userData.terms)) {
     termRows.push(
@@ -18,6 +24,28 @@ export function Terms({userData, setUserData, currentTerm, setCurrentTerm}) {
       end={value.end}
     ></TermRow>); 
   }
+
+  function updateNewTerm(key, value) {
+    let data = {...newTerm};
+    data[key] = value;
+    setNewTerm(data);
+  }
+
+  function addTerm() {
+    console.log("Attempting to add term...", newTerm);
+    if (newTerm.name !== "" && newTerm.start !== "" && newTerm.end !== "") {
+      console.log("Check successful");
+      let termId = "";
+        while (termId === "") {
+            let tempId = Math.floor(Math.random() * 90000) + 10000;
+            if (!userData.terms.hasOwnProperty(tempId)) {
+                termId = tempId;
+            }
+        }
+      addUserData(userData, setUserData, "terms", termId, newTerm);
+    }
+  }
+
   return (
     <div id="manage-term-content" className="text-center">
       <h4 className="pb-5">Academic Terms</h4>
@@ -37,6 +65,7 @@ export function Terms({userData, setUserData, currentTerm, setCurrentTerm}) {
                 type="text"
                 id="new-term-name"
                 placeholder='New term...'
+                onChange={(event) => updateNewTerm("name", event.target.value)}
               />
             </td>
             <td className="p-2 term-start">
@@ -44,6 +73,7 @@ export function Terms({userData, setUserData, currentTerm, setCurrentTerm}) {
                 className="form-control"
                 type="date"
                 id="new-term-start"
+                onChange={(event) => updateNewTerm("start", event.target.value)}
               />
               <label className="d-md-none">Start Date</label>
             </td>
@@ -52,13 +82,14 @@ export function Terms({userData, setUserData, currentTerm, setCurrentTerm}) {
                 className="form-control"
                 type="date"
                 id="new-term-end"
+                onChange={(event) => updateNewTerm("end", event.target.value)}
               />
               <label className="d-md-none">End Date</label>
             </td>
             <td className="p-2 term-delete text-start">
-            <a className="btn btn-primary" href="">
+            <Button variant={(newTerm.name !== "" && newTerm.start !== "" && newTerm.end !== "") ? "primary" : "secondary"} onClick={addTerm}>
               <i className="fa-solid fa-plus" />
-            </a>
+            </Button>
             </td>
         </tr>
         </tbody>

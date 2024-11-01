@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { useState } from 'react';
-import { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';

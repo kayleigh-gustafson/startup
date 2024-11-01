@@ -1,8 +1,14 @@
 import React from 'react';
 import ClassRow from '../components/ClassRow';
 import { Link } from "react-router-dom";
+import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import addUserData from '../functions/addUserData';
 
 export function Classes({userData, setUserData, currentTerm}) {
+
+  const [newClass, setNewClass] = useState({name: "", color: "#a8a8a8"});
+
   let classRows = [];
   for (const [key, value] of Object.entries(userData.classes)) {
     if (value.term == currentTerm) {
@@ -10,6 +16,7 @@ export function Classes({userData, setUserData, currentTerm}) {
           <ClassRow
           userData={userData}
           setUserData={setUserData}
+          currentTerm={currentTerm}
           key={key}
           id={key}
           name={value.name}
@@ -17,6 +24,27 @@ export function Classes({userData, setUserData, currentTerm}) {
         ></ClassRow>);
       }
   }
+
+  function updateNewClass(key, value) {
+    let data = {...newClass};
+    data[key] = value;
+    setNewClass(data);
+  }
+
+  function addClass() {
+    if (newClass.name !== "" && newClass.color !== "") {
+      let classId = "";
+      while (classId === "") {
+          let tempId = Math.floor(Math.random() * 90000) + 10000;
+          if (!userData.classes.hasOwnProperty(tempId)) {
+              classId = tempId;
+          }
+      }
+      addUserData(userData, setUserData, "classes", classId, {...newClass, term:currentTerm});
+      setNewClass({name: "", color: "#a8a8a8"});
+    }
+  }
+
   return (
     <div id="manage-class-content" className="text-center">
       <h4 className="pb-5">{userData.terms[currentTerm].name} Classes</h4>
@@ -34,6 +62,8 @@ export function Classes({userData, setUserData, currentTerm}) {
                 className="form-control"
                 type="text"
                 placeholder="New class..."
+                onChange={(event) => updateNewClass("name", event.target.value)}
+                value={newClass.name}
               />
             </td>
             <td>
@@ -42,13 +72,14 @@ export function Classes({userData, setUserData, currentTerm}) {
                 type="color"
                 id="color"
                 name="color"
-                defaultValue="#a8a8a8"
+                onChange={(event) => updateNewClass("color", event.target.value)}
+                value={newClass.color}
               />
             </td>
             <td className="p-2 text-start">
-              <a className="btn btn-primary" href="">
+              <Button variant={(newClass.name !== "" && newClass.color !== "") ? "primary" : "secondary"} onClick={addClass}>
                 <i className="fa-solid fa-plus" />
-              </a>
+              </Button>
             </td>
           </tr>
         </tbody>

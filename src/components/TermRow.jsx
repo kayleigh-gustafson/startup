@@ -5,7 +5,6 @@ import Button from 'react-bootstrap/Button';
 
 export default function TermRow({ userData, setUserData, currentTerm, setCurrentTerm, id, name, start, end }) {
     
-  console.log(currentTerm, setCurrentTerm);
   return (
         <tr>
             <td className="p-2 term-name">
@@ -38,7 +37,7 @@ export default function TermRow({ userData, setUserData, currentTerm, setCurrent
               <label className="d-md-none">End Date</label>
             </td>
             <td className="p-2 term-delete text-start">
-              <Button className="hover-red" variant="tertiary" onClick={() => deleteUserData(userData, setUserData, "terms", id, currentTerm, setCurrentTerm)}>
+              <Button className={(Object.keys(userData.terms)).length > 1 ? "delete-button-active" : "delete-button-inactive"} variant="tertiary" onClick={() => deleteUserData(userData, setUserData, "terms", id, currentTerm, setCurrentTerm)}>
                 <i className="fa-solid fa-trash" />
               </Button>
             </td>

@@ -3,7 +3,13 @@ import editUserData from '../functions/editUserData';
 import deleteUserData from '../functions/deleteUserData';
 import Button from 'react-bootstrap/Button';
 
-export default function ClassRow({ userData, setUserData, id, name, color }) {
+export default function ClassRow({ userData, setUserData, currentTerm, id, name, color }) {
+    let classesInTerm = {...userData.classes};
+    for (const [key, value] of Object.entries(classesInTerm)) {
+      if (value.term !== currentTerm) {
+          delete classesInTerm[key];
+      }
+    }
     return (
       <tr>
         <td className="class-name p-2">
@@ -26,7 +32,7 @@ export default function ClassRow({ userData, setUserData, id, name, color }) {
           />
         </td>
         <td className="class-delete p-2 text-start">
-          <Button className="hover-red" variant="tertiary" onClick={() => deleteUserData(userData, setUserData, "classes", id)}>
+          <Button className={(Object.keys(classesInTerm)).length > 1 ? "delete-button-active" : "delete-button-inactive"} variant="tertiary" onClick={() => deleteUserData(userData, setUserData, "classes", id, currentTerm)}>
             <i className="fa-solid fa-trash" />
           </Button>
         </td>

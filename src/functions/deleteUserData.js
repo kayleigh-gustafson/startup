@@ -14,32 +14,42 @@ export default function deleteUserData(userData, setUserData, section, id, curre
     }
 
     function deleteTerm(termId) {
-        if (currentTerm === termId) {
-            let remainingTerms = data.terms;
-            Object.keys(remainingTerms).forEach(key => {
-                if (key === currentTerm) delete remainingTerms[key];
-              });
-            setCurrentTerm(Object.keys(remainingTerms)[0]);
-        }
-        for (const [key, value] of Object.entries(userData.classes)) {
-            if (value.term === termId) {
-                deleteClass(key)
+        if (Object.keys(userData.terms).length > 1) {
+            if (currentTerm === termId) {
+                let remainingTerms = data.terms;
+                Object.keys(remainingTerms).forEach(key => {
+                    if (key === currentTerm) delete remainingTerms[key];
+                });
+                setCurrentTerm(Object.keys(remainingTerms)[0]);
             }
+            for (const [key, value] of Object.entries(userData.classes)) {
+                if (value.term === termId) {
+                    deleteClass(key, forceDelete = true)
+                }
+            }
+            delete data["terms"][termId];
         }
-        delete data["terms"][termId];
     }
-    function deleteClass(classId) {
-        for (const [key, value] of Object.entries(userData.assignments)) {
-            if (value.classId === classId) {
-                deleteTask("assignments", key)
-            }
+    function deleteClass(classId, forceDelete = false) {
+        let classesInTerm = {...userData.classes};
+        for (const [key, value] of Object.entries(classesInTerm)) {
+        if (value.term !== currentTerm) {
+            delete classesInTerm[key];
         }
-        for (const [key, value] of Object.entries(userData.exams)) {
-            if (value.classId === classId) {
-                deleteTask("exams", key)
-            }
         }
-        delete data["classes"][classId];
+        if (Object.keys(classesInTerm).length > 1 || forceDelete) {
+            for (const [key, value] of Object.entries(userData.assignments)) {
+                if (value.classId === classId) {
+                    deleteTask("assignments", key)
+                }
+            }
+            for (const [key, value] of Object.entries(userData.exams)) {
+                if (value.classId === classId) {
+                    deleteTask("exams", key)
+                }
+            }
+            delete data["classes"][classId];
+        }
     }
 
     function deleteTask(section, taskId) {

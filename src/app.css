@@ -84,9 +84,13 @@ select option:disabled {
     z-index: 1;
 }
 
-.btn.hover-red:hover {
+.btn.delete-button-active:hover {
     background-color: #f0515c;
     color: white;
+}
+
+.btn.delete-button-inactive {
+    color: #6c757d;
 }
 
 
