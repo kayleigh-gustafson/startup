@@ -14,7 +14,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import { Link } from "react-router-dom";
 import './app.css';
 import './color.css';
-
+import { useLocation } from 'react-router-dom';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { Home } from './home/home';
@@ -37,6 +37,7 @@ export default function App() {
         }
     }
 
+    console.log(location.pathname);
 
     function resetNewTask() {
         console.log("Reset new task");
@@ -53,7 +54,6 @@ export default function App() {
     function handleModal(action, modal) {
         modal === "task" ? setShowTaskModal(!showTaskModal) : setShowExamModal(!showExamModal);
         if (action === "open") {
-
             resetNewTask();
         }
         console.log(userData.newTask);
@@ -134,6 +134,7 @@ export default function App() {
     return (
     <BrowserRouter>
     <div className="d-flex min-vh-100 flex-column">
+        
         <header className="sticky-top">
             <Navbar expand="md" className="bg-body-tertiary px-3">
             <Container style={{ flex: "1 1 0" }}>
@@ -182,6 +183,7 @@ export default function App() {
 
                         </NavDropdown>
                     </Nav>
+                    { location.pathname === "/home" &&
                     <Nav
                         className="justify-content-end text-center"
                         style={{ flex: "1 1 0" }}
@@ -191,17 +193,18 @@ export default function App() {
                             <Dropdown.Divider />
                             <Dropdown.Item to={"../terms"} as={Link} eventKey="0">Manage...</Dropdown.Item>
                         </NavDropdown>
-                        <NavDropdown title="userName123">
+                        <NavDropdown title={userData.username}>
                             <NavDropdown.Item>
                                 <Link className="dropdown-item" to="/">Log out</Link>
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
+                    }
                 </Navbar.Collapse>
             </Container>
             </Navbar>
         </header>
-
+  
         <Modal
         show={showTaskModal}
         onHide={() => handleModal("close", "task")}
@@ -269,7 +272,7 @@ export default function App() {
         <main className="flex-grow-1 mt-5">
 
         <Routes>
-            <Route path='/' element={<Login userData={userData}/>} exact />
+            <Route path='/' element={<Login userData={userData} setUserData={setUserData}/>} exact />
             <Route path='/home' element={<Home userData={userData} setUserData={setUserData} currentTerm={currentTerm}/>} />
             <Route path='/classes' element={<Classes userData={userData} setUserData={setUserData} currentTerm={currentTerm}/>} />
             <Route path='/terms' element={<Terms userData={userData} setUserData={setUserData} currentTerm={currentTerm} setCurrentTerm={setCurrentTerm}/>} />
