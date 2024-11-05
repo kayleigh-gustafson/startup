@@ -15,6 +15,7 @@
     "vite": "^5.4.9"
   },
   "dependencies": {
+    "ac-colors": "^1.4.3",
     "bootstrap": "^5.3.3",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",

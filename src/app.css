@@ -93,21 +93,21 @@ select option:disabled {
     color: #6c757d;
 }
 
-
-.task-check input[type="checkbox"], .exam-check input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-}
-
-input[type="checkbox"]:not(:checked) {
-    background-color: #dee2e6;
-}
-
 .form-style-dropdown {
     border: 1px solid #dee2e6;
     padding: 0px 15px 0px 15px;
-    border-radius: 6px;
     text-align: center;
+    border-radius: 6px;
+}
+
+.form-style-dropdown.class-color button {
+    color: var(--color);
+}
+
+.form-style-dropdown.class-color, .form-control.class-color {
+    border-width: 0px;
+    border-bottom-width: 3px;
+    border-radius: 3px;
 }
 
 .tab-content .task-name, .exam-name {

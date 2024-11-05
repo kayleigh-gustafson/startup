@@ -1,5 +1,4 @@
 export default function addUserData(userData, setUserData, section, id, object) {
-    console.log("Attempting to add user data", id, object);
     let data = {...userData};
     if (section === "terms") {
         let classId = "";
@@ -12,6 +11,5 @@ export default function addUserData(userData, setUserData, section, id, object) 
         addUserData(userData, setUserData, "classes", classId, {name: "My new class", color: "#a8a8a8", term: id})
     }
     data[section][id] = object;
-    console.log("Adding user data:", data);
     setUserData(data);
 }

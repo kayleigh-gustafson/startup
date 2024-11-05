@@ -156,9 +156,20 @@ a.text-primary:hover, a.text-primary:focus {
 /* Addition: checkboxes */
 
 .form-check-input:checked {
-    background-color: #66903e;
-    border-color: #66903e;
-  }
+    background-color: #bfc3c6;
+}
+
+.task-check input[type="checkbox"], .exam-check input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    border: 2px solid;
+    background-color: var(--checkbox-color);
+    border-color: var(--checkbox-color);
+}
+
+input[type="checkbox"]:not(:checked) {
+    background-color: transparent;
+}
 
 /* Addition: focus input border */
 

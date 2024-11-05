@@ -1,6 +1,6 @@
 export default function deleteUserData(userData, setUserData, section, id, currentTerm="", setCurrentTerm="") {
     let data = {...userData};
-    console.log("currentTerm", currentTerm, "setCurrentTerm", setCurrentTerm);
+
     // if we are deleting a term, delete associated classes
     if (section === "terms") {
         deleteTerm(id);
@@ -9,7 +9,6 @@ export default function deleteUserData(userData, setUserData, section, id, curre
     } else if (section === "assignments" || section === "exams") {
         deleteTask(section, id);
     } else {
-        console.log("Error: unknown target for deletion");
         return;
     }
 
@@ -56,6 +55,5 @@ export default function deleteUserData(userData, setUserData, section, id, curre
         delete data[section][taskId];
     }
     
-    console.log(data);
     setUserData(data);
 }

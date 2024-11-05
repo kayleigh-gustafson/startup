@@ -37,18 +37,14 @@ export default function App() {
         }
     }
 
-    console.log(location.pathname);
 
     function resetNewTask() {
-        console.log("Reset new task");
         let data = {...userData};
         data.newTask = {classId: defaultClass};
-        console.log(data);
         setUserData(data);
     }
 
     if (!userData.newTask.hasOwnProperty("classId")) resetNewTask();
-    console.log(userData);
 
 
     function handleModal(action, modal) {
@@ -56,11 +52,9 @@ export default function App() {
         if (action === "open") {
             resetNewTask();
         }
-        console.log(userData.newTask);
     }
 
     function updateNewTask(key, value) {
-        console.log("updateNewTask", key, value)
         let data = {...userData};
         data.newTask[key] = value;
         setUserData(data);
@@ -165,6 +159,8 @@ export default function App() {
                         </Navbar.Brand>
                         </Nav.Item>
                     </Nav>
+                    { location.pathname === "/home" &&
+                    <>
                     <Nav
                         className="justify-content-center"
                         style={{ flex: "1 1 0" }}
@@ -183,7 +179,7 @@ export default function App() {
 
                         </NavDropdown>
                     </Nav>
-                    { location.pathname === "/home" &&
+                    
                     <Nav
                         className="justify-content-end text-center"
                         style={{ flex: "1 1 0" }}
@@ -199,6 +195,7 @@ export default function App() {
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
+                    </>
                     }
                 </Navbar.Collapse>
             </Container>
