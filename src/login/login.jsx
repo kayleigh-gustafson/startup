@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
-export function Login({userData, setUserData}) {
+export function Login({userData, setUserData, setAuthenticated}) {
   const [loginData, setLoginData] = useState({username: "", email: "", password: "", confirm: "", loginEmail: "", loginPassword:""})
   const [valid, setValidation] = useState(false);
   
@@ -22,11 +22,16 @@ export function Login({userData, setUserData}) {
       return false;
     }
   }
-  function completeLogin() {
+  function completeLogin(mode) {
     if (valid) {
       let data = {...userData};
-      data.username = loginData.email;
+      if (mode==="login") {
+        data.username = loginData.loginEmail;
+      } else {
+        data.username = loginData.email;
+      }
       setUserData(data);
+      setAuthenticated(true);
     }
   }
   function handleTabSelect(key) {
@@ -64,7 +69,7 @@ export function Login({userData, setUserData}) {
               />
               <label htmlFor="loginPassword">Password</label>
             </div>
-            <Link to={valid ? "home" : ""} className={valid ? "btn btn-primary" : "btn btn-secondary"} onClick={completeLogin}>
+            <Link to={valid ? "home" : ""} className={valid ? "btn btn-primary" : "btn btn-secondary"} onClick={()=>completeLogin("login")}>
               Continue
             </Link>
           </form>
@@ -115,7 +120,7 @@ export function Login({userData, setUserData}) {
               />
               <label htmlFor="signupPasswordConfirm">Confirm Password</label>
             </div>
-            <Link to={valid ? "home" : ""} className={valid ? "btn btn-primary" : "btn btn-secondary"} onClick={completeLogin}>
+            <Link to={valid ? "home" : ""} className={valid ? "btn btn-primary" : "btn btn-secondary"} onClick={()=>completeLogin("signup")}>
               Continue
             </Link>
           </form>

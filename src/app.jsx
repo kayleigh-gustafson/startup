@@ -29,6 +29,7 @@ export default function App() {
     const [showTaskModal, setShowTaskModal] = useState(false);
     const [showExamModal, setShowExamModal] = useState(false);
     const [currentTerm, setCurrentTerm] = useState(Object.keys(userData.terms)[0]);
+    const [authenticated, setAuthenticated] = useState(false);
 
     let defaultClass = "";
     for (const [key, value] of Object.entries(userData.classes)) {
@@ -159,8 +160,8 @@ export default function App() {
                         </Navbar.Brand>
                         </Nav.Item>
                     </Nav>
-                    { location.pathname === "/home" &&
-                    <>
+                    { authenticated &&
+                    <> 
                     <Nav
                         className="justify-content-center"
                         style={{ flex: "1 1 0" }}
@@ -191,7 +192,7 @@ export default function App() {
                         </NavDropdown>
                         <NavDropdown title={userData.username}>
                             <NavDropdown.Item>
-                                <Link className="dropdown-item" to="/">Log out</Link>
+                                <Link className="dropdown-item" onClick={() => setAuthenticated(false)} to="/">Log out</Link>
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
@@ -269,7 +270,7 @@ export default function App() {
         <main className="flex-grow-1 mt-5">
 
         <Routes>
-            <Route path='/' element={<Login userData={userData} setUserData={setUserData}/>} exact />
+            <Route path='/' element={<Login userData={userData} setUserData={setUserData} setAuthenticated={setAuthenticated}/>} exact />
             <Route path='/home' element={<Home userData={userData} setUserData={setUserData} currentTerm={currentTerm}/>} />
             <Route path='/classes' element={<Classes userData={userData} setUserData={setUserData} currentTerm={currentTerm}/>} />
             <Route path='/terms' element={<Terms userData={userData} setUserData={setUserData} currentTerm={currentTerm} setCurrentTerm={setCurrentTerm}/>} />

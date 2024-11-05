@@ -146,11 +146,11 @@ a.text-primary:hover, a.text-primary:focus {
 /* Addition: inactive tabs */
 
 .nav-tabs button:not(.active) {
-    color: #66903e !important;
+    color: #424547 !important;
 }
 
 .nav-tabs button:not(.active):hover, .nav-tabs button:not(.active):focus {
-    color: #4c6c2e !important;
+    color: #424547 !important;
 }
 
 /* Addition: checkboxes */

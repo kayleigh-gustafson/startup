@@ -340,3 +340,8 @@ select option:disabled {
 .form-style-dropdown .dropdown-toggle {
     border: none;
 }
+
+
+header .navbar{
+    height: 60px;
+}

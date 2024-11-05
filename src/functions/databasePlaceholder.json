@@ -36,32 +36,32 @@
         },
         "11234": {
             "name": "WRTG 150",
-            "color": "#ffd6a5",
+            "color": "#0081a7",
             "term": "02621"
         },
         "63234": {
             "name": "MATH 112",
-            "color": "#9bf6ff",
+            "color": "#2ec4b6",
             "term": "02621"
         },
         "94323": {
             "name": "REL A 250",
-            "color": "#ffc6ff",
+            "color": "#f07167",
             "term": "02621"
         },
         "75343": {
             "name": "REL A 275",
-            "color": "#fdffb6",
+            "color": "#ffbc42",
             "term": "81652"
         },
         "98746": {
             "name": "BIO 100",
-            "color": "#a0c4ff",
+            "color": "#d81159",
             "term": "81652"
         },
         "23451": {
             "name": "MATH 113",
-            "color": "#ff9ed7",
+            "color": "#2f195f",
             "term": "81652"
         }
     },
