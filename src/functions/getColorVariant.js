@@ -2,10 +2,8 @@
 import "https://cdn.jsdelivr.net/npm/ac-colors@1/dist/ac-colors.min.js";
 
 export default function getColorVariant(hex, lightness, maxSaturation=undefined) {
-    console.log(maxSaturation);
     let inputColor = new Color({"color":hex,"type":"hex"});
     let hsl = inputColor.hsl;
-    console.log(hsl);
     if (lightness!==undefined) {
         hsl[2] = lightness;
     }

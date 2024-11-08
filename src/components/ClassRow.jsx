@@ -10,6 +10,7 @@ export default function ClassRow({ userData, setUserData, currentTerm, id, name,
           delete classesInTerm[key];
       }
     }
+    
     return (
       <tr>
         <td className="class-name p-2">

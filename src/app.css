@@ -67,6 +67,7 @@ select option:disabled {
     background-color: transparent;
     border: none;
     cursor: pointer;
+    border-radius: 25px!important;
   }
 .custom-color-picker::-webkit-color-swatch {
     border-radius: 25px;
@@ -327,6 +328,7 @@ select option:disabled {
 
 .dropdown-item:active {
     background-color: transparent!important;
+    color: black;
 }
 
 .no-caret .dropdown-toggle:after {

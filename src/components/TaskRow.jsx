@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -9,7 +10,14 @@ import editUserData from '../functions/editUserData';
 import deleteUserData from '../functions/deleteUserData';
 import getColorVariant from '../functions/getColorVariant';
 
-export default function TaskRow({ userData, setUserData, currentTerm, id, completed, name, due, finish, taskClass, notifyDue = false, notifyFinish = false, notifyLate = false }) {
+export default function TaskRow({ userData, setUserData, currentTerm, id, completed, name, due, finish, taskClass}) {
+    // useState[notificationPrefs, setNotificationPrefs] = useState({due: false, finish: false, late: false})
+    // function updateNotificationPrefs(key, value) {
+    //     data = {...notificationPrefs};
+    //     notificationPrefs[key] = value;
+    //     setNotificationPrefs(data);
+    // }
+
     let classDropdownContent = [];
     for (const [key, value] of Object.entries(userData.classes)) {
         if (value.term == currentTerm) {
@@ -21,6 +29,14 @@ export default function TaskRow({ userData, setUserData, currentTerm, id, comple
             {value.name}
             </Dropdown.Item>);
         }
+    }
+    console.log(name, userData.assignments[id].notifyFinish, userData.assignments[id].notifyDue, userData.assignments[id].notifyLate)
+    function toggleNotification(key) {
+        console.log("toggleNotification", key);
+        let data={...userData};
+        data.assignments[id][key] = !(data.assignments[id][key]);
+        setUserData(data);
+        console.log(data);
     }
     
     let color = userData.classes[userData.assignments[id].classId].color;
@@ -79,23 +95,20 @@ export default function TaskRow({ userData, setUserData, currentTerm, id, comple
         </td>
         <td className="task-menu">
 
-            <Dropdown className="no-caret">
+            <Dropdown className="no-caret" autoClose="outside">
                 <Dropdown.Toggle variant="tertiary">
                     <i className="fa-solid fa-ellipsis-vertical" />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                     <Dropdown.Header>Notifications</Dropdown.Header>
-                    <Dropdown.Item>
-                        <Form.Check id={id+"-row-notifyFinish"} defaultChecked={notifyFinish} className="d-inline me-2"/>
-                        Finish Date
+                    <Dropdown.Item onClick={() => toggleNotification("notifyFinish")}>
+                        {userData.assignments[id].notifyFinish ? <i class="fa-solid fa-square-check"></i>:<i class="fa-regular fa-square"></i>} Finish Date
                     </Dropdown.Item>
-                    <Dropdown.Item>
-                        <Form.Check id={id+"-row-notifyDue"} defaultChecked={notifyFinish} className="d-inline me-2"/>
-                        Due Date
+                    <Dropdown.Item onClick={() => toggleNotification("notifyDue")} defaultChecked={userData.assignments[id].notifyDue}>
+                        {userData.assignments[id].notifyDue ? <i class="fa-solid fa-square-check"></i>:<i class="fa-regular fa-square"></i>} Due Date
                     </Dropdown.Item>
-                    <Dropdown.Item>
-                        <Form.Check id={id+"-row-notifyLate"} defaultChecked={notifyFinish} className="d-inline me-2"/>
-                        Late
+                    <Dropdown.Item onClick={() => toggleNotification("notifyLate")}>
+                        {userData.assignments[id].notifyLate ? <i class="fa-solid fa-square-check"></i>:<i class="fa-regular fa-square"></i>} Late
                     </Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={() => deleteUserData(userData, setUserData, "assignments", id)}>
