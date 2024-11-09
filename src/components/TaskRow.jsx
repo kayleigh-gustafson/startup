@@ -9,6 +9,10 @@ import { Link } from "react-router-dom";
 import editUserData from '../functions/editUserData';
 import deleteUserData from '../functions/deleteUserData';
 import getColorVariant from '../functions/getColorVariant';
+import { DatePicker } from 'rsuite';
+import 'rsuite/DatePicker/styles/index.css';
+import {FaCalendar} from 'react-icons/fa';
+import format from 'date-fns/format';
 
 export default function TaskRow({ userData, setUserData, currentTerm, id, completed, name, due, finish, taskClass}) {
     // useState[notificationPrefs, setNotificationPrefs] = useState({due: false, finish: false, late: false})
@@ -17,6 +21,11 @@ export default function TaskRow({ userData, setUserData, currentTerm, id, comple
     //     notificationPrefs[key] = value;
     //     setNotificationPrefs(data);
     // }
+
+    
+    // const today = new Date();
+ 
+    
 
     let classDropdownContent = [];
     for (const [key, value] of Object.entries(userData.classes)) {
@@ -30,17 +39,15 @@ export default function TaskRow({ userData, setUserData, currentTerm, id, comple
             </Dropdown.Item>);
         }
     }
-    console.log(name, userData.assignments[id].notifyFinish, userData.assignments[id].notifyDue, userData.assignments[id].notifyLate)
+   
     function toggleNotification(key) {
-        console.log("toggleNotification", key);
         let data={...userData};
         data.assignments[id][key] = !(data.assignments[id][key]);
         setUserData(data);
-        console.log(data);
     }
     
     let color = userData.classes[userData.assignments[id].classId].color;
-    let colorInput = {'--color': getColorVariant(color, 20, 60), color: getColorVariant(color, 20, 60), borderColor: color, backgroundColor: getColorVariant(color, 95)};
+    let colorInput = {'--color': getColorVariant(color, 20, 60), color: getColorVariant(color, 20, 60), "--borderColor": color, borderColor: color, "--backgroundColor": getColorVariant(color, 95), backgroundColor: getColorVariant(color, 95)};
     let colorCheck = {'--checkbox-color': color}
     return (
     <tr>
@@ -59,30 +66,52 @@ export default function TaskRow({ userData, setUserData, currentTerm, id, comple
             className="class-color form-control"
             defaultValue={name}
             id={id+"-row-name"}
-            onChange={(event) => editUserData(userData, setUserData, "assignments", id, "name", event.target.value)}
+            onChange={(date) => editUserData(userData, setUserData, "assignments", id, "name", date)}
             style={colorInput}
             />
         </td>
         <td className="task-due">
-            <input
-            type="date"
-            className="class-color form-control"
-            defaultValue={due}
-            id={id+"-row-due"}
-            onChange={(event) => editUserData(userData, setUserData, "assignments", id, "due", event.target.value)}
-            style={colorInput}
+            <DatePicker
+                oneTap={true}
+                editable={false}
+                placeholder="Choose date"
+                renderValue={value => {
+                return format(value, 'EEE, MMM d');
+                }}
+                caretAs={FaCalendar}
+                cleanable={false}
+                defaultValue={new Date(due)}
+                onChange={(date) => editUserData(userData, setUserData, "assignments", id, "due", date)}
+                style={colorInput}
+                className="class-color form-control-date"
             />
             <label className="d-md-none">Due Date</label>
         </td>
         <td className="task-finish">
-            <input
+            {/* <DatePicker id={id+"-row-finish"} format="MMM dd, yyyy" /> */}
+            <DatePicker
+                oneTap={true}
+                editable={false}
+                placeholder="Choose date"
+                renderValue={value => {
+                return format(value, 'EEE, MMM d');
+                }}
+                caretAs={FaCalendar}
+                cleanable={false}
+                defaultValue={new Date(finish)}
+                onChange={(date) => editUserData(userData, setUserData, "assignments", id, "finish", date)}
+                style={colorInput}
+                className="class-color form-control-date"
+            />
+            {/* <input type="text" id={id+"-row-finish"}></input> */}
+            {/* <input
             type="date"
             className="class-color form-control"
             defaultValue={finish}
             id={id+"-row-finish"}
             onChange={(event) => editUserData(userData, setUserData, "assignments", id, "finish", event.target.value)}
             style={colorInput}
-            />
+            /> */}
             <label className="d-md-none">Finish By</label>
         </td>
         <td className="task-class">

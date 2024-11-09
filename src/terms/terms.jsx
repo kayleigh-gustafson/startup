@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import addUserData from '../functions/addUserData';
+import { DatePicker } from 'rsuite';
+import 'rsuite/DatePicker/styles/index.css';
+import {FaCalendar} from 'react-icons/fa';
+import format from 'date-fns/format';
 
 export function Terms({userData, setUserData, currentTerm, setCurrentTerm}) {
 
@@ -32,9 +36,7 @@ export function Terms({userData, setUserData, currentTerm, setCurrentTerm}) {
   }
 
   function addTerm() {
-    console.log("Attempting to add term...", newTerm);
     if (newTerm.name !== "" && newTerm.start !== "" && newTerm.end !== "") {
-      console.log("Check successful");
       let termId = "";
         while (termId === "") {
             let tempId = Math.floor(Math.random() * 90000) + 10000;
@@ -42,7 +44,11 @@ export function Terms({userData, setUserData, currentTerm, setCurrentTerm}) {
                 termId = tempId;
             }
         }
+      document.getElementById("new-term-name").value = "";
+      document.getElementById("new-term-start").value = "";
+      document.getElementById("new-term-end").value = "";
       addUserData(userData, setUserData, "terms", termId, newTerm);
+      setNewTerm({name: "", start: "", end: ""})
     }
   }
 
@@ -59,6 +65,9 @@ export function Terms({userData, setUserData, currentTerm, setCurrentTerm}) {
           </tr>
           {termRows}
           <tr>
+            <td colspan="4"><hr></hr></td>
+          </tr>
+          <tr>
             <td className="p-2 term-name">
               <input
                 className="form-control"
@@ -69,21 +78,47 @@ export function Terms({userData, setUserData, currentTerm, setCurrentTerm}) {
               />
             </td>
             <td className="p-2 term-start">
-              <input
+              {/* <input
                 className="form-control"
                 type="date"
                 id="new-term-start"
                 onChange={(event) => updateNewTerm("start", event.target.value)}
-              />
+              /> */}
+              <DatePicker
+                id="new-term-start"
+                oneTap={true}
+                editable={false}
+                cleanable={true}
+                placeholder="Choose date"
+                renderValue={value => {
+                return format(value, 'EEE, MMM d');
+                }}
+                caretAs={FaCalendar}
+                onChange={(date) => updateNewTerm("start", date)}
+                className="form-control-date"
+            />
               <label className="d-md-none">Start Date</label>
             </td>
             <td className="p-2 term-end">
-              <input
+              {/* <input
                 className="form-control"
                 type="date"
                 id="new-term-end"
                 onChange={(event) => updateNewTerm("end", event.target.value)}
-              />
+              /> */}
+              <DatePicker
+                id="new-term-end"
+                oneTap={true}
+                editable={false}
+                cleanable={true}
+                placeholder="Choose date"
+                renderValue={value => {
+                return format(value, 'EEE, MMM d');
+                }}
+                caretAs={FaCalendar}
+                onChange={(date) => updateNewTerm("end", date)}
+                className="form-control-date"
+            />
               <label className="d-md-none">End Date</label>
             </td>
             <td className="p-2 term-delete text-start">

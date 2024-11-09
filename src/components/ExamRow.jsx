@@ -8,6 +8,10 @@ import { Link } from "react-router-dom";
 import editUserData from '../functions/editUserData';
 import deleteUserData from '../functions/deleteUserData';
 import getColorVariant from '../functions/getColorVariant';
+import { DatePicker } from 'rsuite';
+import 'rsuite/DatePicker/styles/index.css';
+import {FaCalendar} from 'react-icons/fa';
+import format from 'date-fns/format';
 
 export default function ExamRow({ userData, setUserData, currentTerm, id, completed, name, open, close, finish, examClass, notifyOpen = false, notifyDue = false, notifyFinish = false }) {
     let classDropdownContent = [];
@@ -23,7 +27,7 @@ export default function ExamRow({ userData, setUserData, currentTerm, id, comple
         }
     }
     let color = userData.classes[userData.exams[id].classId].color;
-    let colorInput = {'--color': getColorVariant(color, 20, 60), color: getColorVariant(color, 20, 60), borderColor: color, backgroundColor: getColorVariant(color, 95)};
+    let colorInput = {'--color': getColorVariant(color, 20, 60), color: getColorVariant(color, 20, 60), "--borderColor": color, borderColor: color, "--backgroundColor": getColorVariant(color, 95), backgroundColor: getColorVariant(color, 95)};
     let colorCheck = {'--checkbox-color': color}
     return (
     <tr>
@@ -47,35 +51,61 @@ export default function ExamRow({ userData, setUserData, currentTerm, id, comple
             />
         </td>
         <td className="exam-open">
-            <input
+            {/* <input
             type="date"
             className="class-color form-control"
             defaultValue={open}
             id={id+"-row-open"}
             onChange={(event) => editUserData(userData, setUserData, "exams", id, "open", event.target.value)}
             style={colorInput}
+            /> */}
+            <DatePicker
+                oneTap={true}
+                editable={false}
+                placeholder="Choose date"
+                renderValue={value => {
+                return format(value, 'EEE, MMM d');
+                }}
+                caretAs={FaCalendar}
+                cleanable={false}
+                defaultValue={new Date(open)}
+                onChange={(date) => editUserData(userData, setUserData, "exams", id, "open", date)}
+                style={colorInput}
+                className="class-color form-control-date"
             />
             <label className="d-md-none">Open Date</label>
         </td>
         <td className="exam-close">
-            <input
-            type="date"
-            className="class-color form-control"
-            defaultValue={close}
-            id={id+"-row-close"}
-            onChange={(event) => editUserData(userData, setUserData, "exams", id, "close", event.target.value)}
-            style={colorInput}
+        <DatePicker
+                oneTap={true}
+                editable={false}
+                placeholder="Choose date"
+                renderValue={value => {
+                return format(value, 'EEE, MMM d');
+                }}
+                caretAs={FaCalendar}
+                cleanable={false}
+                defaultValue={new Date(close)}
+                onChange={(date) => editUserData(userData, setUserData, "exams", id, "close", date)}
+                style={colorInput}
+                className="class-color form-control-date"
             />
             <label className="d-md-none">Close Date</label>
         </td>
         <td className="exam-finish">
-            <input
-            type="date"
-            className="class-color form-control"
-            defaultValue={finish}
-            id={id+"-row-finish"}
-            style={colorInput}
-            onChange={(event) => editUserData(userData, setUserData, "exams", id, "finish", event.target.value)}
+        <DatePicker
+                oneTap={true}
+                editable={false}
+                placeholder="Choose date"
+                renderValue={value => {
+                return format(value, 'EEE, MMM d');
+                }}
+                caretAs={FaCalendar}
+                cleanable={false}
+                defaultValue={new Date(finish)}
+                onChange={(date) => editUserData(userData, setUserData, "exams", id, "finish", date)}
+                style={colorInput}
+                className="class-color form-control-date"
             />
             <label className="d-md-none">Finish By</label>
         </td>

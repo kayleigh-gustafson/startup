@@ -77,12 +77,12 @@ export function Home({userData, setUserData, currentTerm}) {
         <table className="tab-table">
             <tbody>
               <tr className="task-table-header">
-                <th />
+                <th width="30px"/>
                 <th>Task</th>
-                <th>Due Date</th>
-                <th>Finish By</th>
-                <th>Class</th>
-                <th />
+                <th width="170px">Due Date</th>
+                <th width="170px">Finish By</th>
+                <th width="150px">Class</th>
+                <th width="20px" />
               </tr>
               {incompleteTasks}
             </tbody>
@@ -91,13 +91,13 @@ export function Home({userData, setUserData, currentTerm}) {
         <Tab eventKey="completed" title="Completed">
         <table className="tab-table">
             <tbody>
-              <tr className="task-table-header">
-                <th />
+            <tr className="task-table-header">
+                <th width="30px"/>
                 <th>Task</th>
-                <th>Due Date</th>
-                <th>Finish By</th>
-                <th>Class</th>
-                <th />
+                <th width="170px">Due Date</th>
+                <th width="170px">Finish By</th>
+                <th width="150px">Class</th>
+                <th width="20px" />
               </tr>
               {completeTasks}
             </tbody>
@@ -107,13 +107,13 @@ export function Home({userData, setUserData, currentTerm}) {
         <table className='tab-table'>
             <tbody>
               <tr className="exam-table-header">
-                <th />
+                <th width="30px" />
                 <th>Exam</th>
-                <th>Open Date</th>
-                <th>Close Date</th>
-                <th>Finish By</th>
-                <th>Class</th>
-                <th />
+                <th width="160px">Open Date</th>
+                <th width="160px">Close Date</th>
+                <th width="160px">Finish By</th>
+                <th width="150px">Class</th>
+                <th width="20px" />
               </tr>
               {exams}
             </tbody>

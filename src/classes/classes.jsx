@@ -57,6 +57,9 @@ export function Classes({userData, setUserData, currentTerm}) {
           </tr>
           {classRows}
           <tr>
+            <td colspan="3"><hr></hr></td>
+          </tr>
+          <tr>
             <td className="p-2">
               <input
                 className="form-control"

@@ -23,7 +23,7 @@ export default function deleteUserData(userData, setUserData, section, id, curre
             }
             for (const [key, value] of Object.entries(userData.classes)) {
                 if (value.term === termId) {
-                    deleteClass(key, forceDelete = true)
+                    deleteClass(key, true)
                 }
             }
             delete data["terms"][termId];

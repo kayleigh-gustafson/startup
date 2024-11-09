@@ -20,9 +20,13 @@ import { Login } from './login/login';
 import { Home } from './home/home';
 import { Classes } from './classes/classes';
 import { Terms } from './terms/terms';
-
+import { DatePicker } from 'rsuite';
+import 'rsuite/DatePicker/styles/index.css';
+import {FaCalendar} from 'react-icons/fa';
+import format from 'date-fns/format';
 import getUserData from './functions/getUserData';
 import addUserData from './functions/addUserData';
+
 
 export default function App() {
     const [userData, setUserData] = useState(getUserData());
@@ -56,6 +60,7 @@ export default function App() {
     }
 
     function updateNewTask(key, value) {
+        console.log("updateNewTask");
         let data = {...userData};
         data.newTask[key] = value;
         setUserData(data);
@@ -74,6 +79,7 @@ export default function App() {
     //  },[userData])
 
     function createTask(type, data) {
+        console.log(userData.newTask);
         let id = "";
         while (id === "") {
             let tempId = Math.floor(Math.random() * 90000) + 10000;
@@ -160,8 +166,7 @@ export default function App() {
                         </Navbar.Brand>
                         </Nav.Item>
                     </Nav>
-                    { authenticated &&
-                    <> 
+                     
                     <Nav
                         className="justify-content-center"
                         style={{ flex: "1 1 0" }}
@@ -190,14 +195,13 @@ export default function App() {
                             <Dropdown.Divider />
                             <Dropdown.Item to={"../terms"} as={Link} eventKey="0">Manage...</Dropdown.Item>
                         </NavDropdown>
-                        <NavDropdown title={userData.username}>
+                        <NavDropdown title={userData.username === "" ? "[User is unauthenticated]" : userData.username}>
                             <NavDropdown.Item>
                                 <Link className="dropdown-item" onClick={() => setAuthenticated(false)} to="/">Log out</Link>
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                    </>
-                    }
+                  
                 </Navbar.Collapse>
             </Container>
             </Navbar>
@@ -215,11 +219,36 @@ export default function App() {
                 <input onChange={(event) => updateNewTask("name", event.target.value)} type="text" className="form-control" id="assignment" name="assignment"/>
                 
                 <label className="mt-2 mb-1" htmlFor="duedate">Due Date</label>
-                <input onChange={(event) => updateNewTask("due", event.target.value)} type="date" className="form-control" id="duedate" name="duedate"/>
-                
+                {/* <input onChange={(event) => updateNewTask("due", event.target.value)} type="date" className="form-control" id="duedate" name="duedate"/> */}
+                <DatePicker
+                oneTap={true}
+                editable={false}
+                placeholder="Choose date"
+                renderValue={value => {
+                return format(value, 'EEE, MMM d');
+                }}
+                caretAs={FaCalendar}
+                cleanable={false}
+                block={true}
+                onChange={(date) => updateNewTask("due", date)}
+                className="form-control-date"
+            />
+
                 <label className="mt-2 mb-1" htmlFor="finishdate">Finish By</label>
-                <input onChange={(event) => updateNewTask("finish", event.target.value)} type="date" className="form-control" id="finishdate" name="finishdate"/>
-                
+                {/* <input onChange={(event) => updateNewTask("finish", event.target.value)} type="date" className="form-control" id="finishdate" name="finishdate"/> */}
+                <DatePicker
+                oneTap={true}
+                editable={false}
+                placeholder="Choose date"
+                renderValue={value => {
+                return format(value, 'EEE, MMM d');
+                }}
+                caretAs={FaCalendar}
+                cleanable={false}
+                block={true}
+                onChange={(date) => updateNewTask("finish", date)}
+                className="form-control-date"
+            />
                 <label className="mt-2 mb-1" htmlFor="class">Class</label>
                 <DropdownButton variant="tertiary" title={getNewTaskClass().name} className="form-style-dropdown text-start">
                     {newTaskClassDropdownContent}
@@ -245,14 +274,50 @@ export default function App() {
                 <input onChange={(event) => updateNewTask("name", event.target.value)} type="text" className="form-control" id="assignment" name="assignment"/>
                 
                 <label className="mt-2 mb-1" htmlFor="opendate">Open Date</label>
-                <input onChange={(event) => updateNewTask("open", event.target.value)} type="date" className="form-control" id="opendate" name="opendate"/>
-
+                {/* <input onChange={(event) => updateNewTask("open", event.target.value)} type="date" className="form-control" id="opendate" name="opendate"/> */}
+                <DatePicker
+                oneTap={true}
+                editable={false}
+                placeholder="Choose date"
+                renderValue={value => {
+                return format(value, 'EEE, MMM d');
+                }}
+                caretAs={FaCalendar}
+                cleanable={false}
+                block={true}
+                onChange={(date) => updateNewTask("open", date)}
+                className="form-control-date"
+            />
                 <label className="mt-2 mb-1" htmlFor="closedate">Close Date</label>
-                <input onChange={(event) => updateNewTask("close", event.target.value)} type="date" className="form-control" id="closedate" name="closedate"/>
-                
+                {/* <input onChange={(event) => updateNewTask("close", event.target.value)} type="date" className="form-control" id="closedate" name="closedate"/> */}
+                <DatePicker
+                oneTap={true}
+                editable={false}
+                placeholder="Choose date"
+                renderValue={value => {
+                return format(value, 'EEE, MMM d');
+                }}
+                caretAs={FaCalendar}
+                cleanable={false}
+                block={true}
+                onChange={(date) => updateNewTask("close", date)}
+                className="form-control-date"
+            />
                 <label className="mt-2 mb-1" htmlFor="finishdate">Finish By</label>
-                <input onChange={(event) => updateNewTask("finish", event.target.value)} type="date" className="form-control" id="finishdate" name="finishdate"/>
-                
+                {/* <input onChange={(event) => updateNewTask("finish", event.target.value)} type="date" className="form-control" id="finishdate" name="finishdate"/> */}
+                <DatePicker
+                oneTap={true}
+                editable={false}
+                placeholder="Choose date"
+                renderValue={value => {
+                return format(value, 'EEE, MMM d');
+                }}
+                caretAs={FaCalendar}
+                cleanable={false}
+                block={true}
+                onChange={(date) => updateNewTask("finish", date)}
+                className="form-control-date"
+            />
                 <label className="mt-2 mb-1" htmlFor="class">Class</label>
                 <DropdownButton variant="tertiary" title={getNewTaskClass().name} className="form-style-dropdown text-start">
                     {newTaskClassDropdownContent}

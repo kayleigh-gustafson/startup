@@ -13,6 +13,7 @@ th {
 .tab-table {
     width: 80%;
     margin: 20px auto;
+    table-layout: fixed;
 }
 
 @media screen and (max-width: 992px) {
@@ -105,7 +106,44 @@ select option:disabled {
     color: var(--color);
 }
 
-.form-style-dropdown.class-color, .form-control.class-color {
+.form-control-date input {
+    font-size: 1rem;
+}
+
+.form-control-date.class-color input {
+    background-color: transparent;
+    color: var(--color);
+}
+
+.form-control-date.class-color input:hover {
+    cursor: pointer;
+}
+
+.form-control-date.class-color .rs-picker-input-group {
+    background-color: var(--backgroundColor);
+    border-bottom: 3px solid;
+    border-color: var(--borderColor);
+    color: var(--color);
+}
+
+.form-control-date.class-color .rs-picker-input-group:hover {
+    border-color: var(--borderColor);
+    
+}
+
+.form-control-date.class-color .rs-input-group-addon {
+    color: var(--borderColor);
+}
+
+.rs-picker-date-menu, .rs-picker-popup-date {
+    z-index: 1100 !important;
+  }
+
+.form-control-date.class-color {
+    border-radius: 3px;
+}
+
+.form-style-dropdown.class-color, .form-control.class-color, .form-control-date.class-color .rs-picker-input-group {
     border-width: 0px;
     border-bottom-width: 3px;
     border-radius: 3px;
@@ -341,9 +379,4 @@ select option:disabled {
 
 .form-style-dropdown .dropdown-toggle {
     border: none;
-}
-
-
-header .navbar{
-    height: 60px;
 }
