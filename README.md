@@ -40,4 +40,9 @@ This deliverable involved adding a lot of Bootstrap elements, adjusting padding,
 - [x] Application elements: done
 - [x] Application text content: done
 - [x] Application images: "add" icons, "delete" icons, menu icon, favicon: done
-
+## React Deliverable
+For this deliverable, I converted my HTML to JSX and added JavaScript functionality.
+- [x] Bundled using Vite: done
+- [x] Multiple react components that implement or mock all app functionality: edit, save, delete, assignments (and terms and classes): done
+- [x] React router: routes for login, home, managing terms, and managing classes: done
+- [x] React hooks: useState for userData and several other variables: done
