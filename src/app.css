@@ -33,6 +33,10 @@ th {
     margin: 20px auto;
 }
 
+.login-button {
+    width: 200px;
+}
+
 @media screen and (max-width: 768px) {
     .login-tab-content {
         width: 80%;

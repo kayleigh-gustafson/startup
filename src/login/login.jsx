@@ -12,6 +12,7 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({username: "", email: "", password: "", confirm: "", loginEmail: "", loginPassword:""})
   const [valid, setValidation] = useState(false);
+  const [loading, setLoading] = useState(false);
   
   function updateLoginData(key, value, mode) {
     let data = {...loginData};
@@ -37,6 +38,7 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
     }
   }
   async function completeLogin(mode) {
+    setLoading(true);
     if (valid) {
       // let data = {...userData};
       // if (mode==="login") {
@@ -63,10 +65,12 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
         // setUserData(getUserData(data.email));
         setUserId(data.email);
         setAuthenticated(true);
-        navigate('/home')
+        navigate('/home');
+        setLoading(false);
       } else {
         const body = await response.json();
         console.log(`⚠ Error: ${body.msg}`);
+        setLoading(false);
       }
 
 
@@ -115,8 +119,8 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
               />
               <label htmlFor="loginPassword">Password</label>
             </div>
-            <Button variant={valid ? "primary" : "secondary"} onClick={()=>completeLogin("login")}>
-              Continue
+            <Button className="login-button" variant={valid ? "primary" : "secondary"} onClick={()=>completeLogin("login")}>
+              {loading?<i class="fa-solid fa-spinner fa-spin-pulse"></i>:"Continue"}
             </Button>
           </form>
         </Tab>
@@ -166,8 +170,8 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
               />
               <label htmlFor="signupPasswordConfirm">Confirm Password</label>
             </div>
-            <Button variant={valid ? "primary" : "secondary"} onClick={()=>completeLogin("signup")}>
-              Continue
+            <Button className="login-button" variant={valid ? "primary" : "secondary"} onClick={()=>completeLogin("signup")}>
+              {loading?<i class="fa-solid fa-spinner fa-spin-pulse"></i>:"Continue"}
             </Button>
           </form>
         </Tab>
