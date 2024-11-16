@@ -1,4 +1,4 @@
-export default function deleteUserData(userData, setUserData, section, id, currentTerm="", setCurrentTerm="") {
+export default async function deleteUserData(userData, setUserData, section, id, currentTerm="", setCurrentTerm="") {
     let data = {...userData};
 
     // if we are deleting a term, delete associated classes
@@ -56,4 +56,9 @@ export default function deleteUserData(userData, setUserData, section, id, curre
     }
     
     setUserData(data);
+    await fetch('/api/setuserdata', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({data}),
+    });
 }

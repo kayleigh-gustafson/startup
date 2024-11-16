@@ -8,8 +8,9 @@ import { DatePicker } from 'rsuite';
 import 'rsuite/DatePicker/styles/index.css';
 import {FaCalendar} from 'react-icons/fa';
 import format from 'date-fns/format';
+import { Navigate } from "react-router-dom";
 
-export function Terms({userData, setUserData, currentTerm, setCurrentTerm}) {
+export function Terms({authenticated, userData, setUserData, currentTerm, setCurrentTerm}) {
 
   const [newTerm, setNewTerm] = useState({name: "", start: "", end: ""});
 
@@ -52,6 +53,9 @@ export function Terms({userData, setUserData, currentTerm, setCurrentTerm}) {
     }
   }
 
+  if (!authenticated) {
+    return(<Navigate to="/" replace={true} />)
+  } else {
   return (
     <div id="manage-term-content" className="text-center">
       <h4 className="pb-5">Academic Terms</h4>
@@ -65,7 +69,7 @@ export function Terms({userData, setUserData, currentTerm, setCurrentTerm}) {
           </tr>
           {termRows}
           <tr>
-            <td colspan="4"><hr></hr></td>
+            <td colSpan="4"><hr></hr></td>
           </tr>
           <tr>
             <td className="p-2 term-name">
@@ -135,4 +139,5 @@ export function Terms({userData, setUserData, currentTerm, setCurrentTerm}) {
     </div>
 
   );
+  }
 }

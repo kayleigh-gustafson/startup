@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import addUserData from '../functions/addUserData';
+import { Navigate } from "react-router-dom";
 
-export function Classes({userData, setUserData, currentTerm}) {
+export function Classes({authenticated, userData, setUserData, currentTerm}) {
 
   const [newClass, setNewClass] = useState({name: "", color: "#a8a8a8"});
 
@@ -45,6 +46,9 @@ export function Classes({userData, setUserData, currentTerm}) {
     }
   }
 
+  if (!authenticated) {
+    return(<Navigate to="/" replace={true} />)
+  } else {
   return (
     <div id="manage-class-content" className="text-center">
       <h4 className="pb-5">{userData.terms[currentTerm].name} Classes</h4>
@@ -57,7 +61,7 @@ export function Classes({userData, setUserData, currentTerm}) {
           </tr>
           {classRows}
           <tr>
-            <td colspan="3"><hr></hr></td>
+            <td colSpan="3"><hr></hr></td>
           </tr>
           <tr>
             <td className="p-2">
@@ -92,4 +96,5 @@ export function Classes({userData, setUserData, currentTerm}) {
       </Link>
     </div>
   );
+  }
 }

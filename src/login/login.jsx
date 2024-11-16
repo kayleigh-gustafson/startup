@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import { useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import Button from 'react-bootstrap/Button';
+import getUserData from '../functions/getUserData';
+import { useNavigate } from 'react-router-dom';
 
-export function Login({userData, setUserData, setAuthenticated}) {
+export function Login({userData, setUserData, setUserId, setAuthenticated}) {
+  const navigate = useNavigate();
   const [loginData, setLoginData] = useState({username: "", email: "", password: "", confirm: "", loginEmail: "", loginPassword:""})
   const [valid, setValidation] = useState(false);
   
@@ -22,18 +26,46 @@ export function Login({userData, setUserData, setAuthenticated}) {
       return false;
     }
   }
-  function completeLogin(mode) {
+  async function completeLogin(mode) {
     if (valid) {
-      let data = {...userData};
-      if (mode==="login") {
-        data.username = loginData.loginEmail;
+      // let data = {...userData};
+      // if (mode==="login") {
+      //   data.username = loginData.loginEmail;
+      // } else {
+      //   data.username = loginData.email;
+      // }
+      let data = {};
+      if (mode==="login"){
+        data = {email: loginData.loginEmail, password: loginData.loginPassword};
       } else {
-        data.username = loginData.email;
+        data = {email: loginData.email, password: loginData.password, username: loginData.username}
       }
-      setUserData(data);
-      setAuthenticated(true);
+      const response = await fetch(`api/auth/${mode==="login"?"login":"create"}`, {
+        method: 'post',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      });
+      if (response?.status === 200) {
+        // localStorage.setItem('userName', userName);
+        // props.onLogin(userName);
+        // setUserData(getUserData(data.email));
+        setUserId(data.email);
+        setAuthenticated(true);
+        navigate('/home')
+      } else {
+        const body = await response.json();
+        console.log(`⚠ Error: ${body.msg}`);
+      }
+
+
+
+      
     }
   }
+
+
   function handleTabSelect(key) {
     setLoginData({username: "", email: "", password: "", confirm: "", loginEmail: "", loginPassword:""})
   }
@@ -120,9 +152,9 @@ export function Login({userData, setUserData, setAuthenticated}) {
               />
               <label htmlFor="signupPasswordConfirm">Confirm Password</label>
             </div>
-            <Link to={valid ? "home" : ""} className={valid ? "btn btn-primary" : "btn btn-secondary"} onClick={()=>completeLogin("signup")}>
+            <Button className={valid ? "btn btn-primary" : "btn btn-secondary"} onClick={()=>completeLogin("signup")}>
               Continue
-            </Link>
+            </Button>
           </form>
         </Tab>
       </Tabs>

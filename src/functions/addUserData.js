@@ -1,4 +1,4 @@
-export default function addUserData(userData, setUserData, section, id, object) {
+export default async function addUserData(userData, setUserData, section, id, object) {
     let data = {...userData};
     if (section === "terms") {
         let classId = "";
@@ -12,4 +12,10 @@ export default function addUserData(userData, setUserData, section, id, object) 
     }
     data[section][id] = object;
     setUserData(data);
+    console.log(data);
+    await fetch('/api/setuserdata', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({data}),
+    });
 }

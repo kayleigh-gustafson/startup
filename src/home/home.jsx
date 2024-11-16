@@ -3,8 +3,9 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import TaskRow from '../components/TaskRow';
 import ExamRow from '../components/ExamRow';
+import { Navigate } from "react-router-dom";
 
-export function Home({userData, setUserData, currentTerm}) {
+export function Home({authenticated, userData, setUserData, currentTerm}) {
 
 
   let completeTasks = [];
@@ -66,6 +67,9 @@ export function Home({userData, setUserData, currentTerm}) {
     }
   };
 
+  if (!authenticated) {
+    return(<Navigate to="/" replace={true} />)
+  } else {
   return (
     <>
       <Tabs
@@ -122,4 +126,5 @@ export function Home({userData, setUserData, currentTerm}) {
       </Tabs>
     </>
   );
+  };
 }
