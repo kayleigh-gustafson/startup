@@ -27,6 +27,13 @@ export function Home({authenticated, userData, setUserData, currentTerm}) {
       )
     }
   };
+  if (completeTasks.length < 1) {
+    completeTasks.push(
+      <tr>
+        <td colSpan="6" className="no-tab-content">Nothing to see here...</td>
+      </tr>
+    )
+  }
   let incompleteTasks = [];
   for (const [key, value] of Object.entries(userData.assignments)) {
     if (!value.completed && userData.classes[value.classId].term === currentTerm) {
@@ -46,6 +53,13 @@ export function Home({authenticated, userData, setUserData, currentTerm}) {
       )
     }
   };
+  if (incompleteTasks.length < 1) {
+    incompleteTasks.push(
+      <tr>
+        <td colSpan="6" className="no-tab-content">Nothing to see here...</td>
+      </tr>
+    )
+  }
   let exams = [];
   for (const [key, value] of Object.entries(userData.exams)) {
     if (userData.classes[value.classId].term === currentTerm) {
@@ -66,7 +80,13 @@ export function Home({authenticated, userData, setUserData, currentTerm}) {
       )
     }
   };
-
+  if (exams.length < 1) {
+    exams.push(
+      <tr>
+        <td colSpan="7" className="no-tab-content">Nothing to see here...</td>
+      </tr>
+    )
+  }
   if (!authenticated) {
     return(<Navigate to="/" replace={true} />)
   } else {
