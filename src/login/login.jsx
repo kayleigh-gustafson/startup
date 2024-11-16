@@ -16,14 +16,23 @@ export function Login({userData, setUserData, setUserId, setAuthenticated}) {
     let data = {...loginData};
     data[key] = value;
     setLoginData(data);
-    setValidation(validateLogin(data, mode))
+    validateLogin(data, mode);
+    // setValidation(validateLogin(data, mode))
   }
-  function validateLogin(data, mode) {
+  async function validateLogin(data, mode) {
     console.log(data);
-    if ((mode === "login" && data.loginEmail !== "" && data.loginPassword !== "") || (mode === "signup" && data.email !== "" && data.username !="" && data.password !== "" && data.password === data.confirm)) {
-      return true;
+    let email = (mode==="login"?data.loginEmail:data.email);
+    let emailValid = false;
+    await fetch('https://www.disify.com/api/email/' + email)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.format);
+            emailValid = data.format;
+          });
+    if ((emailValid && mode === "login" && data.loginEmail !== "" && data.loginPassword !== "") || (emailValid && mode === "signup" && data.email !== "" && data.username !="" && data.password !== "" && data.password === data.confirm)) {
+      setValidation(true);
     } else {
-      return false;
+      setValidation(false);
     }
   }
   async function completeLogin(mode) {
@@ -101,9 +110,9 @@ export function Login({userData, setUserData, setUserId, setAuthenticated}) {
               />
               <label htmlFor="loginPassword">Password</label>
             </div>
-            <Link to={valid ? "home" : ""} className={valid ? "btn btn-primary" : "btn btn-secondary"} onClick={()=>completeLogin("login")}>
+            <Button variant={valid ? "primary" : "secondary"} onClick={()=>completeLogin("login")}>
               Continue
-            </Link>
+            </Button>
           </form>
         </Tab>
         <Tab eventKey="signup" title="Sign Up">
@@ -152,7 +161,7 @@ export function Login({userData, setUserData, setUserId, setAuthenticated}) {
               />
               <label htmlFor="signupPasswordConfirm">Confirm Password</label>
             </div>
-            <Button className={valid ? "btn btn-primary" : "btn btn-secondary"} onClick={()=>completeLogin("signup")}>
+            <Button variant={valid ? "primary" : "secondary"} onClick={()=>completeLogin("signup")}>
               Continue
             </Button>
           </form>
