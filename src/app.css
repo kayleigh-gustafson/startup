@@ -97,7 +97,7 @@ select option:disabled {
 
 .form-style-dropdown {
     border: 1px solid #dee2e6;
-    padding: 0px 15px 0px 15px;
+    padding: 0px;
     text-align: center;
     border-radius: 6px;
 }
@@ -149,9 +149,10 @@ select option:disabled {
     border-radius: 3px;
 }
 
-.tab-content .task-name, .exam-name {
+.tab-content .task-name, .tab-content .exam-name {
     width: 100%;
 }
+
 
 /* Mobile-friendly assignment tables */
 
@@ -364,7 +365,7 @@ select option:disabled {
 
 }
 
-.dropdown-item:active {
+.dropdown-item:active, .dropdown-item.active {
     background-color: transparent!important;
     color: black;
 }
