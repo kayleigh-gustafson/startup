@@ -35,7 +35,7 @@ export default function App() {
     const [userId, setUserId] = useState("0");
     const [showTaskModal, setShowTaskModal] = useState(false);
     const [showExamModal, setShowExamModal] = useState(false);
-    const [currentTerm, setCurrentTerm] = useState("");
+    const [currentTerm, setCurrentTerm] = useState("0");
     const [authenticated, setAuthenticated] = useState(false);
 
     React.useEffect(() => {
@@ -51,10 +51,11 @@ export default function App() {
             setReady(true);
           });
       }, [userId]);
+    
 
     function logout() {
         setAuthenticated(false);
-        setUserId("");
+        setUserId("0");
     }
 
     if (ready) {
@@ -167,6 +168,7 @@ export default function App() {
                 <Navbar.Brand className="navbar-brand text-primary d-md-none">
                     <i className="fa-solid fa-book" /> <strong>homework</strong>hub
                 </Navbar.Brand>
+                {authenticated &&
                 <Navbar.Toggle
                 type="button"
                 data-bs-toggle="collapse"
@@ -177,6 +179,7 @@ export default function App() {
                 >
                     <i className="fa-solid fa-bars text-primary" />
                 </Navbar.Toggle>
+                }
                 <Navbar.Collapse
                 className="justify-content-between align-items-center"
                 id="navbarSupportedContent"
@@ -191,7 +194,9 @@ export default function App() {
                         </Navbar.Brand>
                         </Nav.Item>
                     </Nav>
-                     
+
+                     {authenticated &&
+                     <>
                     <Nav
                         className="justify-content-center"
                         style={{ flex: "1 1 0" }}
@@ -226,6 +231,8 @@ export default function App() {
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
+                    </>
+                    }
                   
                 </Navbar.Collapse>
             </Container>
@@ -360,7 +367,7 @@ export default function App() {
         <main className="flex-grow-1 mt-5">
 
         <Routes>
-            <Route path='/' element={<Login userData={userData} setUserData={setUserData} setUserId={setUserId} setAuthenticated={setAuthenticated}/>} exact />
+            <Route path='/' element={<Login authenticated={authenticated} userData={userData} setUserData={setUserData} setUserId={setUserId} setAuthenticated={setAuthenticated}/>} exact />
             <Route path='/home' element={<Home authenticated={authenticated} userData={userData} setUserData={setUserData} currentTerm={currentTerm}/>} />
             <Route path='/classes' element={<Classes authenticated={authenticated} userData={userData} setUserData={setUserData} currentTerm={currentTerm}/>} />
             <Route path='/terms' element={<Terms authenticated={authenticated} userData={userData} setUserData={setUserData} currentTerm={currentTerm} setCurrentTerm={setCurrentTerm}/>} />

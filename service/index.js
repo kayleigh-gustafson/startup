@@ -23,7 +23,7 @@ app.use(`/api`, apiRouter);
 apiRouter.post('/auth/create', async (req, res) => {
   console.log("users", users)
   const user = users[req.body.email];
-  if (user) {
+  if (user && req.body.email !== 0) {
     res.status(409).send({ msg: 'Existing user' });
   } else {
     const user = { email: req.body.email, password: req.body.password, token: uuid.v4() };
@@ -109,26 +109,50 @@ apiRouter.get('/userdata/:userId', (req, res) => {
     res.send(JSON.stringify(userData[req.params.userId]));
   } else {
     res.send(JSON.stringify(
-      {
-        "username": "",
-        "newTask": {},
-        "terms": {
-            "0": {
-                "name": "New Term",
-                "start": "2000-01-01",
-                "end": "2000-06-01"
+        {
+            "username": "Unknown",
+            "email": "Unknown",
+            "newTask": {},
+            "terms": {
+                "0": {
+                    "name": "My First Term",
+                    "start": "2000-01-01",
+                    "end": "2000-06-01"
+                },
             },
-        },
-        "classes": {
-            "0": {
-                "name": "New Class",
-                "color": "#2a9d8f",
-                "term": "0"
+            "classes": {
+                "1": {
+                    "name": "My First Class",
+                    "color": "#2a9d8f",
+                    "term": "0"
+                },
             },
-        },
-        "assignments": {},    
-        "exams": {}
-      }
+            "assignments": {
+              "2": {
+                "completed": false,
+                "name": "My First Assignment",
+                "due": "2000-01-02",
+                "finish": "2000-01-01",
+                "classId": "1",
+                "notifyDue": false,
+                "notifyFinish": false,
+                "notifyLate": false
+              },
+            },    
+            "exams": {
+              "3": {
+                "completed": false,
+                "name": "My First Exam",
+                "open": "2000-01-01",
+                "close": "2000-01-03",
+                "finish": "2000-01-02",
+                "classId": "1",
+                "notifyOpen": false,
+                "notifyFinish": false,
+                "notifyClose": false
+              },
+            }
+          }
     ));
   }
   

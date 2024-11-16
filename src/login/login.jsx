@@ -6,8 +6,9 @@ import Tabs from 'react-bootstrap/Tabs';
 import Button from 'react-bootstrap/Button';
 import getUserData from '../functions/getUserData';
 import { useNavigate } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
 
-export function Login({userData, setUserData, setUserId, setAuthenticated}) {
+export function Login({authenticated, userData, setUserData, setUserId, setAuthenticated}) {
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({username: "", email: "", password: "", confirm: "", loginEmail: "", loginPassword:""})
   const [valid, setValidation] = useState(false);
@@ -78,6 +79,10 @@ export function Login({userData, setUserData, setUserId, setAuthenticated}) {
   function handleTabSelect(key) {
     setLoginData({username: "", email: "", password: "", confirm: "", loginEmail: "", loginPassword:""})
   }
+
+  if (authenticated) {
+    return(<Navigate to="/home" replace={true} />)
+  } else {
   return (
     <>
       <Tabs
@@ -169,4 +174,5 @@ export function Login({userData, setUserData, setUserId, setAuthenticated}) {
       </Tabs>
     </>
   );
+  }
 }
