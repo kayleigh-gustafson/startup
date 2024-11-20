@@ -13,6 +13,8 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
   const [loginData, setLoginData] = useState({username: "", email: "", password: "", confirm: "", loginEmail: "", loginPassword:""})
   const [valid, setValidation] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [emailInputValid, setEmailInputValid] = useState(true);
+  const [passwordInputValid, setPasswordInputValid] = useState(true);
   
   function updateLoginData(key, value, mode) {
     let data = {...loginData};
@@ -33,8 +35,15 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
           });
     if ((emailValid && mode === "login" && data.loginEmail !== "" && data.loginPassword !== "") || (emailValid && mode === "signup" && data.email !== "" && data.username !="" && data.password !== "" && data.password === data.confirm)) {
       setValidation(true);
+      setEmailInputValid(true);
+      setPasswordInputValid(true);
+      set
     } else {
       setValidation(false);
+      if (mode === "signup") {
+        setEmailInputValid(emailValid);
+        setPasswordInputValid(data.password === data.confirm);
+      }
     }
   }
   async function completeLogin(mode) {
@@ -120,7 +129,7 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
               <label htmlFor="loginPassword">Password</label>
             </div>
             <Button className="login-button" variant={valid ? "primary" : "secondary"} onClick={()=>completeLogin("login")}>
-              {loading?<i class="fa-solid fa-spinner fa-spin-pulse"></i>:"Continue"}
+              {(loading && valid)?<i class="fa-solid fa-spinner fa-spin-pulse"></i>:"Continue"}
             </Button>
           </form>
         </Tab>
@@ -129,7 +138,7 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
             <div className="form-floating mb-3">
               <input
                 type="email"
-                className="form-control"
+                className={emailInputValid?"form-control":"form-control is-invalid"}
                 id="signupEmail"
                 placeholder="name@example.com"
                 value={loginData.email}
@@ -162,7 +171,7 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
             <div className="form-floating mb-3">
               <input
                 type="password"
-                className="form-control"
+                className={passwordInputValid?"form-control":"form-control is-invalid"}
                 id="signupPasswordConfirm"
                 placeholder={12345}
                 value={loginData.confirm}
@@ -171,7 +180,7 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
               <label htmlFor="signupPasswordConfirm">Confirm Password</label>
             </div>
             <Button className="login-button" variant={valid ? "primary" : "secondary"} onClick={()=>completeLogin("signup")}>
-              {loading?<i class="fa-solid fa-spinner fa-spin-pulse"></i>:"Continue"}
+              {(loading && valid)?<i class="fa-solid fa-spinner fa-spin-pulse"></i>:"Continue"}
             </Button>
           </form>
         </Tab>
