@@ -46,3 +46,9 @@ For this deliverable, I converted my HTML to JSX and added JavaScript functional
 - [x] Multiple react components that implement or mock all app functionality: edit, save, delete, assignments (and terms and classes): done
 - [x] React router: routes for login, home, managing terms, and managing classes: done
 - [x] React hooks: useState for userData and several other variables: done
+## Service Deliverable
+- [x] Create an HTTP service using Node.js and Express: done
+- [x] Frontend served up using Express static middleware: done
+- [x] Frontend calls third party service endpoints: done (login.jsx uses the [Disify](https://www.disify.com/) API to check if an email is in a valid format)
+- [x] Backend provides service endpoints: done (auth and saving/providing user data)
+- [x] Frontend calls service endpoints: done (auth and getting/setting user data)
