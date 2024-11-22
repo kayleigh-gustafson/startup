@@ -37,7 +37,6 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
       setValidation(true);
       setEmailInputValid(true);
       setPasswordInputValid(true);
-      set
     } else {
       setValidation(false);
       if (mode === "signup") {
@@ -72,6 +71,7 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
         // localStorage.setItem('userName', userName);
         // props.onLogin(userName);
         // setUserData(getUserData(data.email));
+        localStorage.setItem('userId', data.email);
         setUserId(data.email);
         setAuthenticated(true);
         navigate('/home');
@@ -82,9 +82,6 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
         setLoading(false);
       }
 
-
-
-      
     }
   }
 
@@ -129,7 +126,7 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
               <label htmlFor="loginPassword">Password</label>
             </div>
             <Button className="login-button" variant={valid ? "primary" : "secondary"} onClick={()=>completeLogin("login")}>
-              {(loading && valid)?<i class="fa-solid fa-spinner fa-spin-pulse"></i>:"Continue"}
+              {(loading && valid)?<i className="fa-solid fa-spinner fa-spin-pulse"></i>:"Continue"}
             </Button>
           </form>
         </Tab>
@@ -180,7 +177,7 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
               <label htmlFor="signupPasswordConfirm">Confirm Password</label>
             </div>
             <Button className="login-button" variant={valid ? "primary" : "secondary"} onClick={()=>completeLogin("signup")}>
-              {(loading && valid)?<i class="fa-solid fa-spinner fa-spin-pulse"></i>:"Continue"}
+              {(loading && valid)?<i className="fa-solid fa-spinner fa-spin-pulse"></i>:"Continue"}
             </Button>
           </form>
         </Tab>

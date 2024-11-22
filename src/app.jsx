@@ -30,53 +30,107 @@ import addUserData from './functions/addUserData';
 
 export default function App() {
     // const [userData, setUserData] = useState(getUserData());
-    const [ready, setReady] = useState(false);
+    const [dataReady, setDataReady] = useState(false);
     const [userData, setUserData] = useState({});
-    const [userId, setUserId] = useState("0");
+    const [userId, setUserId] = useState(localStorage.getItem('userId') || '');
     const [showTaskModal, setShowTaskModal] = useState(false);
     const [showExamModal, setShowExamModal] = useState(false);
     const [currentTerm, setCurrentTerm] = useState("0");
-    const [authenticated, setAuthenticated] = useState(false);
+    const [authenticated, setAuthenticated] = useState(userId!==""?true:false);
+    const [newTaskClassDropdownContent, setNewTaskClassDropdownContent] = useState([]);
+    const [termDropdownContent, setTermDropdownContent] = useState([]);
+    const [defaultClass, setDefaultClass] = useState("");
 
     React.useEffect(() => {
-        console.log("Fetching data...")
-        fetch('/api/userdata/' + userId)
-          .then((response) => response.json())
-          .then((data) => {
-            let tempData = {...data};
-            tempData.userId = userId;
-            console.log(tempData);
-            setUserData(tempData);
-            setCurrentTerm(Object.keys(tempData.terms)[0]);
-            setReady(true);
-          });
-      }, [userId]);
-    
-
-    function logout() {
-        setAuthenticated(false);
-        setUserId("0");
-    }
-
-    if (ready) {
-
-    let defaultClass = "";
-    for (const [key, value] of Object.entries(userData.classes)) {
-        if (value.term === currentTerm) {
-            defaultClass = key;
+        const fetchData = async () => {
+            try {
+                console.log("Fetching data...")
+                const response = await fetch('/api/userdata/' + userId);
+                console.log(response);
+                const data = await response.json();
+                console.log(data);
+                let tempData = {...data};
+                tempData.userId = userId;
+                console.log(tempData);
+                await setUserData(tempData);
+                console.log("userData", userData);
+                await setCurrentTerm(Object.keys(tempData.terms)[0]);
+                console.log("currentTerm", setCurrentTerm);
+                await initialize(tempData, Object.keys(tempData.terms)[0]);
+                console.log(newTaskClassDropdownContent, termDropdownContent);
+                setDataReady(true);
+            } catch (error) {
+                console.log(error);
+            }
+            
         }
-    }
-
+            
+        if (authenticated) {
+            fetchData();
+        // console.log("Fetching data...")
+        // fetch('/api/userdata/' + userId)
+        //   .then((response) => response.json())
+        //   .then((data) => {
+        //     console.log(data);
+        //     let tempData = {...data};
+        //     tempData.userId = userId;
+        //     console.log(tempData);
+        //     setUserData(tempData);
+        //     initialize(tempData);
+        //     setCurrentTerm(Object.keys(tempData.terms)[0]);
+        //     setDataReady(true);
+        //   });
+        }
+      }, [userId, authenticated]);
+    
+      React.useEffect(() => {
+        if (userData != {} && currentTerm != "0") initialize(userData, currentTerm);
+      }, [userData, currentTerm])
+    
+    console.log("authenticated", authenticated, "dataReady", dataReady);
     
 
-    function resetNewTask() {
-        let data = {...userData};
-        data.newTask = {classId: defaultClass};
-        setUserData(data);
+    // Run this only if the user is authenticated and data is ready to be processed
+    // These functions will break if userData is not properly set, so we wait until dataReady is true and the user is authenticated
+    function initialize(data, currentTerm) {
+        // Set default term that the user is working in
+        for (const [key, value] of Object.entries(data.classes)) {
+            if (value.term === currentTerm) {
+                setDefaultClass(key);
+            }
+        }
+        // Reset new task creation
+        
+        if (!data.newTask.hasOwnProperty("classId")) resetNewTask();
+        // Generate dropdown list of classes for task creation modal
+        let content = [];
+        for (const [key, value] of Object.entries(data.classes)) {
+            if (value.term === currentTerm) {
+                content.push(
+                    <Dropdown.Item
+                    eventKey={key}
+                    key={key}
+                    onClick={() => updateNewTask("classId", key)}>
+                    {value.name}
+                    </Dropdown.Item>
+                );
+            }
+        }
+        setNewTaskClassDropdownContent(content);
+        // Generate dropdown list of terms for navbar
+        let content2 = [];
+        for (const [key, value] of Object.entries(data.terms)) {
+            content2.push(
+                <NavDropdown.Item key={key}>
+                    <Button variant="tertiary" onClick={() => setCurrentTerm(key)} className="dropdown-item">{value.name}</Button>
+                </NavDropdown.Item>
+            );
+        };
+        setTermDropdownContent(content2);
     }
 
-    if (!userData.newTask.hasOwnProperty("classId")) resetNewTask();
 
+    // Utility functions 
 
     function handleModal(action, modal) {
         modal === "task" ? setShowTaskModal(!showTaskModal) : setShowExamModal(!showExamModal);
@@ -100,12 +154,7 @@ export default function App() {
         }
     }
 
-    // useEffect(() => {
-    //     updateNewTask("classId", defaultClass)
-    //  },[userData])
-
     function createTask(type, data) {
-        console.log(userData.newTask);
         let id = "";
         while (id === "") {
             let tempId = Math.floor(Math.random() * 90000) + 10000;
@@ -133,31 +182,28 @@ export default function App() {
         }
     }
 
-    let newTaskClassDropdownContent = [];
-    for (const [key, value] of Object.entries(userData.classes)) {
-        if (value.term === currentTerm) {
-            newTaskClassDropdownContent.push(
-                <Dropdown.Item
-                eventKey={key}
-                key={key}
-                onClick={() => updateNewTask("classId", key)}>
-                {value.name}
-                </Dropdown.Item>
-            );
+    function resetNewTask() {
+        if (authenticated && dataReady) {
+            let data = {...userData};
+            data.newTask = {classId: defaultClass};
+            setUserData(data);
         }
     }
+
+    function logout() {
+        localStorage.removeItem('userId');
+        setAuthenticated(false);
+        setUserId("0");
+    }
+
+    
         
 
-    // Generate term dropdown
-    let termDropdownContent = [];
-    for (const [key, value] of Object.entries(userData.terms)) {
-        termDropdownContent.push(
-            <NavDropdown.Item key={key}>
-                <Button variant="tertiary" onClick={() => setCurrentTerm(key)} className="dropdown-item">{value.name}</Button>
-            </NavDropdown.Item>
-        );
-      };
-
+    
+      
+    if (dataReady || !authenticated) {
+    console.log(newTaskClassDropdownContent);
+    console.log(termDropdownContent);
     return (
     <BrowserRouter>
     <div className="d-flex min-vh-100 flex-column">
@@ -195,7 +241,7 @@ export default function App() {
                         </Nav.Item>
                     </Nav>
 
-                     {authenticated &&
+                     {authenticated && dataReady &&
                      <>
                     <Nav
                         className="justify-content-center"
@@ -238,7 +284,7 @@ export default function App() {
             </Container>
             </Navbar>
         </header>
-  
+        {authenticated &&
         <Modal
         show={showTaskModal}
         onHide={() => handleModal("close", "task")}
@@ -293,7 +339,8 @@ export default function App() {
                 <Button variant='primary' onClick={() => createTask("assignment", userData.newTask)}>Create</Button>
             </Modal.Footer>
         </Modal>
-
+        }
+        {authenticated &&
         <Modal
         show={showExamModal}
         onHide={() => handleModal("close", "exam")}
@@ -362,7 +409,7 @@ export default function App() {
                 <Button variant='primary' onClick={() => createTask("exam", userData.newTask)}>Create</Button>
             </Modal.Footer>
         </Modal>
-
+        }
 
         <main className="flex-grow-1 mt-5">
 

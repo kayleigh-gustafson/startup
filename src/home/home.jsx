@@ -7,6 +7,7 @@ import { Navigate } from "react-router-dom";
 
 export function Home({authenticated, userData, setUserData, currentTerm}) {
 
+  if (!authenticated) return (<Navigate to="/" replace={true} />);
 
   let completeTasks = [];
   for (const [key, value] of Object.entries(userData.assignments)) {
@@ -29,7 +30,7 @@ export function Home({authenticated, userData, setUserData, currentTerm}) {
   };
   if (completeTasks.length < 1) {
     completeTasks.push(
-      <tr>
+      <tr key="0">
         <td colSpan="6" className="no-tab-content">Nothing to see here...</td>
       </tr>
     )
@@ -55,7 +56,7 @@ export function Home({authenticated, userData, setUserData, currentTerm}) {
   };
   if (incompleteTasks.length < 1) {
     incompleteTasks.push(
-      <tr>
+      <tr key="0">
         <td colSpan="6" className="no-tab-content">Nothing to see here...</td>
       </tr>
     )
@@ -82,14 +83,12 @@ export function Home({authenticated, userData, setUserData, currentTerm}) {
   };
   if (exams.length < 1) {
     exams.push(
-      <tr>
+      <tr key="0">
         <td colSpan="7" className="no-tab-content">Nothing to see here...</td>
       </tr>
     )
   }
-  if (!authenticated) {
-    return(<Navigate to="/" replace={true} />)
-  } else {
+
   return (
     <>
       <Tabs
@@ -146,5 +145,5 @@ export function Home({authenticated, userData, setUserData, currentTerm}) {
       </Tabs>
     </>
   );
-  };
+
 }

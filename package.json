@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "ac-colors": "^1.4.3",
+    "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",

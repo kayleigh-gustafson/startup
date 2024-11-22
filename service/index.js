@@ -1,10 +1,14 @@
+const cookieParser = require('cookie-parser');
+const bcrypt = require('bcrypt');
 const express = require('express');
-const uuid = require('uuid');
 const app = express();
+const DB = require('./database.js');
+
+const authCookieName = 'token';
 
 // The scores and users are saved in memory and disappear whenever the service is restarted.
-let userData = {};
-let users = {};
+// let userData = {};
+// let users = {};
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
@@ -12,158 +16,92 @@ const port = process.argv.length > 2 ? process.argv[2] : 3000;
 // JSON body parsing using built-in middleware
 app.use(express.json());
 
+// Use the cookie parser middleware for tracking authentication tokens
+app.use(cookieParser());
+
 // Serve up the front-end static content hosting
 app.use(express.static('public'));
+
+// Trust headers that are forwarded from the proxy so we can determine IP addresses
+app.set('trust proxy', true);
 
 // Router for service endpoints
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-// CreateAuth a new user
+// CreateAuth token for a new user
 apiRouter.post('/auth/create', async (req, res) => {
-  console.log("users", users)
-  const user = users[req.body.email];
-  if (user && req.body.email !== 0) {
+  if (await DB.getUser(req.body.email)) {
     res.status(409).send({ msg: 'Existing user' });
   } else {
-    const user = { email: req.body.email, password: req.body.password, token: uuid.v4() };
-    console.log("user", user);
-    users[user.email] = user;
-    userData[user.email] = (
-      {
-        "username": req.body.username,
-        "email": req.body.email,
-        "newTask": {},
-        "terms": {
-            "0": {
-                "name": "My First Term",
-                "start": "2000-01-01",
-                "end": "2000-06-01"
-            },
-        },
-        "classes": {
-            "1": {
-                "name": "My First Class",
-                "color": "#2a9d8f",
-                "term": "0"
-            },
-        },
-        "assignments": {
-          "2": {
-            "completed": false,
-            "name": "My First Assignment",
-            "due": "2000-01-02",
-            "finish": "2000-01-01",
-            "classId": "1",
-            "notifyDue": false,
-            "notifyFinish": false,
-            "notifyLate": false
-          },
-        },    
-        "exams": {
-          "3": {
-            "completed": false,
-            "name": "My First Exam",
-            "open": "2000-01-01",
-            "close": "2000-01-03",
-            "finish": "2000-01-02",
-            "classId": "1",
-            "notifyOpen": false,
-            "notifyFinish": false,
-            "notifyClose": false
-          },
-        }
-      }
-    )
+    const user = await DB.createUser(req.body.email, req.body.username, req.body.password);
 
-    res.send({ token: user.token });
+    // Set the cookie
+    setAuthCookie(res, user.token);
+
+    res.send({
+      id: user._id,
+    });
   }
 });
 
-// GetAuth login an existing user
+// GetAuth token for the provided credentials
 apiRouter.post('/auth/login', async (req, res) => {
-  const user = users[req.body.email];
+  const user = await DB.getUser(req.body.email);
+  console.log(user);
   if (user) {
-    if (req.body.password === user.password) {
-      user.token = uuid.v4();
-      res.send({ token: user.token });
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      setAuthCookie(res, user.token);
+      res.send({ id: user._id });
       return;
     }
   }
   res.status(401).send({ msg: 'Unauthorized' });
 });
 
-// DeleteAuth logout a user
-apiRouter.delete('/auth/logout', (req, res) => {
-  const user = Object.values(users).find((u) => u.token === req.body.token);
-  if (user) {
-    delete user.token;
-  }
+// DeleteAuth token if stored in cookie
+apiRouter.delete('/auth/logout', (_req, res) => {
+  res.clearCookie(authCookieName);
   res.status(204).end();
 });
 
-// Get user data
-apiRouter.get('/userdata/:userId', (req, res) => {
-  // res.send({name: req.params.userId});
-  if (userData.hasOwnProperty(req.params.userId)) {
-    res.send(JSON.stringify(userData[req.params.userId]));
+// secureApiRouter verifies credentials for endpoints
+const secureApiRouter = express.Router();
+apiRouter.use(secureApiRouter);
+
+secureApiRouter.use(async (req, res, next) => {
+  const authToken = req.cookies[authCookieName];
+  const user = await DB.getUserByToken(authToken);
+  if (user) {
+    console.log("Secure router access granted");
+    next();
   } else {
-    res.send(JSON.stringify(
-        {
-            "username": "Unknown",
-            "email": "Unknown",
-            "newTask": {},
-            "terms": {
-                "0": {
-                    "name": "My First Term",
-                    "start": "2000-01-01",
-                    "end": "2000-06-01"
-                },
-            },
-            "classes": {
-                "1": {
-                    "name": "My First Class",
-                    "color": "#2a9d8f",
-                    "term": "0"
-                },
-            },
-            "assignments": {
-              "2": {
-                "completed": false,
-                "name": "My First Assignment",
-                "due": "2000-01-02",
-                "finish": "2000-01-01",
-                "classId": "1",
-                "notifyDue": false,
-                "notifyFinish": false,
-                "notifyLate": false
-              },
-            },    
-            "exams": {
-              "3": {
-                "completed": false,
-                "name": "My First Exam",
-                "open": "2000-01-01",
-                "close": "2000-01-03",
-                "finish": "2000-01-02",
-                "classId": "1",
-                "notifyOpen": false,
-                "notifyFinish": false,
-                "notifyClose": false
-              },
-            }
-          }
-    ));
+    res.status(401).send({ msg: 'Unauthorized' });
   }
-  
+});
+
+// Get user data
+secureApiRouter.get('/userdata/:userId', async (req, res) => {
+  console.log("Get userdata")
+  // res.send({name: req.params.userId});
+  const userData = await DB.getUserData(req.params.userId);
+  console.log(userData);
+  res.send(JSON.stringify(userData));
 });
 
 // Submit user data
-apiRouter.post('/setuserdata', (req, res) => {
+secureApiRouter.post('/setuserdata', async (req, res) => {
   // scores = updateScores(req.body, scores);
 //   res.send({name: req.params.userId});
-    userData[req.body.data.email] = req.body.data;
-    res.send(req.body)
+    // userData[req.body.data.email] = req.body.data;
+    console.log("Attempting to set user data");
+    await DB.setUserData(req.body.data.email, req.body.data);
+    res.send(req.body);
+});
+
+// Default error handler
+app.use(function (err, req, res, next) {
+  res.status(500).send({ type: err.name, message: err.message });
 });
 
 // Return the application's default page if the path is unknown
@@ -171,28 +109,15 @@ app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-app.listen(port, () => {
+// setAuthCookie in the HTTP response
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
+
+const httpService = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
-
-// updateScores considers a new score for inclusion in the high scores.
-function updateScores(newScore, scores) {
-  let found = false;
-  for (const [i, prevScore] of scores.entries()) {
-    if (newScore.score > prevScore.score) {
-      scores.splice(i, 0, newScore);
-      found = true;
-      break;
-    }
-  }
-
-  if (!found) {
-    scores.push(newScore);
-  }
-
-  if (scores.length > 10) {
-    scores.length = 10;
-  }
-
-  return scores;
-}
