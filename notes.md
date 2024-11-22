@@ -8,6 +8,7 @@
 
 ## Deployment
 - ./deployFiles.sh -k yourpemkey -h yourdomain -s startup
+- After deployment, SSH into server, cd into services/startup, npm install uuid, then go back to root and pm2 restart
 
 ## CSS Notes
 ### Meta viewport tag
