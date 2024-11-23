@@ -46,25 +46,19 @@ export default function App() {
             try {
                 console.log("Fetching data...")
                 const response = await fetch('/api/userdata/' + userId);
-                console.log(response);
                 const data = await response.json();
-                console.log(data);
                 let tempData = {...data};
                 tempData.userId = userId;
-                console.log(tempData);
+                tempData.newTask = {};
+                console.log("useEffect: setUserData", tempData);
                 await setUserData(tempData);
-                console.log("userData", userData);
                 await setCurrentTerm(Object.keys(tempData.terms)[0]);
-                console.log("currentTerm", setCurrentTerm);
                 await initialize(tempData, Object.keys(tempData.terms)[0]);
-                console.log(newTaskClassDropdownContent, termDropdownContent);
                 setDataReady(true);
             } catch (error) {
                 console.log(error);
-            }
-            
+            } 
         }
-            
         if (authenticated) {
             fetchData();
         // console.log("Fetching data...")
@@ -84,7 +78,10 @@ export default function App() {
       }, [userId, authenticated]);
     
       React.useEffect(() => {
-        if (userData != {} && currentTerm != "0") initialize(userData, currentTerm);
+        console.log("Update: userData", userData, "currentTerm", currentTerm);
+        if (Object.keys(userData).length !== 0) {
+            initialize(userData, currentTerm);
+        } 
       }, [userData, currentTerm])
     
     console.log("authenticated", authenticated, "dataReady", dataReady);
@@ -93,6 +90,7 @@ export default function App() {
     // Run this only if the user is authenticated and data is ready to be processed
     // These functions will break if userData is not properly set, so we wait until dataReady is true and the user is authenticated
     function initialize(data, currentTerm) {
+        console.log("initialize: data", data)
         // Set default term that the user is working in
         for (const [key, value] of Object.entries(data.classes)) {
             if (value.term === currentTerm) {
@@ -101,16 +99,17 @@ export default function App() {
         }
         // Reset new task creation
         
-        if (!data.newTask.hasOwnProperty("classId")) resetNewTask();
+        // if (!data.newTask.hasOwnProperty("classId")) resetNewTask();
         // Generate dropdown list of classes for task creation modal
         let content = [];
         for (const [key, value] of Object.entries(data.classes)) {
             if (value.term === currentTerm) {
                 content.push(
                     <Dropdown.Item
+                    as="button"
                     eventKey={key}
                     key={key}
-                    onClick={() => updateNewTask("classId", key)}>
+                    onClick={() => {console.log("Button clicked: userData", userData);updateNewTask("classId", key)}}>
                     {value.name}
                     </Dropdown.Item>
                 );
@@ -129,10 +128,10 @@ export default function App() {
         setTermDropdownContent(content2);
     }
 
-
     // Utility functions 
 
     function handleModal(action, modal) {
+        console.log("handleModal");
         modal === "task" ? setShowTaskModal(!showTaskModal) : setShowExamModal(!showExamModal);
         if (action === "open") {
             resetNewTask();
@@ -140,9 +139,10 @@ export default function App() {
     }
 
     function updateNewTask(key, value) {
-        console.log("updateNewTask");
+        console.log("updateNewTask: userData", userData, newTaskClassDropdownContent);
         let data = {...userData};
         data.newTask[key] = value;
+        console.log("updateNewTask: setUserData", data);
         setUserData(data);
     }
 
@@ -186,6 +186,7 @@ export default function App() {
         if (authenticated && dataReady) {
             let data = {...userData};
             data.newTask = {classId: defaultClass};
+            console.log("resetNewTask: setUserData", data);
             setUserData(data);
         }
     }
@@ -194,6 +195,12 @@ export default function App() {
         localStorage.removeItem('userId');
         setAuthenticated(false);
         setUserId("0");
+        fetch(`/api/auth/logout`, {
+            method: 'delete',
+          })
+            .catch((error) => {
+              console.log(error);
+            })
     }
 
     
@@ -202,8 +209,6 @@ export default function App() {
     
       
     if (dataReady || !authenticated) {
-    console.log(newTaskClassDropdownContent);
-    console.log(termDropdownContent);
     return (
     <BrowserRouter>
     <div className="d-flex min-vh-100 flex-column">
@@ -328,7 +333,7 @@ export default function App() {
                 className="form-control-date"
             />
                 <label className="mt-2 mb-1" htmlFor="class">Class</label>
-                <DropdownButton variant="tertiary" title={getNewTaskClass().name} className="form-style-dropdown text-start">
+                <DropdownButton onClick={() => console.log("Dropdown clicked, userData", userData)} variant="tertiary" title={getNewTaskClass().name} className="form-style-dropdown text-start">
                     {newTaskClassDropdownContent}
                     <Dropdown.Divider />
                     <Dropdown.Item eventKey="4" href="classes">Manage...</Dropdown.Item>

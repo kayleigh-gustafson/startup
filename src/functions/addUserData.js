@@ -11,8 +11,8 @@ export default async function addUserData(userData, setUserData, section, id, ob
         addUserData(userData, setUserData, "classes", classId, {name: "My new class", color: "#a8a8a8", term: id})
     }
     data[section][id] = object;
+    console.log("addUserData: setUserData", data);
     setUserData(data);
-    console.log(data);
     await fetch('/api/setuserdata', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },

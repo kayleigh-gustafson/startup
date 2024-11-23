@@ -49,7 +49,15 @@ async function setUserData(email, data) {
   console.log(email, data);
   await dataCollection.findOneAndUpdate(
     { email: email },
-    { $set: data },
+    { $set: {
+      assignments: data.assignments,
+      exams: data.exams,
+      classes: data.classes,
+      terms: data.terms,
+      username: data.username,
+      userId: data.userId,
+      email: data.email
+    } },
     { upsert: true }
   );
 }
