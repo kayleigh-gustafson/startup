@@ -47,16 +47,14 @@ For this deliverable, I converted my HTML to JSX and added JavaScript functional
 - [x] React router: routes for login, home, managing terms, and managing classes: done
 - [x] React hooks: useState for userData and several other variables: done
 ## Service Deliverable
-Deployment is currently broken because of the login deployment, but it was working before I started the login deliverable!
 - [x] Create an HTTP service using Node.js and Express: done
 - [x] Frontend served up using Express static middleware: done
 - [x] Frontend calls third party service endpoints: done (login.jsx uses the [Disify](https://www.disify.com/) API to check if an email is in a valid format)
 - [x] Backend provides service endpoints: done (auth and saving/providing user data)
 - [x] Frontend calls service endpoints: done (auth and getting/setting user data)
 ## Login Deliverable
-Deployment is currently broken but development works
-- [ ] Supports new user registration
-- [ ] Supports existing user authentication
-- [ ] Stores application data in MongoDB
-- [ ] Stores and retrieves credentials in MongoDB
-- [ ] Restricts application functionality based on login
+- [x] Supports new user registration: done
+- [x] Supports existing user authentication: done
+- [x] Stores application data in MongoDB: done (stores user's data such as assignments and classes)
+- [x] Stores and retrieves credentials in MongoDB: done
+- [x] Restricts application functionality based on login: done (uses secureAuthRouter, and also redirects the user if they try to access an unauthorized page)
