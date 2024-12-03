@@ -203,7 +203,7 @@ export default function App() {
         }
     }
 
-    function createTask(type, data) {
+    function createTask(type, data, close=true) {
         let id = "";
         while (id === "") {
             let tempId = Math.floor(Math.random() * 90000) + 10000;
@@ -214,7 +214,7 @@ export default function App() {
         if (type === "assignment") {
             if (data.hasOwnProperty('name') && data.hasOwnProperty('due') && data.hasOwnProperty('finish') && data.hasOwnProperty('classId')) {
                 addUserData(userData, setUserData, "assignments", id, data)
-                handleModal("close", "task")
+                if (close) handleModal("close", "task");
                 return(true)
             } else {
 
@@ -223,7 +223,7 @@ export default function App() {
         } else if (type === "exam") {
             if (data.hasOwnProperty('name') && data.hasOwnProperty('open') && data.hasOwnProperty('close') && data.hasOwnProperty('finish') && data.hasOwnProperty('classId')) {
                 addUserData(userData, setUserData, "exams", id, data)
-                handleModal("close", "exam")
+                if (close) handleModal("close", "exam");
                 return(true)
             } else {
                 return(false)
@@ -391,6 +391,7 @@ export default function App() {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant='tertiary' onClick={() => handleModal("close", "task")}>Close</Button>
+                <Button variant='tertiary' onClick={() => createTask("assignment", userData.newTask, close=false)}>Create & Copy</Button>
                 <Button variant='primary' onClick={() => createTask("assignment", userData.newTask)}>Create</Button>
             </Modal.Footer>
         </Modal>
@@ -465,6 +466,7 @@ export default function App() {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant='tertiary' onClick={() => handleModal("close", "exam")}>Close</Button>
+                <Button variant='tertiary' onClick={() => createTask("exam", userData.newTask, close=false)}>Create & Copy</Button>
                 <Button variant='primary' onClick={() => createTask("exam", userData.newTask)}>Create</Button>
             </Modal.Footer>
         </Modal>
