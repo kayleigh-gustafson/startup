@@ -23,6 +23,7 @@ import { Terms } from './terms/terms';
 import { DatePicker } from 'rsuite';
 import 'rsuite/DatePicker/styles/index.css';
 import {FaCalendar} from 'react-icons/fa';
+import Notification from './components/Notification';
 import format from 'date-fns/format';
 import getUserData from './functions/getUserData';
 import addUserData from './functions/addUserData';
@@ -40,17 +41,17 @@ export default function App() {
     const [newTaskClassDropdownContent, setNewTaskClassDropdownContent] = useState([]);
     const [termDropdownContent, setTermDropdownContent] = useState([]);
     const [defaultClass, setDefaultClass] = useState("");
+    const [notification, setNotification] = useState('');
+    const [notificationState, setNotificationState] = useState("active")
 
     React.useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log("Fetching data...")
                 const response = await fetch('/api/userdata/' + userId);
                 const data = await response.json();
                 let tempData = {...data};
                 tempData.userId = userId;
                 tempData.newTask = {};
-                console.log("useEffect: setUserData", tempData);
                 await setUserData(tempData);
                 await setCurrentTerm(Object.keys(tempData.terms)[0]);
                 await initialize(tempData, Object.keys(tempData.terms)[0]);
@@ -78,19 +79,16 @@ export default function App() {
       }, [userId, authenticated]);
     
       React.useEffect(() => {
-        console.log("Update: userData", userData, "currentTerm", currentTerm);
         if (Object.keys(userData).length !== 0) {
             initialize(userData, currentTerm);
         } 
       }, [userData, currentTerm])
     
-    console.log("authenticated", authenticated, "dataReady", dataReady);
     
 
     // Run this only if the user is authenticated and data is ready to be processed
     // These functions will break if userData is not properly set, so we wait until dataReady is true and the user is authenticated
     function initialize(data, currentTerm) {
-        console.log("initialize: data", data)
         // Set default term that the user is working in
         for (const [key, value] of Object.entries(data.classes)) {
             if (value.term === currentTerm) {
@@ -109,7 +107,7 @@ export default function App() {
                     as="button"
                     eventKey={key}
                     key={key}
-                    onClick={() => {console.log("Button clicked: userData", userData);updateNewTask("classId", key)}}>
+                    onClick={() => {updateNewTask("classId", key)}}>
                     {value.name}
                     </Dropdown.Item>
                 );
@@ -128,10 +126,52 @@ export default function App() {
         setTermDropdownContent(content2);
     }
 
+    function notificationTimeout() {
+        setTimeout(() => {
+            setNotificationState("inactive");
+        }, 10);
+        
+    }
+
+    // WebSocket
+
+    // Adjust the webSocket protocol to what is being used for HTTP
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+
+    // Display that we have opened the webSocket
+    socket.onopen = (event) => {
+        console.log("Socket connected");
+    };
+
+    socket.onmessage = async (event) => {
+        console.log("Message recieved:", event);
+        let message = JSON.parse(event.data);
+        console.log(`${message.user} just sent a message of action ${message.action}`);
+        if (message.action === "assignment" || message.action === "exam") {
+            let options = [
+                `Way to go! ${message.user} just finished an ${message.action}!`,
+                `Time to celebrate! ${message.user} just finished an ${message.action}!`,
+                `Good job! ${message.user} just finished an ${message.action}!`,
+            ]
+        setNotification(options[Math.floor(Math.random() * options.length)]);
+        setNotificationState("active");
+        notificationTimeout();
+    }};
+
+    socket.onclose = (event) => {
+        console.log("Socket disconnected");
+    };
+
+    function send(user, action) {
+        console.log("Send message");
+        socket.send(`{"user":"${user}", "action":"${action}"}`);
+    }
+
+
     // Utility functions 
 
     function handleModal(action, modal) {
-        console.log("handleModal");
         modal === "task" ? setShowTaskModal(!showTaskModal) : setShowExamModal(!showExamModal);
         if (action === "open") {
             resetNewTask();
@@ -139,10 +179,8 @@ export default function App() {
     }
 
     function updateNewTask(key, value) {
-        console.log("updateNewTask: userData", userData, newTaskClassDropdownContent);
         let data = {...userData};
         data.newTask[key] = value;
-        console.log("updateNewTask: setUserData", data);
         setUserData(data);
     }
 
@@ -186,7 +224,6 @@ export default function App() {
         if (authenticated && dataReady) {
             let data = {...userData};
             data.newTask = {classId: defaultClass};
-            console.log("resetNewTask: setUserData", data);
             setUserData(data);
         }
     }
@@ -304,9 +341,10 @@ export default function App() {
                 <label className="mt-2 mb-1" htmlFor="duedate">Due Date</label>
                 {/* <input onChange={(event) => updateNewTask("due", event.target.value)} type="date" className="form-control" id="duedate" name="duedate"/> */}
                 <DatePicker
-                oneTap={true}
                 editable={false}
                 placeholder="Choose date"
+                format="MM/dd/yyyy hh:mm aa"
+                showMeridiem
                 renderValue={value => {
                 return format(value, 'EEE, MMM d');
                 }}
@@ -320,9 +358,10 @@ export default function App() {
                 <label className="mt-2 mb-1" htmlFor="finishdate">Finish By</label>
                 {/* <input onChange={(event) => updateNewTask("finish", event.target.value)} type="date" className="form-control" id="finishdate" name="finishdate"/> */}
                 <DatePicker
-                oneTap={true}
                 editable={false}
                 placeholder="Choose date"
+                format="MM/dd/yyyy hh:mm aa"
+                showMeridiem
                 renderValue={value => {
                 return format(value, 'EEE, MMM d');
                 }}
@@ -333,7 +372,7 @@ export default function App() {
                 className="form-control-date"
             />
                 <label className="mt-2 mb-1" htmlFor="class">Class</label>
-                <DropdownButton onClick={() => console.log("Dropdown clicked, userData", userData)} variant="tertiary" title={getNewTaskClass().name} className="form-style-dropdown text-start">
+                <DropdownButton variant="tertiary" title={getNewTaskClass().name} className="form-style-dropdown text-start">
                     {newTaskClassDropdownContent}
                     <Dropdown.Divider />
                     <Dropdown.Item eventKey="4" href="classes">Manage...</Dropdown.Item>
@@ -360,9 +399,10 @@ export default function App() {
                 <label className="mt-2 mb-1" htmlFor="opendate">Open Date</label>
                 {/* <input onChange={(event) => updateNewTask("open", event.target.value)} type="date" className="form-control" id="opendate" name="opendate"/> */}
                 <DatePicker
-                oneTap={true}
                 editable={false}
                 placeholder="Choose date"
+                format="MM/dd/yyyy hh:mm aa"
+                showMeridiem
                 renderValue={value => {
                 return format(value, 'EEE, MMM d');
                 }}
@@ -375,9 +415,10 @@ export default function App() {
                 <label className="mt-2 mb-1" htmlFor="closedate">Close Date</label>
                 {/* <input onChange={(event) => updateNewTask("close", event.target.value)} type="date" className="form-control" id="closedate" name="closedate"/> */}
                 <DatePicker
-                oneTap={true}
                 editable={false}
                 placeholder="Choose date"
+                format="MM/dd/yyyy hh:mm aa"
+                showMeridiem
                 renderValue={value => {
                 return format(value, 'EEE, MMM d');
                 }}
@@ -390,9 +431,10 @@ export default function App() {
                 <label className="mt-2 mb-1" htmlFor="finishdate">Finish By</label>
                 {/* <input onChange={(event) => updateNewTask("finish", event.target.value)} type="date" className="form-control" id="finishdate" name="finishdate"/> */}
                 <DatePicker
-                oneTap={true}
                 editable={false}
                 placeholder="Choose date"
+                format="MM/dd/yyyy hh:mm aa"
+                showMeridiem
                 renderValue={value => {
                 return format(value, 'EEE, MMM d');
                 }}
@@ -420,7 +462,7 @@ export default function App() {
 
         <Routes>
             <Route path='/' element={<Login authenticated={authenticated} userData={userData} setUserData={setUserData} setUserId={setUserId} setAuthenticated={setAuthenticated}/>} exact />
-            <Route path='/home' element={<Home authenticated={authenticated} userData={userData} setUserData={setUserData} currentTerm={currentTerm}/>} />
+            <Route path='/home' element={<Home onFinish={send} authenticated={authenticated} userData={userData} setUserData={setUserData} currentTerm={currentTerm}/>} />
             <Route path='/classes' element={<Classes authenticated={authenticated} userData={userData} setUserData={setUserData} currentTerm={currentTerm}/>} />
             <Route path='/terms' element={<Terms authenticated={authenticated} userData={userData} setUserData={setUserData} currentTerm={currentTerm} setCurrentTerm={setCurrentTerm}/>} />
             <Route path='*' element={<NotFound />} />
@@ -428,8 +470,13 @@ export default function App() {
 
         </main>
 
+
+
         <footer className="mt-5 py-3 px-5 bg-body-tertiary d-flex flex-row justify-content-between align-items-center">
-            <p className="mb-0">123,456 total assignments completed</p>
+            <p id="notificationElement" className={(notificationState==="active")?"notification":"notification notification-hidden"}>
+                {notification !== "" && <span>🎉</span>}
+                {notification}
+            </p>
             <p className="mb-0">
             © 2024 Kayleigh Gustafson |{" "}
             <a

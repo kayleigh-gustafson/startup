@@ -45,7 +45,6 @@ async function createUser(email, username, password) {
 // }
 
 async function setUserData(email, data) {
-  console.log(email, data);
   await dataCollection.findOneAndUpdate(
     { email: email },
     { $set: {
@@ -62,12 +61,9 @@ async function setUserData(email, data) {
 }
 
 async function getUserData(email) {
-  console.log("Get user data from database")
   let result = await dataCollection.findOne({ email: email });
-  console.log(result)
   if (result===null) {
     user = await getUser(email);
-    console.log(user);
     return {
       "username":user.username,
       "email":email,

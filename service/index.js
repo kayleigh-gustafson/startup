@@ -3,8 +3,15 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const app = express();
 const DB = require('./database.js');
+const { peerProxy } = require('./peerProxy.js');
 
 const authCookieName = 'token';
+
+let count = 0;
+
+function increaseCount() {
+  count += 1;
+}
 
 // The scores and users are saved in memory and disappear whenever the service is restarted.
 // let userData = {};
@@ -29,6 +36,17 @@ app.set('trust proxy', true);
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
+apiRouter.get('/count', async (req, res) => {
+  console.log("Get count");
+  res.send(JSON.stringify(count));
+});
+
+apiRouter.post('/increment', async (req, res) => {
+  console.log("Increment count");
+  count += 1;
+  res.send(JSON.stringify(count));
+});
+
 // CreateAuth token for a new user
 apiRouter.post('/auth/create', async (req, res) => {
   if (await DB.getUser(req.body.email)) {
@@ -47,8 +65,8 @@ apiRouter.post('/auth/create', async (req, res) => {
 
 // GetAuth token for the provided credentials
 apiRouter.post('/auth/login', async (req, res) => {
+  console.log("Login request");
   const user = await DB.getUser(req.body.email);
-  console.log(user);
   if (user) {
     if (await bcrypt.compare(req.body.password, user.password)) {
       setAuthCookie(res, user.token);
@@ -65,6 +83,9 @@ apiRouter.delete('/auth/logout', (_req, res) => {
   res.status(204).end();
 });
 
+
+
+
 // secureApiRouter verifies credentials for endpoints
 const secureApiRouter = express.Router();
 apiRouter.use(secureApiRouter);
@@ -73,7 +94,6 @@ secureApiRouter.use(async (req, res, next) => {
   const authToken = req.cookies[authCookieName];
   const user = await DB.getUserByToken(authToken);
   if (user) {
-    console.log("Secure router access granted");
     next();
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
@@ -82,10 +102,8 @@ secureApiRouter.use(async (req, res, next) => {
 
 // Get user data
 secureApiRouter.get('/userdata/:userId', async (req, res) => {
-  console.log("Get userdata")
   // res.send({name: req.params.userId});
   const userData = await DB.getUserData(req.params.userId);
-  console.log(userData);
   res.send(JSON.stringify(userData));
 });
 
@@ -94,7 +112,6 @@ secureApiRouter.post('/setuserdata', async (req, res) => {
   // scores = updateScores(req.body, scores);
 //   res.send({name: req.params.userId});
     // userData[req.body.data.email] = req.body.data;
-    console.log("Attempting to set user data");
     await DB.setUserData(req.body.data.email, req.body.data);
     res.send(req.body);
 });
@@ -121,3 +138,5 @@ function setAuthCookie(res, authToken) {
 const httpService = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+peerProxy(httpService);

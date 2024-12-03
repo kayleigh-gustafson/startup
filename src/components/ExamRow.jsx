@@ -13,7 +13,7 @@ import 'rsuite/DatePicker/styles/index.css';
 import {FaCalendar} from 'react-icons/fa';
 import format from 'date-fns/format';
 
-export default function ExamRow({ userData, setUserData, currentTerm, id, completed, name, open, close, finish, examClass, notifyOpen = false, notifyDue = false, notifyFinish = false }) {
+export default function ExamRow({ onFinish, userData, setUserData, currentTerm, id, completed, name, open, close, finish, examClass, notifyOpen = false, notifyDue = false, notifyFinish = false }) {
     let classDropdownContent = [];
     for (const [key, value] of Object.entries(userData.classes)) {
         if (value.term == currentTerm) {
@@ -26,6 +26,15 @@ export default function ExamRow({ userData, setUserData, currentTerm, id, comple
             </Dropdown.Item>);
         }
     }
+
+    function handleCheck() {
+        console.log("handleCheck");
+        if (!completed) {
+            onFinish(userData.username, "exam");
+        }
+        editUserData(userData, setUserData, "exams", id, "completed", !completed);
+    }
+
     let color = userData.classes[userData.exams[id].classId].color;
     let colorInput = {'--color': getColorVariant(color, 20, 60), color: getColorVariant(color, 20, 60), "--borderColor": color, borderColor: color, "--backgroundColor": getColorVariant(color, 95), backgroundColor: getColorVariant(color, 95)};
     let colorCheck = {'--checkbox-color': color}
@@ -36,7 +45,7 @@ export default function ExamRow({ userData, setUserData, currentTerm, id, comple
             id={id+"-row-checkbox"}
             defaultChecked={completed}
             className="class-color"
-            onChange={() => editUserData(userData, setUserData, "exams", id, "completed", !completed)}
+            onChange={handleCheck}
             style={colorCheck}
             />
         </td>

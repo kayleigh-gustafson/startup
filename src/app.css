@@ -397,3 +397,21 @@ select option:disabled {
 .form-style-dropdown .dropdown-toggle {
     border: none;
 }
+
+.notification {
+    padding: 0;
+    margin: 0;
+}
+
+.notification span {
+    font-size: 1.2rem;
+}
+
+.notification-visible {
+    opacity: 1;
+}
+
+.notification-hidden {
+    opacity: 0;
+    transition: opacity 1s ease-in-out 3s;
+}

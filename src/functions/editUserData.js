@@ -2,7 +2,6 @@ export default async function editUserData(userData, setUserData, section, id, p
     let data = {...userData};
     data[section][id][property] = value;
     setUserData(data);
-    console.log(data);
     await fetch('/api/setuserdata', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },

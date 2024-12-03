@@ -14,7 +14,7 @@ import 'rsuite/DatePicker/styles/index.css';
 import {FaCalendar} from 'react-icons/fa';
 import format from 'date-fns/format';
 
-export default function TaskRow({ userData, setUserData, currentTerm, id, completed, name, due, finish, taskClass}) {
+export default function TaskRow({ onFinish, userData, setUserData, currentTerm, id, completed, name, due, finish, taskClass}) {
     // useState[notificationPrefs, setNotificationPrefs] = useState({due: false, finish: false, late: false})
     // function updateNotificationPrefs(key, value) {
     //     data = {...notificationPrefs};
@@ -45,6 +45,14 @@ export default function TaskRow({ userData, setUserData, currentTerm, id, comple
         data.assignments[id][key] = !(data.assignments[id][key]);
         setUserData(data);
     }
+
+    function handleCheck() {
+        console.log("handleCheck");
+        if (!completed) {
+            onFinish(userData.username, "assignment");
+        }
+        editUserData(userData, setUserData, "assignments", id, "completed", !completed);
+    }
     
     let color = userData.classes[userData.assignments[id].classId].color;
     let colorInput = {'--color': getColorVariant(color, 20, 60), color: getColorVariant(color, 20, 60), "--borderColor": color, borderColor: color, "--backgroundColor": getColorVariant(color, 95), backgroundColor: getColorVariant(color, 95)};
@@ -56,7 +64,7 @@ export default function TaskRow({ userData, setUserData, currentTerm, id, comple
             id={id+"-row-checkbox"}
             defaultChecked={completed}
             className="class-color"
-            onChange={() => editUserData(userData, setUserData, "assignments", id, "completed", !completed)}
+            onChange={handleCheck}
             style={colorCheck}
             />
         </td>
@@ -72,9 +80,10 @@ export default function TaskRow({ userData, setUserData, currentTerm, id, comple
         </td>
         <td className="task-due">
             <DatePicker
-                oneTap={true}
                 editable={false}
                 placeholder="Choose date"
+                format="MM/dd/yyyy hh:mm aa"
+                showMeridiem
                 renderValue={value => {
                 return format(value, 'EEE, MMM d');
                 }}
@@ -90,9 +99,10 @@ export default function TaskRow({ userData, setUserData, currentTerm, id, comple
         <td className="task-finish">
             {/* <DatePicker id={id+"-row-finish"} format="MMM dd, yyyy" /> */}
             <DatePicker
-                oneTap={true}
                 editable={false}
                 placeholder="Choose date"
+                format="MM/dd/yyyy hh:mm aa"
+                showMeridiem
                 renderValue={value => {
                 return format(value, 'EEE, MMM d');
                 }}

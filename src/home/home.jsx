@@ -5,7 +5,7 @@ import TaskRow from '../components/TaskRow';
 import ExamRow from '../components/ExamRow';
 import { Navigate } from "react-router-dom";
 
-export function Home({authenticated, userData, setUserData, currentTerm}) {
+export function Home({onFinish, authenticated, userData, setUserData, currentTerm}) {
 
   if (!authenticated) return (<Navigate to="/" replace={true} />);
 
@@ -14,6 +14,7 @@ export function Home({authenticated, userData, setUserData, currentTerm}) {
     if (value.completed && userData.classes[value.classId].term === currentTerm) {
       completeTasks.push(
       <TaskRow
+        onFinish={onFinish}
         userData={userData}
         setUserData={setUserData}
         currentTerm={currentTerm}
@@ -40,6 +41,7 @@ export function Home({authenticated, userData, setUserData, currentTerm}) {
     if (!value.completed && userData.classes[value.classId].term === currentTerm) {
       incompleteTasks.push(
       <TaskRow
+        onFinish={onFinish}
         userData={userData}
         setUserData={setUserData}
         currentTerm={currentTerm}
@@ -66,6 +68,7 @@ export function Home({authenticated, userData, setUserData, currentTerm}) {
     if (userData.classes[value.classId].term === currentTerm) {
       exams.push(
         <ExamRow
+        onFinish={onFinish}
         userData={userData}
         setUserData={setUserData}
         currentTerm={currentTerm}
