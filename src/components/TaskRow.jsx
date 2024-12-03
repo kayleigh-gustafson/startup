@@ -141,13 +141,13 @@ export default function TaskRow({ onFinish, userData, setUserData, currentTerm, 
                 <Dropdown.Menu>
                     <Dropdown.Header>Notifications</Dropdown.Header>
                     <Dropdown.Item onClick={() => toggleNotification("notifyFinish")}>
-                        {userData.assignments[id].notifyFinish ? <i class="fa-solid fa-square-check"></i>:<i class="fa-regular fa-square"></i>} Finish Date
+                        {userData.assignments[id].notifyFinish ? <i className="fa-solid fa-square-check"></i>:<i className="fa-regular fa-square"></i>} Finish Date
                     </Dropdown.Item>
-                    <Dropdown.Item onClick={() => toggleNotification("notifyDue")} defaultChecked={userData.assignments[id].notifyDue}>
-                        {userData.assignments[id].notifyDue ? <i class="fa-solid fa-square-check"></i>:<i class="fa-regular fa-square"></i>} Due Date
+                    <Dropdown.Item onClick={() => toggleNotification("notifyDue")}>
+                        {userData.assignments[id].notifyDue ? <i className="fa-solid fa-square-check"></i>:<i className="fa-regular fa-square"></i>} Due Date
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => toggleNotification("notifyLate")}>
-                        {userData.assignments[id].notifyLate ? <i class="fa-solid fa-square-check"></i>:<i class="fa-regular fa-square"></i>} Late
+                        {userData.assignments[id].notifyLate ? <i className="fa-solid fa-square-check"></i>:<i className="fa-regular fa-square"></i>} Late
                     </Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={() => deleteUserData(userData, setUserData, "assignments", id)}>

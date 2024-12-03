@@ -27,6 +27,12 @@ export default function ExamRow({ onFinish, userData, setUserData, currentTerm, 
         }
     }
 
+    function toggleNotification(key) {
+        let data={...userData};
+        data.assignments[id][key] = !(data.assignments[id][key]);
+        setUserData(data);
+    }
+
     function handleCheck() {
         console.log("handleCheck");
         if (!completed) {
@@ -134,20 +140,20 @@ export default function ExamRow({ onFinish, userData, setUserData, currentTerm, 
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                     <Dropdown.Header>Notifications</Dropdown.Header>
-                    <Dropdown.Item>
-                        <Form.Check id={id+"-row-notifyOpen"} defaultChecked={notifyOpen} className="d-inline me-2"/>
-                        Open Date
+                    <Dropdown.Item onClick={() => toggleNotification("notifyFinish")}>
+                        {userData.exams[id].notifyFinish ? <i className="fa-solid fa-square-check"></i>:<i className="fa-regular fa-square"></i>} Finish Date
                     </Dropdown.Item>
-                    <Dropdown.Item>
-                        <Form.Check id={id+"-row-notifyFinish"} defaultChecked={notifyFinish} className="d-inline me-2"/>
-                        Finish Date
+                    <Dropdown.Item onClick={() => toggleNotification("notifyOpen")}>
+                        {userData.exams[id].notifyDue ? <i className="fa-solid fa-square-check"></i>:<i className="fa-regular fa-square"></i>} Open Date
                     </Dropdown.Item>
-                    <Dropdown.Item>
-                        <Form.Check id={id+"-row-notifyDue"} defaultChecked={notifyFinish} className="d-inline me-2"/>
-                        Due Date
+                    <Dropdown.Item onClick={() => toggleNotification("notifyClose")}>
+                        {userData.exams[id].notifyDue ? <i className="fa-solid fa-square-check"></i>:<i className="fa-regular fa-square"></i>} Close Date
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={() => toggleNotification("notifyLate")}>
+                        {userData.exams[id].notifyLate ? <i className="fa-solid fa-square-check"></i>:<i className="fa-regular fa-square"></i>} Late
                     </Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item onClick={() => deleteUserData(userData, setUserData, "exams", id)}>
+                    <Dropdown.Item onClick={() => deleteUserData(userData, setUserData, "assignments", id)}>
                         Delete
                     </Dropdown.Item>
                 </Dropdown.Menu>

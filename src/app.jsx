@@ -43,6 +43,8 @@ export default function App() {
     const [defaultClass, setDefaultClass] = useState("");
     const [notification, setNotification] = useState('');
     const [notificationState, setNotificationState] = useState("active")
+    const [socketOpen, setSocketOpen] = useState(false);
+    const [webSocket, setWebSocket] = useState(null);
 
     React.useEffect(() => {
         const fetchData = async () => {
@@ -135,38 +137,47 @@ export default function App() {
 
     // WebSocket
 
-    // Adjust the webSocket protocol to what is being used for HTTP
-    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-    const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    
+    useEffect(() => {
+        let port = window.location.port;
+        const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+        let socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
+        // Display that we have opened the webSocket
+        socket.onopen = (event) => {
+            setSocketOpen(true);
+            console.log("Socket connected");
+        };
 
-    // Display that we have opened the webSocket
-    socket.onopen = (event) => {
-        console.log("Socket connected");
-    };
+        socket.onmessage = async (event) => {
+            console.log("Message recieved:", event);
+            let message = JSON.parse(event.data);
+            console.log(`${message.user} just sent a message of action ${message.action}`);
+            if (message.action === "assignment" || message.action === "exam") {
+                let options = [
+                    `Way to go! ${message.user} just finished an ${message.action}!`,
+                    `Time to celebrate! ${message.user} just finished an ${message.action}!`,
+                    `Good job! ${message.user} just finished an ${message.action}!`,
+                ]
+            setNotification(options[Math.floor(Math.random() * options.length)]);
+            setNotificationState("active");
+            notificationTimeout();
+        }};
 
-    socket.onmessage = async (event) => {
-        console.log("Message recieved:", event);
-        let message = JSON.parse(event.data);
-        console.log(`${message.user} just sent a message of action ${message.action}`);
-        if (message.action === "assignment" || message.action === "exam") {
-            let options = [
-                `Way to go! ${message.user} just finished an ${message.action}!`,
-                `Time to celebrate! ${message.user} just finished an ${message.action}!`,
-                `Good job! ${message.user} just finished an ${message.action}!`,
-            ]
-        setNotification(options[Math.floor(Math.random() * options.length)]);
-        setNotificationState("active");
-        notificationTimeout();
-    }};
+        socket.onclose = (event) => {
+            setSocketOpen(false);
+            console.log("Socket disconnected");
+        };
+        setWebSocket(socket);
+    
+    },[])
 
-    socket.onclose = (event) => {
-        console.log("Socket disconnected");
-    };
+    
 
     function send(user, action) {
         console.log("Send message");
-        socket.send(`{"user":"${user}", "action":"${action}"}`);
+        webSocket.send(`{"user":"${user}", "action":"${action}"}`);
     }
+    
 
 
     // Utility functions 
@@ -431,6 +442,7 @@ export default function App() {
                 <label className="mt-2 mb-1" htmlFor="finishdate">Finish By</label>
                 {/* <input onChange={(event) => updateNewTask("finish", event.target.value)} type="date" className="form-control" id="finishdate" name="finishdate"/> */}
                 <DatePicker
+                placement="autoVerticalStart"
                 editable={false}
                 placeholder="Choose date"
                 format="MM/dd/yyyy hh:mm aa"
