@@ -58,3 +58,8 @@ For this deliverable, I converted my HTML to JSX and added JavaScript functional
 - [x] Stores application data in MongoDB: done (stores user's data such as assignments and classes)
 - [x] Stores and retrieves credentials in MongoDB: done
 - [x] Restricts application functionality based on login: done (uses secureAuthRouter, and also redirects the user if they try to access an unauthorized page)
+## WebSocket Deliverable
+- [x] Backend listens for WebSocket connection: done (in peerProxy.js)
+- [x] Frontend makes WebSocket connection: done (in app.jsx)
+- [x] Data sent over WebSocket connection: done (when a user finishes an assignment or exam)
+- [x] WebSocket data displayed in the application interface: done (in the bottom right corner, a message appears and fades out when any user finishes an assignment or exam)
