@@ -16,8 +16,8 @@ th {
     table-layout: fixed;
 }
 
-.task-table-header th {
-    padding: 15px 0px 15px 0px;
+.task-table-header th, .exam-table-header th {
+    padding: 15px 10px 5px 10px;
 }
 
 .tab-content .no-tab-content {
@@ -126,9 +126,9 @@ select option:disabled {
     font-size: 1rem;
 }
 
-.form-control-date.class-color input {
+.form-control-date.class-color input, .form-control-date.class-color.MuiFormControl-root {
     background-color: transparent;
-    color: var(--color);
+    color: var(--color)!important;
 }
 
 .form-control-date.class-color input:hover {
@@ -169,29 +169,67 @@ select option:disabled {
     width: 100%;
 }
 
+.show-small {
+    display: none;
+    visibility: hidden;
+    position: absolute;
+    
+}
+
+.show-small.form-control-date, .show-small.form-style-dropdown {
+    width: 90%;
+    margin: auto;
+    display: block;
+    margin-bottom: 15px;
+}
+
+
+.show-small.dropdown-header {
+    padding-bottom: 0px;
+}
 
 /* Mobile-friendly assignment tables */
 
 @media screen and (max-width: 768px) {
-    .tab-content tr {
-        display: flex;
-        flex-wrap: wrap;
-        padding: 20px 0px;
-        border-bottom: 1px solid #cccccc;
-        align-items: center;
-        text-align: start;
+
+    .tab-content .task-menu .dropdown-menu.show, .tab-content .exam-menu .dropdown-menu.show {
+        position: fixed!important;
+        width: 40%;
+        
     }
-    .tab-content .task-check .form-check-input, .exam-check .form-check-input {
+
+    .tab-content .task-menu .dropdown, .tab-content .exam-menu .dropdown {
+        position: relative!important;
+    }
+
+    .dropdown-header-compress {
+        padding-top: 0px;
+        margin-top: -5px;
+    }
+
+    .show-large {
+        display: none;
+        visibility: hidden;
+    }
+
+    .show-small {
+        display: block;
+        visibility: visible;
+        position: static;
+    }
+
+   
+    .tab-content .form-check-input {
         width: 20px;
         height: 20px;
         padding: 0px;
         margin: 0px;
     }
-    .tab-content #tasks-tab-pane table, #completed-tab-pane table {
+    .tab-content table {
         width: 95%;
         margin: auto;
     }
-    .tab-content #tasks-tab-pane td, #completed-tab-pane td {
+    .tab-content td {
         padding: 1%;
         margin: 0px;
     }
@@ -205,19 +243,21 @@ select option:disabled {
         
     }
     
-    .tab-content .task-menu, .exam-menu {
-        order: 3;
+    .tab-content .task-menu, .tab-content .exam-menu {
+        order: 4;
         width: 6%;
-        margin-left: -1.5%;
+        position: relative;
+        left: -1.5%;
     }
-    .tab-content .task-due {
+    .tab-content .task-finish, .tab-content .exam-finish {
+        width: 33%;
+        order: 3;
+    }
+    /* .tab-content .task-due {
         width: 33%;
         order: 4;
     }
-    .tab-content .task-finish {
-        width: 33%;
-        order: 5;
-    }
+    
     .tab-content .task-class {
         width: 33%;
         order: 6;
@@ -237,11 +277,10 @@ select option:disabled {
     .tab-content .exam-class {
         width: 24%;
         order: 7;
-    }
-    .tab-content .task-due input, .tab-content .task-finish input, .tab-content .task-class a.dropdown-toggle, .tab-content .exam-open input, .tab-content .exam-close input, .tab-content .exam-finish input, .tab-content .exam-class a.dropdown-toggle, .form-style-dropdown .dropdown-toggle  {
+    } */
+    /* .tab-content .task-due input, .tab-content .task-finish input, .tab-content .task-class a.dropdown-toggle, .tab-content .exam-open input, .tab-content .exam-close input, .tab-content .exam-finish input, .tab-content .exam-class a.dropdown-toggle, .form-style-dropdown .dropdown-toggle  {
         font-size: 0.8em;
         padding-bottom: 7px;
-        /* background-color: #f5f5f5; */
     }
 
     .tab-table label {
@@ -252,41 +291,11 @@ select option:disabled {
         color: gray;
         background-color: white;
         padding: 0px 5px;
-    }
-    .tab-content .task-table-header, .tab-content .exam-table-header {
+    } */
+    /* .tab-content .task-table-header, .tab-content .exam-table-header {
         display: none;
-    }
-    /* table {
-        display: block;
-    }
-    
-    table td {
-        display: inline-block;
     } */
 
-}
-
-@media screen and (max-width: 576px) {
-    .tab-content .exam-open {
-        width: 49.5%;
-        order: 4;
-        padding-bottom: 0px;
-    }
-    .tab-content .exam-close {
-        width: 49.5%;
-        order: 5;
-        padding-bottom: 0px;
-    }
-    .tab-content .exam-finish {
-        width: 49.5%;
-        order: 6;
-        padding-top: 0px;
-    }
-    .tab-content .exam-class {
-        width: 49.5%;
-        order: 7;
-        padding-top: 0px;
-    }
 }
 
 /* Mobile-friendly term tables */
@@ -414,4 +423,8 @@ select option:disabled {
 .notification-hidden {
     opacity: 0;
     transition: opacity 1s ease-in-out 3s;
+}
+
+.modal-content .btn-tertiary:hover {
+    background-color: #f5f5f5;
 }

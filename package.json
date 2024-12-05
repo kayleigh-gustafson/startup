@@ -15,9 +15,14 @@
     "vite": "^5.4.9"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.5",
+    "@emotion/styled": "^11.13.5",
+    "@mui/material": "^6.1.10",
+    "@mui/x-date-pickers": "^7.23.0",
     "ac-colors": "^1.4.3",
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",
+    "dayjs": "^1.11.13",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",
     "react-dom": "^18.3.1",

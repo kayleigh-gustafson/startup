@@ -57,6 +57,7 @@ export default function TaskRow({ onFinish, userData, setUserData, currentTerm, 
     let color = userData.classes[userData.assignments[id].classId].color;
     let colorInput = {'--color': getColorVariant(color, 20, 60), color: getColorVariant(color, 20, 60), "--borderColor": color, borderColor: color, "--backgroundColor": getColorVariant(color, 95), backgroundColor: getColorVariant(color, 95)};
     let colorCheck = {'--checkbox-color': color}
+
     return (
     <tr>
         <td className="task-check">
@@ -78,7 +79,8 @@ export default function TaskRow({ onFinish, userData, setUserData, currentTerm, 
             style={colorInput}
             />
         </td>
-        <td className="task-due">
+        <td className="show-large task-due">
+            
             <DatePicker
                 editable={false}
                 placeholder="Choose date"
@@ -122,9 +124,8 @@ export default function TaskRow({ onFinish, userData, setUserData, currentTerm, 
             onChange={(event) => editUserData(userData, setUserData, "assignments", id, "finish", event.target.value)}
             style={colorInput}
             /> */}
-            <label className="d-md-none">Finish By</label>
         </td>
-        <td className="task-class">
+        <td className="show-large task-class">
             <DropdownButton style={colorInput} variant="tertiary" id={id+"-row-class"} title={taskClass} className="class-color form-style-dropdown">
                 {classDropdownContent}
                 <Dropdown.Divider />
@@ -134,11 +135,36 @@ export default function TaskRow({ onFinish, userData, setUserData, currentTerm, 
         </td>
         <td className="task-menu">
 
-            <Dropdown className="no-caret" autoClose="outside">
+            <Dropdown className="no-caret" autoClose={false}>
                 <Dropdown.Toggle variant="tertiary">
                     <i className="fa-solid fa-ellipsis-vertical" />
                 </Dropdown.Toggle>
+                
                 <Dropdown.Menu>
+                    <Dropdown.Header className="show-small">Due Date</Dropdown.Header>
+                    <DatePicker
+                        className="show-small form-control-date"
+                        placement="autoHorizontalStart"
+                        editable={false}
+                        placeholder="Choose date"
+                        format="MM/dd/yyyy hh:mm aa"
+                        showMeridiem
+                        renderValue={value => {
+                        return format(value, 'EEE, MMM d');
+                        }}
+                        caretAs={FaCalendar}
+                        cleanable={false}
+                        defaultValue={new Date(due)}
+                        onChange={(date) => editUserData(userData, setUserData, "assignments", id, "due", date)}
+                    />
+                    <Dropdown.Divider className="show-small"/>
+                    <Dropdown.Header className="show-small">Class</Dropdown.Header>
+                    <DropdownButton variant="tertiary" id={id+"-row-class"} title={taskClass} className="show-small form-style-dropdown">
+                        {classDropdownContent}
+                        <Dropdown.Divider />
+                        <Dropdown.Item to={"../classes"} as={Link} eventKey="0">Manage...</Dropdown.Item>
+                    </DropdownButton>
+                    <Dropdown.Divider className="show-small"/>
                     <Dropdown.Header>Notifications</Dropdown.Header>
                     <Dropdown.Item onClick={() => toggleNotification("notifyFinish")}>
                         {userData.assignments[id].notifyFinish ? <i className="fa-solid fa-square-check"></i>:<i className="fa-regular fa-square"></i>} Finish Date

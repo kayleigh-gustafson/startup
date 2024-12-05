@@ -23,7 +23,6 @@ import { Terms } from './terms/terms';
 import { DatePicker } from 'rsuite';
 import 'rsuite/DatePicker/styles/index.css';
 import {FaCalendar} from 'react-icons/fa';
-import Notification from './components/Notification';
 import format from 'date-fns/format';
 import getUserData from './functions/getUserData';
 import addUserData from './functions/addUserData';
@@ -352,6 +351,7 @@ export default function App() {
                 <label className="mt-2 mb-1" htmlFor="duedate">Due Date</label>
                 {/* <input onChange={(event) => updateNewTask("due", event.target.value)} type="date" className="form-control" id="duedate" name="duedate"/> */}
                 <DatePicker
+                placement="autoVerticalStart"
                 editable={false}
                 placeholder="Choose date"
                 format="MM/dd/yyyy hh:mm aa"
@@ -369,6 +369,7 @@ export default function App() {
                 <label className="mt-2 mb-1" htmlFor="finishdate">Finish By</label>
                 {/* <input onChange={(event) => updateNewTask("finish", event.target.value)} type="date" className="form-control" id="finishdate" name="finishdate"/> */}
                 <DatePicker
+                placement="autoVerticalStart"
                 editable={false}
                 placeholder="Choose date"
                 format="MM/dd/yyyy hh:mm aa"
@@ -411,6 +412,7 @@ export default function App() {
                 <label className="mt-2 mb-1" htmlFor="opendate">Open Date</label>
                 {/* <input onChange={(event) => updateNewTask("open", event.target.value)} type="date" className="form-control" id="opendate" name="opendate"/> */}
                 <DatePicker
+                placement="autoVerticalStart"
                 editable={false}
                 placeholder="Choose date"
                 format="MM/dd/yyyy hh:mm aa"
@@ -427,6 +429,7 @@ export default function App() {
                 <label className="mt-2 mb-1" htmlFor="closedate">Close Date</label>
                 {/* <input onChange={(event) => updateNewTask("close", event.target.value)} type="date" className="form-control" id="closedate" name="closedate"/> */}
                 <DatePicker
+                placement="autoVerticalStart"
                 editable={false}
                 placeholder="Choose date"
                 format="MM/dd/yyyy hh:mm aa"

@@ -105,9 +105,9 @@ export function Home({onFinish, authenticated, userData, setUserData, currentTer
               <tr className="task-table-header">
                 <th width="30px"/>
                 <th>Task</th>
-                <th width="170px">Due Date</th>
+                <th className="show-large" width="170px">Due Date</th>
                 <th width="170px">Finish By</th>
-                <th width="150px">Class</th>
+                <th className="show-large" width="150px">Class</th>
                 <th width="20px" />
               </tr>
               {incompleteTasks}
@@ -120,9 +120,9 @@ export function Home({onFinish, authenticated, userData, setUserData, currentTer
             <tr className="task-table-header">
                 <th width="30px"/>
                 <th>Task</th>
-                <th width="170px">Due Date</th>
+                <th className="show-large" width="170px">Due Date</th>
                 <th width="170px">Finish By</th>
-                <th width="150px">Class</th>
+                <th className="show-large" width="150px">Class</th>
                 <th width="20px" />
               </tr>
               {completeTasks}
@@ -135,10 +135,10 @@ export function Home({onFinish, authenticated, userData, setUserData, currentTer
               <tr className="exam-table-header">
                 <th width="30px" />
                 <th>Exam</th>
-                <th width="160px">Open Date</th>
-                <th width="160px">Close Date</th>
+                <th className="show-large" width="160px">Open Date</th>
+                <th className="show-large" width="160px">Close Date</th>
                 <th width="160px">Finish By</th>
-                <th width="150px">Class</th>
+                <th className="show-large" width="150px">Class</th>
                 <th width="20px" />
               </tr>
               {exams}

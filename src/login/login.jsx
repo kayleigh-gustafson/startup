@@ -24,13 +24,11 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
     // setValidation(validateLogin(data, mode))
   }
   async function validateLogin(data, mode) {
-    console.log(data);
     let email = (mode==="login"?data.loginEmail:data.email);
     let emailValid = false;
     await fetch('https://www.disify.com/api/email/' + email)
           .then((response) => response.json())
           .then((data) => {
-            console.log(data.format);
             emailValid = data.format;
           });
     if ((emailValid && mode === "login" && data.loginEmail !== "" && data.loginPassword !== "") || (emailValid && mode === "signup" && data.email !== "" && data.username !="" && data.password !== "" && data.password === data.confirm)) {
@@ -46,6 +44,7 @@ export function Login({authenticated, userData, setUserData, setUserId, setAuthe
     }
   }
   async function completeLogin(mode) {
+    validateLogin(loginData, mode);
     setLoading(true);
     if (valid) {
       // let data = {...userData};

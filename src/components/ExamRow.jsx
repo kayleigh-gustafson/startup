@@ -65,7 +65,7 @@ export default function ExamRow({ onFinish, userData, setUserData, currentTerm, 
             style={colorInput}
             />
         </td>
-        <td className="exam-open">
+        <td className="show-large exam-open">
             {/* <input
             type="date"
             className="class-color form-control"
@@ -88,9 +88,8 @@ export default function ExamRow({ onFinish, userData, setUserData, currentTerm, 
                 style={colorInput}
                 className="class-color form-control-date"
             />
-            <label className="d-md-none">Open Date</label>
         </td>
-        <td className="exam-close">
+        <td className="show-large exam-close">
         <DatePicker
                 oneTap={true}
                 editable={false}
@@ -105,7 +104,6 @@ export default function ExamRow({ onFinish, userData, setUserData, currentTerm, 
                 style={colorInput}
                 className="class-color form-control-date"
             />
-            <label className="d-md-none">Close Date</label>
         </td>
         <td className="exam-finish">
         <DatePicker
@@ -122,9 +120,8 @@ export default function ExamRow({ onFinish, userData, setUserData, currentTerm, 
                 style={colorInput}
                 className="class-color form-control-date"
             />
-            <label className="d-md-none">Finish By</label>
         </td>
-        <td className="exam-class">
+        <td className="show-large exam-class">
             <DropdownButton style={colorInput} variant="tertiary" id={id+"-row-class"} title={examClass} className="class-color form-style-dropdown">
                 {classDropdownContent}
                 <Dropdown.Divider />
@@ -139,6 +136,41 @@ export default function ExamRow({ onFinish, userData, setUserData, currentTerm, 
                     <i className="fa-solid fa-ellipsis-vertical" />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
+                    <Dropdown.Header className="show-small">Open Date</Dropdown.Header>
+                    <DatePicker
+                        oneTap={true}
+                        editable={false}
+                        placeholder="Choose date"
+                        renderValue={value => {
+                        return format(value, 'EEE, MMM d');
+                        }}
+                        caretAs={FaCalendar}
+                        cleanable={false}
+                        defaultValue={new Date(open)}
+                        onChange={(date) => editUserData(userData, setUserData, "exams", id, "open", date)}
+                        className="show-small form-control-date"
+                    />
+                    <Dropdown.Header className="show-small dropdown-header-compress">Close Date</Dropdown.Header>
+                    <DatePicker
+                        oneTap={true}
+                        editable={false}
+                        placeholder="Choose date"
+                        renderValue={value => {
+                        return format(value, 'EEE, MMM d');
+                        }}
+                        caretAs={FaCalendar}
+                        cleanable={false}
+                        defaultValue={new Date(close)}
+                        onChange={(date) => editUserData(userData, setUserData, "exams", id, "close", date)}
+                        className="show-small form-control-date"
+                    />
+                    <Dropdown.Header className="show-small dropdown-header-compress">Class</Dropdown.Header>
+                    <DropdownButton variant="tertiary" id={id+"-row-class"} title={examClass} className="show-small form-style-dropdown">
+                        {classDropdownContent}
+                        <Dropdown.Divider />
+                        <Dropdown.Item to={"../classes"} as={Link} eventKey="4">Manage...</Dropdown.Item>
+                    </DropdownButton>
+                    <Dropdown.Divider className="show-small"/>
                     <Dropdown.Header>Notifications</Dropdown.Header>
                     <Dropdown.Item onClick={() => toggleNotification("notifyFinish")}>
                         {userData.exams[id].notifyFinish ? <i className="fa-solid fa-square-check"></i>:<i className="fa-regular fa-square"></i>} Finish Date
