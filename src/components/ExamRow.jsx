@@ -185,7 +185,7 @@ export default function ExamRow({ onFinish, userData, setUserData, currentTerm, 
                         {userData.exams[id].notifyLate ? <i className="fa-solid fa-square-check"></i>:<i className="fa-regular fa-square"></i>} Late
                     </Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item onClick={() => deleteUserData(userData, setUserData, "assignments", id)}>
+                    <Dropdown.Item onClick={() => deleteUserData(userData, setUserData, "exams", id)}>
                         Delete
                     </Dropdown.Item>
                 </Dropdown.Menu>
