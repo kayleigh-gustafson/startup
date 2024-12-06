@@ -295,9 +295,9 @@ export default function App() {
                         style={{ flex: "1 1 0" }}
                     >
                         <Nav.Item className="my-auto">
-                        <Navbar.Brand className="me-auto text-primary">
+                        <h3 className="me-auto text-primary">
                             <i className="fa-solid fa-book" /> <strong>homework</strong>hub
-                        </Navbar.Brand>
+                        </h3>
                         </Nav.Item>
                     </Nav>
 

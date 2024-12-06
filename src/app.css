@@ -2,12 +2,22 @@
     font-family: Inter, sans-serif;
 }
 
-.navbar-brand, .navbar-brand .strong {
+h3, h3 .strong {
     font-size: 12pt!important;
+    margin-bottom: 0;
 }
 
 body, .btn, .dropdown .btn, .dropdown .dropdown-item, .tab-content input {
-    font-size: 10.5pt;
+    font-size: 11pt;
+}
+
+@media screen and (max-width: 992px) {
+    body, .btn, .dropdown .btn, .dropdown .dropdown-item, .tab-content input {
+        font-size: 11pt;
+    }
+    h3, h3 .strong {
+        font-size: 12pt!important;
+    }
 }
 
 th {
