@@ -49,15 +49,17 @@ export default function App() {
     React.useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('/api/userdata/' + userId);
-                const data = await response.json();
-                let tempData = {...data};
-                tempData.userId = userId;
-                tempData.newTask = {};
-                await setUserData(tempData);
-                await setCurrentTerm(Object.keys(tempData.terms)[0]);
-                await initialize(tempData, Object.keys(tempData.terms)[0]);
-                setDataReady(true);
+                if (authenticated) {
+                    const response = await fetch('/api/userdata/' + userId);
+                    const data = await response.json();
+                    let tempData = {...data};
+                    tempData.userId = userId;
+                    tempData.newTask = {};
+                    await setUserData(tempData);
+                    await setCurrentTerm(Object.keys(tempData.terms)[0]);
+                    await initialize(tempData, Object.keys(tempData.terms)[0]);
+                    setDataReady(true);
+                }
             } catch (error) {
                 console.log(error);
             } 
@@ -269,9 +271,9 @@ export default function App() {
         <header className="sticky-top">
             <Navbar expand="md" className="bg-body-tertiary px-3">
             <Container style={{ flex: "1 1 0" }}>
-                <Navbar.Brand className="navbar-brand text-primary d-md-none">
+                <h3 className="text-primary d-md-none">
                     <i className="fa-solid fa-book" /> <strong>homework</strong>hub
-                </Navbar.Brand>
+                </h3>
                 {authenticated &&
                 <Navbar.Toggle
                 type="button"
@@ -305,7 +307,7 @@ export default function App() {
                         className="justify-content-center"
                         style={{ flex: "1 1 0" }}
                     >
-                        <NavDropdown className="w-100 dropdown-center justify-content-center text-center m-auto p-0 no-caret" title={<i className="fa-solid fa-plus text-md-end fs-3"></i>}>
+                        <NavDropdown className="w-50 dropdown-center justify-content-center text-center m-auto p-0 no-caret" title={<i className="fa-solid fa-plus text-md-end fs-4"></i>}>
                             <NavDropdown.Item>
                             <Button onClick={() => handleModal("open", "task")} variant="tertiary" className="d-inline w-100">
                                 Create Task

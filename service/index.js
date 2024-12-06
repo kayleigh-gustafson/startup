@@ -36,17 +36,6 @@ app.set('trust proxy', true);
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-apiRouter.get('/count', async (req, res) => {
-  console.log("Get count");
-  res.send(JSON.stringify(count));
-});
-
-apiRouter.post('/increment', async (req, res) => {
-  console.log("Increment count");
-  count += 1;
-  res.send(JSON.stringify(count));
-});
-
 // CreateAuth token for a new user
 apiRouter.post('/auth/create', async (req, res) => {
   if (await DB.getUser(req.body.email)) {
