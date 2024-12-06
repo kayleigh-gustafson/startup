@@ -29,7 +29,7 @@ export default function ExamRow({ onFinish, userData, setUserData, currentTerm, 
 
     function toggleNotification(key) {
         let data={...userData};
-        data.assignments[id][key] = !(data.assignments[id][key]);
+        data.exams[id][key] = !(data.exams[id][key]);
         setUserData(data);
     }
 
@@ -131,7 +131,7 @@ export default function ExamRow({ onFinish, userData, setUserData, currentTerm, 
         </td>
         <td className="exam-menu">
 
-            <Dropdown className="no-caret">
+            <Dropdown className="no-caret" autoClose={false}>
                 <Dropdown.Toggle variant="tertiary">
                     <i className="fa-solid fa-ellipsis-vertical" />
                 </Dropdown.Toggle>
@@ -176,10 +176,10 @@ export default function ExamRow({ onFinish, userData, setUserData, currentTerm, 
                         {userData.exams[id].notifyFinish ? <i className="fa-solid fa-square-check"></i>:<i className="fa-regular fa-square"></i>} Finish Date
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => toggleNotification("notifyOpen")}>
-                        {userData.exams[id].notifyDue ? <i className="fa-solid fa-square-check"></i>:<i className="fa-regular fa-square"></i>} Open Date
+                        {userData.exams[id].notifyOpen ? <i className="fa-solid fa-square-check"></i>:<i className="fa-regular fa-square"></i>} Open Date
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => toggleNotification("notifyClose")}>
-                        {userData.exams[id].notifyDue ? <i className="fa-solid fa-square-check"></i>:<i className="fa-regular fa-square"></i>} Close Date
+                        {userData.exams[id].notifyClose ? <i className="fa-solid fa-square-check"></i>:<i className="fa-regular fa-square"></i>} Close Date
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => toggleNotification("notifyLate")}>
                         {userData.exams[id].notifyLate ? <i className="fa-solid fa-square-check"></i>:<i className="fa-regular fa-square"></i>} Late

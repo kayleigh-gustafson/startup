@@ -29,6 +29,7 @@ export function Home({onFinish, authenticated, userData, setUserData, currentTer
       )
     }
   };
+  completeTasks.sort((a, b) => new Date(a.props.finish) - new Date(b.props.finish));
   if (completeTasks.length < 1) {
     completeTasks.push(
       <tr key="0">
@@ -56,6 +57,7 @@ export function Home({onFinish, authenticated, userData, setUserData, currentTer
       )
     }
   };
+  incompleteTasks.sort((a, b) => new Date(a.props.finish) - new Date(b.props.finish));
   if (incompleteTasks.length < 1) {
     incompleteTasks.push(
       <tr key="0">
@@ -84,6 +86,7 @@ export function Home({onFinish, authenticated, userData, setUserData, currentTer
       )
     }
   };
+  exams.sort((a, b) => new Date(a.props.finish) - new Date(b.props.finish));
   if (exams.length < 1) {
     exams.push(
       <tr key="0">
