@@ -42,6 +42,7 @@ export default function App() {
     const [defaultClass, setDefaultClass] = useState("");
     const [notification, setNotification] = useState('');
     const [notificationState, setNotificationState] = useState("active")
+    const [lastNotification, setLastNotification] = useState(-1);
     const [socketOpen, setSocketOpen] = useState(false);
     const [webSocket, setWebSocket] = useState(null);
 
@@ -127,10 +128,11 @@ export default function App() {
         setTermDropdownContent(content2);
     }
 
-    function notificationTimeout() {
+    function notificationTimeout(ms) {
         setTimeout(() => {
+            if (Date.now()-lastNotification >= (ms-100))
             setNotificationState("inactive");
-        }, 10);
+        }, ms);
         
     }
 
@@ -159,7 +161,8 @@ export default function App() {
                 ]
             setNotification(options[Math.floor(Math.random() * options.length)]);
             setNotificationState("active");
-            notificationTimeout();
+            setLastNotification(Date.now());
+            notificationTimeout(3000);
         }};
 
         socket.onclose = (event) => {
@@ -328,7 +331,7 @@ export default function App() {
                         </NavDropdown>
                         <NavDropdown title={userData.username === "" ? "[User is unauthenticated]" : userData.username}>
                             <NavDropdown.Item>
-                                <Link className="dropdown-item" onClick={() => logout()} to="/">Log out</Link>
+                                <Link className="btn dropdown-item" onClick={() => logout()} to="/">Log out</Link>
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
@@ -491,12 +494,12 @@ export default function App() {
         </main>
 
 
-
-        <footer className="mt-5 py-3 px-5 bg-body-tertiary d-flex flex-row justify-content-between align-items-center">
-            <p id="notificationElement" className={(notificationState==="active")?"notification":"notification notification-hidden"}>
+        <p id="notificationElement" className={(notificationState==="active")?"notification":"notification notification-hidden"}>
                 {notification !== "" && <span>🎉</span>}
                 {notification}
             </p>
+        <footer className="mt-2 py-3 px-5 bg-body-tertiary">
+            
             <p className="mb-0">
             © 2024 Kayleigh Gustafson |{" "}
             <a

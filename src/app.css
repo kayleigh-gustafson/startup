@@ -65,12 +65,38 @@ th {
     }
 }
 
+/* footer {
+    display: flex;
+    flex-direction: row;
+}
+@media screen and (max-width: 768px) {
+    footer {
+        flex-direction: column;
+    }
+} */
+
+/* @media screen and (max-width: 768px) {
+    #notificationElement {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 100;
+    }
+} */
+
+
+
+
 select option:disabled {
     color: #cccccc;
 }
 
 .navbar-toggler {
     border: none;
+}
+
+nav .dropdown-item.btn {
+    padding: 0;
 }
 
 .custom-color-picker {
@@ -408,21 +434,20 @@ select option:disabled {
 }
 
 .notification {
-    padding: 0;
+    padding: 10px 30px;
     margin: 0;
+    height: 50px;
+    opacity: .7;
+    transition: opacity 0.2s ease-in-out;
 }
 
 .notification span {
     font-size: 1.2rem;
 }
 
-.notification-visible {
-    opacity: 1;
-}
-
 .notification-hidden {
     opacity: 0;
-    transition: opacity 1s ease-in-out 3s;
+    transition: opacity 1s ease-in-out;
 }
 
 .modal-content .btn-tertiary:hover {
