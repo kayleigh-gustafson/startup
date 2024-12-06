@@ -74,6 +74,7 @@ export default function TaskRow({ onFinish, userData, setUserData, currentTerm, 
             type="text"
             className="class-color form-control"
             defaultValue={name}
+            title={name}
             id={id+"-row-name"}
             onBlur={(event) => editUserData(userData, setUserData, "assignments", id, "name", event.target.value)}
             style={colorInput}

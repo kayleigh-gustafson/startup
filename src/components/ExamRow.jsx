@@ -60,6 +60,7 @@ export default function ExamRow({ onFinish, userData, setUserData, currentTerm, 
             type="text"
             className="class-color form-control"
             defaultValue={name}
+            title={name}
             id={id+"-row-name"}
             onChange={(event) => editUserData(userData, setUserData, "exams", id, "name", event.target.value)}
             style={colorInput}

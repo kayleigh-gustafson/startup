@@ -475,7 +475,7 @@ export default function App() {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant='tertiary' onClick={() => handleModal("close", "exam")}>Close</Button>
-                <Button variant='tertiary' onClick={() => createTask("exam", userData.newTask, close=false)}>Create & Copy</Button>
+                <Button variant='tertiary' onClick={() => createTask("exam", JSON.parse(JSON.stringify(userData.newTask)), close=false)}>Create & Copy</Button>
                 <Button variant='primary' onClick={() => createTask("exam", userData.newTask)}>Create</Button>
             </Modal.Footer>
         </Modal>
