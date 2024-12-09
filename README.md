@@ -2,6 +2,10 @@
 ## Elevator Pitch
 As a freshman starting her first semester of college, the number of assignments can be overwhelming. At the moment, I have a spreadsheet with all of my assignments for the semester, and I know some of my friends and roommates have similar solutions. My web app, an assignment planner, will aim to make organizing and remembering assignments easier.
 
+My Google sheet inspiration:
+![Main page mockup](./public/images/inspo.png)
+
+
 ![Main page mockup](./public/images/spec1.jpg)
 ![Log in mockup](./public/images/spec2.jpg)
 ![Sign up mockup](./public/images/spec3.jpg)
