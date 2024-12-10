@@ -11,7 +11,7 @@ export function Home({onFinish, authenticated, userData, setUserData, currentTer
 
   let completeTasks = [];
   for (const [key, value] of Object.entries(userData.assignments)) {
-    if (value.completed && userData.classes[value.classId].term === currentTerm) {
+    if (value.completed && userData.classes[value.classId].term.toString() === currentTerm.toString()) {
       completeTasks.push(
       <TaskRow
         onFinish={onFinish}
@@ -39,7 +39,7 @@ export function Home({onFinish, authenticated, userData, setUserData, currentTer
   }
   let incompleteTasks = [];
   for (const [key, value] of Object.entries(userData.assignments)) {
-    if (!value.completed && userData.classes[value.classId].term === currentTerm) {
+    if (!value.completed && userData.classes[value.classId].term.toString() === currentTerm.toString()) {
       incompleteTasks.push(
       <TaskRow
         onFinish={onFinish}
@@ -67,7 +67,7 @@ export function Home({onFinish, authenticated, userData, setUserData, currentTer
   }
   let exams = [];
   for (const [key, value] of Object.entries(userData.exams)) {
-    if (userData.classes[value.classId].term === currentTerm) {
+    if (userData.classes[value.classId].term.toString() === currentTerm.toString()) {
       exams.push(
         <ExamRow
         onFinish={onFinish}

@@ -66,6 +66,7 @@ export function Terms({authenticated, userData, setUserData, currentTerm, setCur
             <th className="px-2">Start Date</th>
             <th className="px-2">End Date</th>
             <th className="px-2" />
+            <th className="px-2" />
           </tr>
           {termRows}
           <tr>
@@ -125,16 +126,16 @@ export function Terms({authenticated, userData, setUserData, currentTerm, setCur
             />
               <label className="d-md-none">End Date</label>
             </td>
-            <td className="p-2 term-delete text-start">
-            <Button variant={(newTerm.name !== "" && newTerm.start !== "" && newTerm.end !== "") ? "primary" : "secondary"} onClick={addTerm}>
-              <i className="fa-solid fa-plus" />
+            <td colSpan="2" className="p-2 term-delete text-start">
+            <Button className="w-100" variant={(newTerm.name !== "" && newTerm.start !== "" && newTerm.end !== "") ? "primary" : "secondary"} onClick={addTerm}>
+              <i className="fa-solid fa-plus" /> Create
             </Button>
             </td>
         </tr>
         </tbody>
       </table>
       <Link className="btn btn-primary mt-4" to="../home">
-        Done
+        Home
       </Link>
     </div>
 

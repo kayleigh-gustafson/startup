@@ -4,3 +4,5 @@ make date pickers less buggy
 add feedback for login/signup
 figure out why the current term keeps reverting (maybe add it to userdata)
 figure out error where user keeps having to delete cookies to get page to load
+weird gap between tabs and header on mobile
+dropdowns cut off near edges of page

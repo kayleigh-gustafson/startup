@@ -6,9 +6,17 @@ import { DatePicker } from 'rsuite';
 import 'rsuite/DatePicker/styles/index.css';
 import {FaCalendar} from 'react-icons/fa';
 import format from 'date-fns/format';
+import { useNavigate } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
 
 export default function TermRow({ userData, setUserData, currentTerm, setCurrentTerm, id, name, start, end }) {
-    
+  const navigate = useNavigate();
+
+  function manageClasses() {
+    setCurrentTerm(id);
+    navigate('/classes')
+  }
+
   return (
         <tr>
             <td className="p-2 term-name">
@@ -58,6 +66,11 @@ export default function TermRow({ userData, setUserData, currentTerm, setCurrent
                 className="form-control-date"
             />
               <label className="d-md-none">End Date</label>
+            </td>
+            <td>
+              <Button className="tertiary-button-hover" variant="tertiary" onClick={manageClasses}>
+                Manage Classes
+              </Button>
             </td>
             <td className="p-2 term-delete text-start">
               <Button className={(Object.keys(userData.terms)).length > 1 ? "delete-button-active" : "delete-button-inactive"} variant="tertiary" onClick={() => deleteUserData(userData, setUserData, "terms", id, currentTerm, setCurrentTerm)}>

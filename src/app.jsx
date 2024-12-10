@@ -95,7 +95,7 @@ export default function App() {
     function initialize(data, currentTerm) {
         // Set default term that the user is working in
         for (const [key, value] of Object.entries(data.classes)) {
-            if (value.term === currentTerm) {
+            if (value.term.toString() === currentTerm.toString()) {
                 setDefaultClass(key);
             }
         }
@@ -105,7 +105,7 @@ export default function App() {
         // Generate dropdown list of classes for task creation modal
         let content = [];
         for (const [key, value] of Object.entries(data.classes)) {
-            if (value.term === currentTerm) {
+            if (value.term.toString() === currentTerm.toString()) {
                 content.push(
                     <Dropdown.Item
                     as="button"

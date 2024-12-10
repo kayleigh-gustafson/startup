@@ -14,10 +14,10 @@ export default async function deleteUserData(userData, setUserData, section, id,
 
     function deleteTerm(termId) {
         if (Object.keys(userData.terms).length > 1) {
-            if (currentTerm === termId) {
+            if (currentTerm.toString() === termId.toString()) {
                 let remainingTerms = data.terms;
                 Object.keys(remainingTerms).forEach(key => {
-                    if (key === currentTerm) delete remainingTerms[key];
+                    if (key.toString() === currentTerm.toString()) delete remainingTerms[key];
                 });
                 setCurrentTerm(Object.keys(remainingTerms)[0]);
             }
@@ -32,7 +32,7 @@ export default async function deleteUserData(userData, setUserData, section, id,
     function deleteClass(classId, forceDelete = false) {
         let classesInTerm = {...userData.classes};
         for (const [key, value] of Object.entries(classesInTerm)) {
-        if (value.term !== currentTerm) {
+        if (value.term.toString() !== currentTerm.toString()) {
             delete classesInTerm[key];
         }
         }

@@ -468,6 +468,6 @@ nav .dropdown-item.btn {
     transition: opacity 1s ease-in-out;
 }
 
-.modal-content .btn-tertiary:hover {
+.modal-content .btn-tertiary:hover, .tertiary-button-hover:hover {
     background-color: #f5f5f5;
 }

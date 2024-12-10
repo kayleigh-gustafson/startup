@@ -92,7 +92,7 @@ export function Classes({authenticated, userData, setUserData, currentTerm}) {
         </tbody>
       </table>
       <Link className="btn btn-primary mt-4" to="../home">
-        Done
+        Home
       </Link>
     </div>
   );
